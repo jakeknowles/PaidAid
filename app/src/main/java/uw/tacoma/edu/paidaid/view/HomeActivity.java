@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import uw.tacoma.edu.paidaid.R;
 
+/** Home Activity */
 public class HomeActivity extends AppCompatActivity {
 
     @Override
