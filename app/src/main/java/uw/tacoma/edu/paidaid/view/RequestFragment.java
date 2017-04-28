@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.DummyContent;
-import uw.tacoma.edu.paidaid.model.DummyContent.DummyItem;
+import uw.tacoma.edu.paidaid.model.Requests;
+import uw.tacoma.edu.paidaid.model.Requests.RequestItem;
 
 /**
  * A fragment representing a list of Items.
@@ -68,7 +68,7 @@ public class RequestFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(Requests.ITEMS, mListener));
         }
         return view;
     }
@@ -103,6 +103,6 @@ public class RequestFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(RequestItem item);
     }
 }
