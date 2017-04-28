@@ -5,17 +5,22 @@
     tools:context="uw.tacoma.edu.paidaid.view.LoginFragment">
 
 
-    <!-- username -->
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/username" />
+    <!--&lt;!&ndash; username &ndash;&gt;-->
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/username" />-->
 
-    <!-- password -->
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/password" />
+    <!--&lt;!&ndash; password &ndash;&gt;-->
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/password" />-->
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/signup" />
 
 
 </FrameLayout>

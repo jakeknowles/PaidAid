@@ -8,5 +8,6 @@
     <!-- Custom Dialog -->
     <string name="username">Enter Username</string>
     <string name="password">Enter Password</string>
+    <string name="signup">Sign in</string>
 
 </resources>
