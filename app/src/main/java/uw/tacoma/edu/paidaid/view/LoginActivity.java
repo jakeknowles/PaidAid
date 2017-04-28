@@ -2,6 +2,7 @@ package uw.tacoma.edu.paidaid.view;
 
 
 
+import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,4 +23,5 @@ public class LoginActivity extends AppCompatActivity {
             .commit();
 
     }
+
 }
