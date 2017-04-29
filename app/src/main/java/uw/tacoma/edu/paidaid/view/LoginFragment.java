@@ -6,11 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import uw.tacoma.edu.paidaid.R;
 
 /** Login Fragment */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,13 +44,46 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        Button signUp = (Button) view.findViewById(R.id.login_button);
+                signUp.setOnClickListener(this);
+
+        return view;
+    }
+
+
+
+    private void launchSignUpScreen() {
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.login_fragment_container, new RegisterFragment())
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch(v.getId()){
+            case R.id.login_button:
+                launchSignUpScreen();
+                break;
+
+            default:
+                break;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

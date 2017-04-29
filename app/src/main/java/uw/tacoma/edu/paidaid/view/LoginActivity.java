@@ -2,10 +2,10 @@ package uw.tacoma.edu.paidaid.view;
 
 
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -21,5 +21,8 @@ public class LoginActivity extends AppCompatActivity {
             .add(R.id.login_fragment_container, new LoginFragment())
             .commit();
 
+
+
     }
+
 }

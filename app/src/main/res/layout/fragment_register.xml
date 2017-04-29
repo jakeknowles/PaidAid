@@ -5,4 +5,9 @@
     tools:context="uw.tacoma.edu.paidaid.view.RegisterFragment">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:text="TextView" />
 </FrameLayout>
