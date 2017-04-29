@@ -80,6 +80,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             case R.id.login_button:
                 launchSignUpScreen();
                 break;
+            case R.id.sign_up_now_button:
+                launchSignUpScreen();
 
             default:
                 break;

@@ -8,5 +8,6 @@
     <color name="paidAidDarkBlue">#174787</color>
     <color name="paidAidRed">#E32330</color>
     <color name="paidAidDarkRed">#790F23</color>
+    <color name="black">#000000</color>
 
 </resources>
