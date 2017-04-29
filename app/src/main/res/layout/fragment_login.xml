@@ -23,31 +23,37 @@
 
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/login_button"
         android:layout_width="92dp"
         android:layout_height="39dp"
         android:layout_marginBottom="88dp"
         android:backgroundTint="@color/paidAidBlue"
-        android:text="@string/signup"
+        android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1" />
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="166dp"
         android:layout_height="23dp"
-        android:text="Username"
+        android:text="@string/username"
         android:textAllCaps="false"
         android:textColor="@color/grey"
         android:textStyle="italic"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="296dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/paidaid"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,13 +61,15 @@
         android:layout_height="23dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:text="Password"
+        android:text="@string/password"
         android:textAllCaps="false"
         android:textColor="@color/grey"
         android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="334dp" />
+        app:layout_constraintHorizontal_bias="0.502"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button" />
 
 
 </android.support.constraint.ConstraintLayout>
