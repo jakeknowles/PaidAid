@@ -1,6 +1,5 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -125,5 +124,4 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }
