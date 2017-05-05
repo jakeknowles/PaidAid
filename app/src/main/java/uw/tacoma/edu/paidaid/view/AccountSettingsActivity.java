@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import uw.tacoma.edu.paidaid.R;
 
+/** Account Settings Activity */
 public class AccountSettingsActivity extends AppCompatActivity {
 
     @Override
