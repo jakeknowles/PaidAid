@@ -56,8 +56,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        Button signUp = (Button) view.findViewById(R.id.login_button);
-                signUp.setOnClickListener(this);
+        Button login = (Button) view.findViewById(R.id.login_button);
+        login.setOnClickListener(this);
+
+        Button signUp = (Button) view.findViewById(R.id.sign_up_now_button);
+        signUp.setOnClickListener(this);
 
         return view;
     }
