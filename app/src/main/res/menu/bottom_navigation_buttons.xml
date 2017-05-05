@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/home_button"
+        android:icon="@drawable/paidaid" />
+    <item
+        android:id="@+id/menu_add"
+        android:title="@string/add_button"
+        android:icon="@drawable/paidaid" />
+
+    <item
+        android:id="@+id/menu_messages"
+        android:title="@string/messages_button"
+        android:icon="@drawable/paidaid" />
+
+    <item
+        android:id="@+id/menu_requests"
+        android:title="@string/requests_button"
+        android:icon="@drawable/paidaid" />
+</menu>

@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">PaidAid</string>
+
+    <!-- Login/Registration strings. -->
     <string name="title_activity_login">LoginActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login_button">Login</string>
+    <string name="logout_button">Logout</string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="confirm_button">Confirm</string>
+
+    <!-- Navigation Bar Strings -->
+    <string name="home_button">HOME</string>
+    <string name="add_button">ADD</string>
+    <string name="messages_button">MESSAGES</string>
+    <string name="requests_button">REQUESTS</string>
+
+
+
 
 </resources>
