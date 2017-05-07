@@ -6,4 +6,29 @@
     android:layout_height="match_parent"
     tools:context="uw.tacoma.edu.paidaid.view.RequestsButtonActivity">
 
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="146dp"
+        android:layout_height="41dp"
+        android:fontFamily="sans-serif"
+        android:text="Current"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:track="@color/paidAidBlue"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="36dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="130dp"
+        android:layout_height="36dp"
+        android:fontFamily="sans-serif"
+        android:text="Expired"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteY="41dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

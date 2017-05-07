@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PaidAid</string>
 
-    <!-- Login/Registration strings. -->
+    <!-- Login/Registration -->
     <string name="title_activity_login">LoginActivity</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -10,13 +10,15 @@
     <string name="no_account">Don\'t have an account?</string>
     <string name="confirm_button">Confirm</string>
 
-    <!-- Navigation Bar Strings -->
+    <!-- Navigation Bar -->
     <string name="home_button">HOME</string>
     <string name="add_button">ADD</string>
     <string name="messages_button">MESSAGES</string>
     <string name="requests_button">REQUESTS</string>
 
-
+    <!-- Current/Expired Toggle Buttons -->
+    <string name="current_button">Current</string>
+    <string name="expired_button">Expired</string>
 
 
 </resources>
