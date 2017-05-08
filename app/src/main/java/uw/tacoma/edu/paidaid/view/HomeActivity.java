@@ -66,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
                 pushFragment(new ExpiredRequestsFragment());
                 break;
             case R.id.add_button:
-                pushFragment(new ExpiredRequestsFragment());
+                pushFragment(new PostRequestFragment());
                 break;
             case R.id.messages_button:
                 pushFragment(new ReviewFragment());
