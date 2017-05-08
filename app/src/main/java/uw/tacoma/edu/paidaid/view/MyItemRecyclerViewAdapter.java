@@ -6,24 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import uw.tacoma.edu.paidaid.view.RequestFragment.OnListFragmentInteractionListener;
-import uw.tacoma.edu.paidaid.model.Requests.RequestItem;
-
 import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.model.Requests;
+import uw.tacoma.edu.paidaid.view.RequestFragment.OnListFragmentInteractionListener;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link RequestItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Requests} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<RequestItem> mValues;
+    private final List<Requests> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<RequestItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<Requests> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -38,8 +37,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getmItemsAndComments());
+        holder.mContentView.setText(mValues.get(position).getmStoreName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +61,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public RequestItem mItem;
+        public Requests mItem;
 
         public ViewHolder(View view) {
             super(view);
