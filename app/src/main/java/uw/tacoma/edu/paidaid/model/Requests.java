@@ -1,72 +1,109 @@
 package uw.tacoma.edu.paidaid.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
- * <p>
- * TODO: Replace all uses of this class before publishing your app.
+ * Requests object that contains all necessary request info
+ * (tip amount, distance, store name, expiration time, items & comments, rating)
  */
-public class Requests {
+public class Requests implements Serializable{
+
+
+    /** Constant for JSON key tip_amount */
+    public static final String TIP_AMOUNT = "tip_amount";
+
+    /** Constant for JSON key distance_away */
+    public static final String DISTANCE_AWAY = "distance_away";
+
+    /** Constant for JSON key store_name */
+    public static final String STORE_NAME = "store_name";
+
+    /** Constant for JSON key expiration_time */
+    public static final String EXPIRATION_TIME = "expiration_time";
+
+    /** Constant for JSON key items_and_comments */
+    public static final String ITEMS_AND_COMMENTS = "items_and_comments";
+
+    /** Constant for JSON key star_rating */
+    public static final String STAR_RATING = "star_rating";
+
+    // Tip amount for picking up request
+    private double mTipAmount;
+
+    // Distance away from request
+    private double mDistanceAway;
+
+    // Store name of where items are located
+    private String  mStoreName;
+
+    // Time until request expires
+    private double mExpirationTime;
+
+    // Items & Comments contained in Request
+    private String mItemsAndComments;
+
+    // 1 - 5 Star rating
+    private int mStarRating;
+
+    /** Requests Constructor */
+    public Requests(double theTipAmount, double theDistanceAway, String theStoreName, double theExpirationTime, String theItemsAndComments, int theStarRating) {
+
+        mTipAmount = theTipAmount;
+        mDistanceAway = theDistanceAway;
+        mStoreName = theStoreName;
+        mExpirationTime = theExpirationTime;
+        mItemsAndComments = theItemsAndComments;
+        mStarRating = theStarRating;
+
+    }
+
 
     /**
-     * An array of sample (request) items.
+     * Getter for mTipAmount
+     * @return tip amount ($0.00)
      */
-    public static final List<RequestItem> ITEMS = new ArrayList<RequestItem>();
-
-    /**
-     * A map of sample (requests) items, by ID.
-     */
-    public static final Map<String, RequestItem> ITEM_MAP = new HashMap<String, RequestItem>();
-
-    private static final int COUNT = 25;
-
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createRequestItem(i));
-        }
-    }
-
-    private static void addItem(RequestItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
-    }
-
-    private static RequestItem createRequestItem(int position) {
-        return new RequestItem(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
-
-    private static String makeDetails(int position) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
-        return builder.toString();
+    public double getmTipAmount() {
+        return mTipAmount;
     }
 
     /**
-     * A request item representing a piece of content.
+     * Getter for mDistanceAway
+     * @return distance away from request
      */
-    public static class RequestItem {
-        public final String id;
-        public final String content;
-        public final String details;
-
-        public RequestItem(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
-        }
-
-        @Override
-        public String toString() {
-            return content;
-        }
+    public double getmDistanceAway() {
+        return mDistanceAway;
     }
+
+    /**
+     * Getter for mStoreName
+     * @return the name of the store where the items are located
+     */
+    public String getmStoreName() {
+        return mStoreName;
+    }
+
+    /**
+     * Getter for mExpirationTime
+     * @return the time until the request expires
+     */
+    public double getmExpirationTime() {
+        return mExpirationTime;
+    }
+
+    /**
+     * Getter mItemsAndComments
+     * @return the request items and additional comments
+     */
+    public String getmItemsAndComments() {
+        return mItemsAndComments;
+    }
+
+    /**
+     * Getter for mStarRating
+     * @return rating of user from 1 - 5
+     */
+    public int getStarRating() {
+        return mStarRating;
+    }
+
 }
