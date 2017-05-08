@@ -3,14 +3,12 @@ package uw.tacoma.edu.paidaid.view;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -22,7 +20,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+//        getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
+//        getSupportActionBar().setLogo(R.drawable.paidaid);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         setupNavigationView();
+
     }
 
     @Override
@@ -91,14 +94,9 @@ public class HomeActivity extends AppCompatActivity {
         if (fragmentManager != null) {
             FragmentTransaction ft = fragmentManager.beginTransaction();
             if (ft != null) {
-                ft.replace(R.id.rootLayout, fragment);
+                ft.replace(R.id.main_layout, fragment);
                 ft.commit();
             }
         }
-    }
-
-    public void add(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 }
