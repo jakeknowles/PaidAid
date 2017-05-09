@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Perform action when any item is selected.
      *
-     * @param item Item that is selected.
+     * @param item Menu Item that is selected.
      */
     protected void selectFragment(MenuItem item) {
 
