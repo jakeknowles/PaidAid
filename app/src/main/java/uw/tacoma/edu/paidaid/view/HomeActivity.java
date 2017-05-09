@@ -3,6 +3,7 @@ package uw.tacoma.edu.paidaid.view;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -63,13 +64,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void selectFragment(MenuItem item) {
 
         item.setChecked(true);
-
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.home_button:
                 pushFragment(new ExpiredRequestsFragment());
                 break;
             case R.id.add_button:
-                pushFragment(new PostRequestFragment());
+//                pushFragment(new PostRequestFragment());
                 break;
             case R.id.messages_button:
                 pushFragment(new ReviewFragment());
@@ -78,8 +79,8 @@ public class HomeActivity extends AppCompatActivity {
                 pushFragment(new CurrentRequestsFragment());
                 break;
         }
-
     }
+
 
     /**
      * Method to push any fragment into given id.
