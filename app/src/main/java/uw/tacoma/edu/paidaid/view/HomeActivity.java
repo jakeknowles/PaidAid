@@ -73,7 +73,10 @@ public class HomeActivity extends AppCompatActivity {
                 pushFragment(new PostRequestFragment());
                 break;
             case R.id.messages_button:
-                pushFragment(new ReviewFragment());
+                intent = new Intent(this, AddRequestButtonActivity.class);
+                startActivity(intent);
+
+//                pushFragment(new ReviewFragment());
                 break;
             case R.id.requests_button:
                 pushFragment(new CurrentRequestsFragment());
