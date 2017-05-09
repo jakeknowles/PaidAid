@@ -9,6 +9,8 @@
     <string name="logout_button">Logout</string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="confirm_button">Confirm</string>
+    <string name="email">Email</string>
+
 
     <!-- Navigation Bar -->
     <string name="home_button">HOME</string>
