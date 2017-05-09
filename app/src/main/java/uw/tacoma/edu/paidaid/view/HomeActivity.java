@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import uw.tacoma.edu.paidaid.R;
 
-/** Home Activity */
+/** Home Activity for all activities*/
 public class HomeActivity extends AppCompatActivity {
 
     @Override
