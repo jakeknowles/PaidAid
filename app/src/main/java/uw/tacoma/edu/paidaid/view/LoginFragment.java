@@ -218,6 +218,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
@@ -227,6 +228,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // go to home screen ///////////////////////////////////////////////
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
 
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Successfully Logged in!"
