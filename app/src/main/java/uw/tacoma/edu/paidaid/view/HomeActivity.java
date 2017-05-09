@@ -1,8 +1,5 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,35 +18,28 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
-//        getSupportActionBar().setLogo(R.drawable.paidaid);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
+        getSupportActionBar().setLogo(R.drawable.topbarpaidaid);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         setupNavigationView();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bottom_navigation_buttons, menu);
-        return true;
     }
 
     private void setupNavigationView() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {
 
-            // Select first menu item by default and show Fragment accordingly.
+            // Select first menu item by default and show activity accordingly.
             Menu menu = bottomNavigationView.getMenu();
-            selectFragment(menu.getItem(0));
+            chooseActivity(menu.getItem(0));
 
             // Set action to perform when any menu-item is selected.
             bottomNavigationView.setOnNavigationItemSelectedListener(
                     new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragment(item);
+                            chooseActivity(item);
                             return false;
                         }
                     });
@@ -61,43 +51,47 @@ public class HomeActivity extends AppCompatActivity {
      *
      * @param item Item that is selected.
      */
-    protected void selectFragment(MenuItem item) {
-
-        item.setChecked(true);
+    protected void chooseActivity(MenuItem item) {
         Intent intent;
+        item.setChecked(true);
         switch (item.getItemId()) {
             case R.id.home_button:
-                pushFragment(new ExpiredRequestsFragment());
+                intent = new Intent(this, HomeButtonActivity.class);
+                startActivity(intent);
                 break;
             case R.id.add_button:
-                pushFragment(new PostRequestFragment());
+                intent = new Intent(this, AddRequestButtonActivity.class);
+                startActivity(intent);
                 break;
             case R.id.messages_button:
-                pushFragment(new ReviewFragment());
+                intent = new Intent(this, MessagesButtonActivity.class);
+                startActivity(intent);
                 break;
             case R.id.requests_button:
-                pushFragment(new CurrentRequestsFragment());
+                intent = new Intent(this, RequestsButtonActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
 
-    /**
-     * Method to push any fragment into given id.
-     *
-     * @param fragment An instance of Fragment to show into the given id.
-     */
-    protected void pushFragment(Fragment fragment) {
-        if (fragment == null)
-            return;
+//    /**
+//     * Method to push any fragment into given id.
+//     *
+//     * @param fragment An instance of Fragment to show into the given id.
+//     */
+//    protected void pushFragment(Fragment fragment) {
+//        if (fragment == null)
+//            return;
+//
+//        FragmentManager fragmentManager = getFragmentManager();
+//        if (fragmentManager != null) {
+//            FragmentTransaction ft = fragmentManager.beginTransaction();
+//            if (ft != null) {
+//                ft.replace(R.id.main_layout, fragment);
+//                ft.commit();
+//            }
+//        }
+//    }
 
-        FragmentManager fragmentManager = getFragmentManager();
-        if (fragmentManager != null) {
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            if (ft != null) {
-                ft.replace(R.id.main_layout, fragment);
-                ft.commit();
-            }
-        }
-    }
 }
