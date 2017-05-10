@@ -1,30 +1,23 @@
-This phase of your project must meet the following minimum requirements.
+IMPLEMENTED FEATURES
 
-1. Uses web services to retrieve or store data for the app.
-Your app must retrieve data from the web service that you build.
-It could be a list page that’s using the web service just as we retrieved the course
-list using an Android AsyncTask in the labs. If your app doesn’t need to retrieve any
-data, you must store data using a web service that you build. Start on the web service
-portion early so that you can get the php help timely.
+Minimum Requirements -
+1. We implemented web services for retrieving usernames and passwords and storing users usernames,
+   passwords, and emails. We also used web services for displaying fake (hard-coded) requests on the
+   requests feed. (home screen)
 
-2. Provides Registration and Sign-In with custom account or using a social media account.
-Your app must allow the user to register and login if you implement custom login.
-This should be fully functional with validation and proper navigation.
-If implementing social media account login, make sure to provide a test account.
-If using Facebook login, login under Facebook Developers, go to application, Roles,
-on top navigation for tabs, click Test Users and add. We suggest installing the apk file
-on a different tester’s device to test. They should use the account information provided
-to login. This will ensure that we can test your app and run it successfully.
-
-3. You must implement at least one (or more) other high priority user story (stories) that
-is (are) important for your project other than the ones listed above. Your source code must have
-javadoc for all the methods and comments for any obscure code. Use good naming conventions for
-packages and components within your project. Java coding conventions must be followed that you
-learned in the past courses. Remove all TODOs. Make sure that each java file has a header with
-the information for each class.
+2. We implemented Registration and Sign-In options. To register, you click the "Sign up now!"
+   button and proceed with typing in your desired username, email, and password. If you already
+   have an account, you can sign in with your username and password. For validation, we check to
+   make sure the username is not empty, check to make sure the email is valid by using the given
+   built in PHP email validator (must have @ sign), and then the password must be 7+ characters long.
 
 
-
+3. The user stories we implemented are:
+    - As a non-registered user, I want to be able to register with Paid Aid, so that I can access all
+      the app has to offer.
+    - As a user, I want to be able to log into Paid Aid, so I can access all of Paid Aids features.
+    - As a user, I want to be able to swipe through the requests, so that I can view all of the posted
+      requests.
 ______________________________________________
 
 FOR TEACHER
