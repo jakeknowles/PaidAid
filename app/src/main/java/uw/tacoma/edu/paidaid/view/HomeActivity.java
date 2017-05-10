@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
                             mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
                             break;
                         case R.id.requests_button:
-                            mScreen.setCurrentItem(2); // Set to Index 4 ( Requests )
+                            mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
                             break;
                     }
                     return true;
