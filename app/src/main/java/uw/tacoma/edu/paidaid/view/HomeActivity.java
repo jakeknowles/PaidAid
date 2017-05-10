@@ -67,19 +67,18 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.home_button:
-                pushFragment(new ExpiredRequestsFragment());
                 break;
             case R.id.add_button:
-                pushFragment(new PostRequestFragment());
-                break;
-            case R.id.messages_button:
                 intent = new Intent(this, AddRequestButtonActivity.class);
                 startActivity(intent);
-
-//                pushFragment(new ReviewFragment());
+                break;
+            case R.id.messages_button:
+                intent = new Intent(this, MessagesButtonActivity.class);
+                startActivity(intent);
                 break;
             case R.id.requests_button:
-                pushFragment(new CurrentRequestsFragment());
+                intent = new Intent(this, RequestsButtonActivity.class);
+                startActivity(intent);
                 break;
         }
     }
