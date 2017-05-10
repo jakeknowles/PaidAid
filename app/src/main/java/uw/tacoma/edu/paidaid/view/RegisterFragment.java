@@ -53,6 +53,7 @@ public class RegisterFragment extends Fragment {
     private static final String REGISTER_USER_URL
              = "http://paidaid.x10host.com/register.php?";
 
+    private EditText mUsernameEditText;
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private LoginActivity mActivity;
@@ -87,6 +88,7 @@ public class RegisterFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
+        mUsernameEditText = (EditText) view.findViewById(R.id.username_text);
         mEmailEditText = (EditText) view.findViewById(R.id.email_text);
         mPasswordEditText = (EditText) view.findViewById(R.id.password_text);
 
@@ -131,9 +133,13 @@ public class RegisterFragment extends Fragment {
 
         try {
 
-            String username = mEmailEditText.getText().toString();
-            sb.append("email=");
+            String username = mUsernameEditText.getText().toString();
+            sb.append("username=");
             sb.append(username);
+
+            String email = mEmailEditText.getText().toString();
+            sb.append("&email=");
+            sb.append(URLEncoder.encode(email, "UTF-8"));
 
             String password = mPasswordEditText.getText().toString();
             sb.append("&password=");
@@ -179,7 +185,7 @@ public class RegisterFragment extends Fragment {
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to Login Reason: "
+                    response = "Unable to Register Reason: "
                             + e.getMessage();
                 } finally {
                     if (urlConnection != null)

@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             = "http://paidaid.x10host.com/login.php?";
 
     private LoginActivity mLoginActivity;
-    private EditText mEmailEditText;
+    private EditText mUsernameEditText;
     private EditText mPasswordEditText;
 
 
@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        mEmailEditText = (EditText) view.findViewById(R.id.email_text);
+        mUsernameEditText = (EditText) view.findViewById(R.id.username_text);
         mPasswordEditText = (EditText) view.findViewById(R.id.password_text);
 
         // attach on click listener
@@ -104,8 +104,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         try {
 
-            String username = mEmailEditText.getText().toString();
-            sb.append("email=");
+            String username = mUsernameEditText.getText().toString();
+            sb.append("username=");
             sb.append(username);
 
 
