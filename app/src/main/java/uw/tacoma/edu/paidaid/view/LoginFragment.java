@@ -229,7 +229,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 if (status.equals("success")) {
 
-                    // go to home screen ///////////////////////////////////////////////
+                    // go to house screen ///////////////////////////////////////////////
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                     getActivity().finish();
