@@ -220,8 +220,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             // Something wrong with the network or the URL.
 
             try {
+                Log.e("Result", result);
+
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
+
+                Log.e("Status", status);
 
                 if (status.equals("success")) {
 

@@ -46,7 +46,8 @@ public class Requests implements Serializable{
     private int mStarRating;
 
     /** Requests Constructor */
-    public Requests(double theTipAmount, double theDistanceAway, String theStoreName, double theExpirationTime, String theItemsAndComments, int theStarRating) {
+    public Requests(double theTipAmount, double theDistanceAway, String theStoreName,
+                    double theExpirationTime, String theItemsAndComments, int theStarRating) {
 
         mTipAmount = theTipAmount;
         mDistanceAway = theDistanceAway;
