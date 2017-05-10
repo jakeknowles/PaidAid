@@ -1,12 +1,17 @@
 package uw.tacoma.edu.paidaid.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Requests object that contains all necessary request info
+ * Request object that contains all necessary request info
  * (tip amount, distance, store name, expiration time, items & comments, rating)
  */
-public class Requests implements Serializable{
+public class Request implements Serializable{
 
 
     /** Constant for JSON key tip_amount */
@@ -45,9 +50,9 @@ public class Requests implements Serializable{
     // 1 - 5 Star rating
     private int mStarRating;
 
-    /** Requests Constructor */
-    public Requests(double theTipAmount, double theDistanceAway, String theStoreName,
-                    double theExpirationTime, String theItemsAndComments, int theStarRating) {
+    /** Request Constructor */
+    public Request(double theTipAmount, double theDistanceAway, String theStoreName,
+                   double theExpirationTime, String theItemsAndComments, int theStarRating) {
 
         mTipAmount = theTipAmount;
         mDistanceAway = theDistanceAway;
@@ -56,6 +61,33 @@ public class Requests implements Serializable{
         mItemsAndComments = theItemsAndComments;
         mStarRating = theStarRating;
 
+    }
+
+
+    /**
+     * Parses the json string, returns an error message if unsuccessful.
+     * Returns course list if success.
+     * @param courseJSON
+     * @return reason or null if successful.
+     */
+    public static String parseRequestsJSON(String courseJSON, List<Request> courseList) {
+        String reason = null;
+//        if (courseJSON != null) {
+//            try {
+//                JSONArray arr = new JSONArray(courseJSON);
+//
+//                for (int i = 0; i < arr.length(); i++) {
+//                    JSONObject obj = arr.getJSONObject(i);
+//                    Request course = new Request(obj.getString(Request.ID), obj.getString(Request.SHORT_DESC)
+//                            , obj.getString(Request.LONG_DESC), obj.getString(Request.PRE_REQS));
+//                    courseList.add(course);
+//                }
+//            } catch (JSONException e) {
+//                reason =  "Unable to parse data, Reason: " + e.getMessage();
+//            }
+//
+//        }
+        return reason;
     }
 
 

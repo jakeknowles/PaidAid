@@ -9,20 +9,20 @@ import android.widget.TextView;
 import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.Requests;
+import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.view.RequestFragment.OnListFragmentInteractionListener;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Requests} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Request} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
+public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyRequestsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Requests> mValues;
+    private final List<Request> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<Requests> items, OnListFragmentInteractionListener listener) {
+    public MyRequestsRecyclerViewAdapter(List<Request> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -61,7 +61,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public Requests mItem;
+        public Request mItem;
 
         public ViewHolder(View view) {
             super(view);

@@ -18,7 +18,7 @@ import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
 import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
 
 /** Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
- *  Account Button, and the Requests Feed. */
+ *  Account Button, and the Request Feed. */
 public class HomeActivity extends AppCompatActivity {
 
         /** Navigation bar */
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
             mMenuBarArray.add(new HomeButtonFragment()); /** Home Button */
             mMenuBarArray.add(new AddRequestButtonFragment()); /** Add Button */
             mMenuBarArray.add(new MessagesButtonFragment()); /** Messages Button */
-            mMenuBarArray.add(new RequestsButtonFragment()); /** Requests Button */
+            mMenuBarArray.add(new RequestsButtonFragment()); /** Request Button */
 
 
             /** Creates an adapter that handles fragments so the user can return back. */
@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
                             mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
                             break;
                         case R.id.requests_button:
-                            mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
+                            mScreen.setCurrentItem(3); // Set to Index 4 ( Request )
                             break;
                     }
                     return true;
