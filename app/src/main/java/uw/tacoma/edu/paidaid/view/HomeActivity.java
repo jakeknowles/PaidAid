@@ -1,82 +1,91 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 
-import uw.tacoma.edu.paidaid.R;
+import java.util.ArrayList;
 
-/** Home Activity for all activities*/
+import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
+import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
+import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
+import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
+
+/** Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
+ *  Account Button, and the Requests Feed. */
 public class HomeActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        /** Navigation bar */
+        private BottomNavigationView mBottomNavigationMenuBar;
 
-//        getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
-//        getSupportActionBar().setLogo(R.drawable.paidaid);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        /** View pager variable for each fragment screen */
+        private ViewPager mScreen;
 
-        setupNavigationView();
+        /** Array to hold fragments */
+        private ArrayList<Fragment> mMenuBarArray = new ArrayList<>();
 
-    }
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_home);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.bottom_navigation_buttons, menu);
-        return true;
-    }
+            /** Finds and assigns screen and navigation bar layout */
+            this.mScreen = (ViewPager) findViewById(R.id.pager);
+            this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
-    private void setupNavigationView() {
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        if (bottomNavigationView != null) {
 
-            // Select first menu item by default and show Fragment accordingly.
-            Menu menu = bottomNavigationView.getMenu();
-            selectActivity(menu.getItem(0));
+            mMenuBarArray.add(new HomeButtonFragment()); /** Home Button */
+            mMenuBarArray.add(new AddRequestButtonFragment()); /** Add Button */
+            mMenuBarArray.add(new MessagesButtonFragment()); /** Messages Button */
+            mMenuBarArray.add(new RequestsButtonFragment()); /** Requests Button */
 
-            // Set action to perform when any menu-item is selected.
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectActivity(item);
-                            return false;
-                        }
-                    });
+
+            /** Creates an adapter that handles fragments so the user can return back. */
+            mScreen.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+
+                /** Method needed for adapter */
+                @Override
+                public Fragment getItem(int position) {
+                    return mMenuBarArray.get(position);
+                }
+
+                /** Method needed for adapter */
+                @Override
+                public int getCount() {
+                    return mMenuBarArray.size();
+                }
+            });
+
+            /** Listener for handling events on bottom menu navigation buttons. */
+            mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home_button:
+                            mScreen.setCurrentItem(0); // Set to Index 1 ( Home )
+                            break;
+                        case R.id.add_button:
+                            mScreen.setCurrentItem(1); // Set to Index 2 ( Add )
+                            break;
+                        case R.id.messages_button:
+                            mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
+                            break;
+                        case R.id.requests_button:
+                            mScreen.setCurrentItem(2); // Set to Index 4 ( Requests )
+                            break;
+                    }
+                    return true;
+                }
+            });
         }
-    }
-
-    /**
-     * Perform action when any item is selected.
-     *
-     * @param item Item that is selected.
-     */
-    protected void selectActivity(MenuItem item) {
-
-        item.setChecked(true);
-        Intent intent;
-        switch (item.getItemId()) {
-            case R.id.home_button:
-                break;
-            case R.id.add_button:
-                intent = new Intent(this, AddRequestButtonActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.messages_button:
-                intent = new Intent(this, MessagesButtonActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.requests_button:
-                intent = new Intent(this, RequestsButtonActivity.class);
-                startActivity(intent);
-                break;
-        }
-    }
 }
+
+
+
+

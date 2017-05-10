@@ -5,22 +5,26 @@
     <item
         android:id="@+id/home_button"
         android:icon="@android:drawable/btn_star_big_on"
-        android:title="Home" />
+        android:title="Home"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/add_button"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="Add" />
+        android:title="Add"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/messages_button"
         android:icon="@android:drawable/sym_action_chat"
-        android:title="Messages" />
+        android:title="Messages"
+        android:enabled="true"/>
 
     <item
         android:id="@+id/requests_button"
         android:icon="@android:drawable/ic_menu_recent_history"
-        android:title="Requests" />
+        android:title="Requests"
+        android:enabled="true"/>
 
 
 </menu>

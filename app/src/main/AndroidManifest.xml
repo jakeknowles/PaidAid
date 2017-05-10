@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.HomeActivity"
+            android:name=".view.LoginActivity"
             android:logo="@mipmap/ic_launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         </activity>
         <!-- <activity android:name=".view.LoginActivity"></activity> -->
         <activity android:name=".view.AccountSettingsActivity" />
-        <!--<activity android:name=".view.HomeActivity"></activity>-->
+        <activity android:name=".view.HomeActivity"></activity>
     </application>
 
 </manifest>
