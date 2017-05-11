@@ -98,7 +98,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 }
             });
 
-
+            /** New Request Fragment */
             if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
                 RequestFragment requestFragment = new RequestFragment();
                 getSupportFragmentManager().beginTransaction()

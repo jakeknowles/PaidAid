@@ -50,7 +50,13 @@ public class Request implements Serializable{
     // 1 - 5 Star rating
     private int mStarRating;
 
-    /** Request Constructor */
+    /**
+     * Requests Constructor
+     * @param theTip is the tip in cash rewarded to user for picking up request
+     * @param theDistanceAway is the distance the poster is what the picker-upper
+     * @param theStoreName is the store name where the items are
+     * @param theItemsAndComments is the list of items and additional comments if need be
+     */
     public Request(double theTip, double theDistanceAway, String theStoreName,
                    String theItemsAndComments) {
 
