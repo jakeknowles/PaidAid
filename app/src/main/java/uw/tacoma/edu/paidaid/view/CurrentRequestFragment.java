@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Current Request Fragment is from clicking on a request from the
  * list of your current requests in the Requests button on the home screen */
 public class CurrentRequestFragment extends Fragment {

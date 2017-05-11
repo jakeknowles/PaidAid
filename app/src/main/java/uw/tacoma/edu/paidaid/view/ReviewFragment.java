@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Review Fragment is from clicking on the messages button, then clicking on a username to review,
  * and then this fragment gives users an option to give a star rating (1 - 5) */
 public class ReviewFragment extends Fragment {

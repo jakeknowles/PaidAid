@@ -6,11 +6,9 @@
     android:background="@drawable/border_background"
     android:layout_marginTop="@dimen/margin_top_grid"
     android:layout_marginRight="@dimen/margin_top_grid"
-    android:gravity="center"
+    android:gravity="center">
 
-
-    >
-
+    <!-- Tip amount text view -->
     <TextView
         android:id="@+id/tip_amount"
         android:layout_width="wrap_content"
@@ -19,6 +17,7 @@
         android:textAppearance="?attr/textAppearanceListItem"
         android:textStyle="bold"/>
 
+    <!-- Distance picker - upper is from poster text view -->
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
@@ -26,6 +25,7 @@
         android:padding="@dimen/grid_padding"
         android:textAppearance="?attr/textAppearanceListItem" />
 
+    <!-- Store name text view -->
     <TextView
         android:id="@+id/storename"
         android:layout_width="wrap_content"

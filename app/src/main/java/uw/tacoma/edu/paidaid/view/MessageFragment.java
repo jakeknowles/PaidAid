@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Message Fragment is from clicking on the Messages button - allowing the user to click on a specific
  * message and see their conversation */
 public class MessageFragment extends Fragment {
