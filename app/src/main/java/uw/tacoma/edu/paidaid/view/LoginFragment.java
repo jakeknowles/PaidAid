@@ -26,33 +26,44 @@ import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
 
-/** Login Fragment consisting of login / sign-up button*/
+/**
+ * @Author Dmitriy Onishchenko
+ * @Author Jake Knowles
+ * @version 5/5/2017
+ *
+ * Login Fragment requiring a username and password
+ * */
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-    /** URL for our login.php file */
+    /**
+     * URL for our login.php file
+     * */
     private final static String LOGIN_URL
             = "http://paidaid.x10host.com/login.php?";
 
-    /** Login Activity member variable */
+    /**
+     * Login Activity member variable
+     * */
     private LoginActivity mLoginActivity;
 
-    /** Edit text member variable for username */
+    /**
+     * Edit text member variable for username
+     * */
     private EditText mUsernameEditText;
 
-    /** Edit Text member variable for password */
+    /**
+     * Edit Text member variable for password
+     * */
     private EditText mPasswordEditText;
 
 
-    /** Constructor */
+    /**
+     * Constructor
+     * */
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /** Login Fragment - creates a new Login Fragment */
-    public static LoginFragment newInstance() {
-        LoginFragment fragment = new LoginFragment();
-        return fragment;
-    }
 
     /**
      * onCreate
@@ -184,7 +195,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    /** Inner LoginTask class dealing with database */
+    /**
+     * Inner LoginTask class dealing with database
+     * */
     private class LoginTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -264,7 +277,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    /** OnFragmentInteractionListener */
+    /**
+     * OnFragmentInteractionListener, activities must implment this interface to
+     * allow for interaction.
+     * */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

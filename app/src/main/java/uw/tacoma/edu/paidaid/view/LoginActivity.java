@@ -5,7 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import uw.tacoma.edu.paidaid.R;
 
-/** Activity for logging in with username & password */
+/**
+ * @Author: Dmitriy Onishchenko
+ * @Author Jake Knowles
+ * @version 5/5/2017
+ * Activity for logging in with username & password
+ * */
 public class LoginActivity extends AppCompatActivity {
 
     /**

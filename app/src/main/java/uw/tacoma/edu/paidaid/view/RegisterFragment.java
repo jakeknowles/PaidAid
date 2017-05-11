@@ -1,12 +1,3 @@
-/**
- * Dmitriy Onishchenko
- * Mobile Apps
- *
- * This is a registration fragment for our app. Requiring an email and a password
- *
- */
-
-
 package uw.tacoma.edu.paidaid.view;
 
 import android.content.Context;
@@ -35,43 +26,51 @@ import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
 
+
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
-
- * to handle interaction events.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * @Author Dmitriy Onishchenko
+ * @Author Jake Knowles
+ * @version 5/5/2017
+ *
+ * A Registration fragment that requires a user to input a username
+ * email and password, and allows them to register with PaidAid
  */
-
-// {@link RegisterFragment.OnFragmentInteractionListener} interface
-
 public class RegisterFragment extends Fragment {
 
+    /**
+     * Registration URL to add new user to database
+     */
     private static final String REGISTER_USER_URL
              = "http://paidaid.x10host.com/register.php?";
 
+    /**
+     * The username edit text view.
+     */
     private EditText mUsernameEditText;
+
+    /**
+     * The email edit text view.
+     */
     private EditText mEmailEditText;
+
+    /**
+     * The password text view.
+     */
     private EditText mPasswordEditText;
+
+    /**
+     * The activity that launched this fragment.
+     */
     private LoginActivity mActivity;
 
 
+    /**
+     * Constructor Initialize fields.
+     */
     public RegisterFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-
-     * @return A new instance of fragment RegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RegisterFragment newInstance() {
-        RegisterFragment fragment = new RegisterFragment();
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -237,43 +236,12 @@ public class RegisterFragment extends Fragment {
 
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Interface must be implemented by activities that contain this
+     * fragment to allow interaction.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-
-
-
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
 
 
 }

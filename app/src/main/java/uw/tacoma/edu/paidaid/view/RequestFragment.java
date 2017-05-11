@@ -24,38 +24,47 @@ import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
 
 /**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
+ * @Author Dmitriy Onishchenko
+ * @Author Jake Knowles
+ * @version 5/5/2017
+ *
+ * A fragment representing a list of Requests.
+ *
  */
 public class RequestFragment extends Fragment {
 
+    /**
+     * URL to download the requests from database.
+     */
     private static final String DOWNLOAD_REQUESTS_URL =
             "http://paidaid.x10host.com/requests.php?cmd=requests";
 
+    /**
+     * The column count argument.
+     */
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
+    /**
+     * The column count for the grid layout
+     */
     private int mColumnCount = 3;
+
+    /**
+     * The listener for interaction.
+     */
     private OnListFragmentInteractionListener mListener;
+
+    /**
+     * The recycler view for the dislplay.
+     */
     private RecyclerView mRecyclerView;
 
     /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
+     * Constructor initialize fields.
      */
     public RequestFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static RequestFragment newInstance(int columnCount) {
-        RequestFragment fragment = new RequestFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,14 +117,7 @@ public class RequestFragment extends Fragment {
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * Interface which allows for interaction with this fragment.
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -123,6 +125,9 @@ public class RequestFragment extends Fragment {
     }
 
 
+    /**
+     * A task to download the requests from the database.
+     */
     private class DownloadRequestsTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -156,6 +161,13 @@ public class RequestFragment extends Fragment {
             return response;
         }
 
+        /**
+         * It checks to see if there was a problem with the URL(Network), if not tries to parse the
+         * json object, if successful sets the adapter to the RecyclerViewAdapter, if not successful
+         * shows an error message toast.
+         *
+         * @param result
+         */
         @Override
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
