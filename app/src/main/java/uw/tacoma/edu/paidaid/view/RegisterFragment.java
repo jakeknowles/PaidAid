@@ -122,7 +122,7 @@ public class RegisterFragment extends Fragment {
 
 
     /**
-     * Grabs input from the user and build a url.
+     * Grabs input from the user1 and build a url.
      *
      * @param v view
      * @return a url to execute

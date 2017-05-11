@@ -125,7 +125,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     /**
-     * Helper method to launch new fragment if the user want to sign up.
+     * Helper method to launch new fragment if the user1 want to sign up.
      */
     private void launchSignUpScreen() {
 

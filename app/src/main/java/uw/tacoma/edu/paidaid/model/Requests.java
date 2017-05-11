@@ -101,7 +101,7 @@ public class Requests implements Serializable{
 
     /**
      * Getter for mStarRating
-     * @return rating of user from 1 - 5
+     * @return rating of user1 from 1 - 5
      */
     public int getmStarRating() {
         return mStarRating;

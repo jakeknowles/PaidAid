@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -35,6 +37,11 @@ public class HomeActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
 
+
+            getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
+            getSupportActionBar().setLogo(R.drawable.topbarpaidaid);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+
             /** Finds and assigns screen and navigation bar layout */
             this.mScreen = (ViewPager) findViewById(R.id.pager);
             this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
@@ -46,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
             mMenuBarArray.add(new RequestsButtonFragment()); /** Requests Button */
 
 
-            /** Creates an adapter that handles fragments so the user can return back. */
+            /** Creates an adapter that handles fragments so the user1 can return back. */
             mScreen.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 
                 /** Method needed for adapter */
@@ -79,10 +86,24 @@ public class HomeActivity extends AppCompatActivity {
                         case R.id.requests_button:
                             mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
                             break;
+                        case R.id.user_account: // If user hits account settings button
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.activity_main, new MessageFragment())
+                                    .addToBackStack(null).commit();
+                            break;
                     }
                     return true;
                 }
             });
+        }
+
+        /** Creates account settings user button on top right of home screen */
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.account_settings, menu);
+            return true;
         }
 }
 
