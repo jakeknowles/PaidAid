@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -36,6 +38,10 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
 
+            /** Displays paid aid logo on top action bar */
+            getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
+            getSupportActionBar().setLogo(R.drawable.topbarpaidaid);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
 
             /** Finds and assigns screen and navigation bar layout */
             this.mScreen = (ViewPager) findViewById(R.id.pager);
@@ -45,7 +51,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             mMenuBarArray.add(new HomeButtonFragment()); /** Home Button */
             mMenuBarArray.add(new AddRequestButtonFragment()); /** Add Button */
             mMenuBarArray.add(new MessagesButtonFragment()); /** Messages Button */
-            mMenuBarArray.add(new RequestsButtonFragment()); /** Request Button */
+            mMenuBarArray.add(new RequestsButtonFragment()); /** Requests Button */
 
 
             /** Creates an adapter that handles fragments so the user can return back. */
@@ -79,12 +85,27 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
                             break;
                         case R.id.requests_button:
-                            mScreen.setCurrentItem(3); // Set to Index 4 ( Request )
+                            mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
+                            break;
+                        case R.id.user_account: // If user hits account settings button
+                            getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.activity_main, new MessageFragment())
+                                    .addToBackStack(null).commit();
                             break;
                     }
                     return true;
                 }
             });
+        }
+
+        /** Creates account settings user button on top right of home screen */
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.account_settings, menu);
+            return true;
+        }
 
             if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
                 RequestFragment requestFragment = new RequestFragment();

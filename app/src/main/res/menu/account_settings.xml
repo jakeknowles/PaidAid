@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:user_account="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/user_account"
+        android:icon="@drawable/user1"
+        android:title="Account"
+        user_account:showAsAction="always"/>/>
+
+</menu>
