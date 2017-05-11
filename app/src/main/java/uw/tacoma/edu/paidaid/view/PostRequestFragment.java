@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
-
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Post Request Fragment is from clicking on the Add button - this allows a user to import their
  * request details (tip amount, distance from poster to picker - upper, store name, time until expire,
  * and the items and additional comments.*/

@@ -9,7 +9,12 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
-/** Add Button Fragment from clicking "Add" on home screen. */
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
+ * Add Button Fragment from clicking "Add" on home screen. */
 public class AddRequestButtonFragment extends Fragment {
 
     /** OnFragmentInteractionListener */

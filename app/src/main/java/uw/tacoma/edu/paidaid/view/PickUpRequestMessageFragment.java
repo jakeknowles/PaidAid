@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
-
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Pick Up Request Message Fragment is from clicking on a request, giving the user
  * an option to contact the user who posted the request */
 public class PickUpRequestMessageFragment extends Fragment {

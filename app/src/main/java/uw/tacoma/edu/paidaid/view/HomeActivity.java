@@ -20,6 +20,12 @@ import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
 import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
 import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
 
+
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
  *  Account Button, and the Request Feed. */
 public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener{

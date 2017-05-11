@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/11/17
+ *
 /** Requests Button Fragment from clicking "Requests" on home screen. */
 public class RequestsButtonFragment extends Fragment {
 

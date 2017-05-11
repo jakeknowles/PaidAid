@@ -35,7 +35,6 @@ public class RequestFragment extends Fragment {
             "http://paidaid.x10host.com/requests.php?cmd=requests";
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 3;
     private OnListFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
@@ -47,7 +46,6 @@ public class RequestFragment extends Fragment {
     public RequestFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static RequestFragment newInstance(int columnCount) {
         RequestFragment fragment = new RequestFragment();
