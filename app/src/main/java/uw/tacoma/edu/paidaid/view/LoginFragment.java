@@ -60,9 +60,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     /**
      * Constructor
      * */
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    public LoginFragment() {}
 
 
     /**

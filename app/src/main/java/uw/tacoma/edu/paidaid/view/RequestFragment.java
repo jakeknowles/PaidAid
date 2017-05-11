@@ -120,7 +120,6 @@ public class RequestFragment extends Fragment {
      * Interface which allows for interaction with this fragment.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Request item);
     }
 
