@@ -14,6 +14,8 @@
     <color name="grey">#6e726b</color>
     <color name="black">#000000</color>
     <color name="lightgrey">#bbb</color>
+    <color name="light_light_grey">#EEE</color>
+
 
     <!-- <color name="background_request">#e26a6a</color> -->
     <color name="background_request">#DD834D</color>

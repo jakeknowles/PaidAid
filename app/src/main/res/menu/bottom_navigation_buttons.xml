@@ -21,7 +21,7 @@
         android:id="@+id/messages_button"
         android:icon="@drawable/messages"
         android:title="Messages"
-        android:enabled="true"/>
+        android:enabled="true" />
 
     <!--Requests button-->
     <item

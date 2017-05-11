@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+
 
             /** Displays paid aid logo on top action bar */
             getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
