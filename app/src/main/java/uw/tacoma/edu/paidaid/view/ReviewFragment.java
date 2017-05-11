@@ -9,79 +9,50 @@ import android.view.ViewGroup;
 
 import uw.tacoma.edu.paidaid.R;
 
+/** Review Fragment is from clicking on the messages button, then clicking on a username to review,
+ * and then this fragment gives users an option to give a star rating (1 - 5) */
 public class ReviewFragment extends Fragment {
 
-
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    /** OnFragmentInteractionListener */
     private OnFragmentInteractionListener mListener;
 
-    public ReviewFragment() {
-        // Required empty public constructor
-    }
+    /** Constructor */
+    public ReviewFragment() {}
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ReviewFragment.
+     * onCreate
+     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
      */
-    // TODO: Rename and change types and number of parameters
-    public static ReviewFragment newInstance(String param1, String param2) {
-        ReviewFragment fragment = new ReviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
+    /**
+     * onCreateView
+     * @param inflater instantiates the layout XML file into its corresponding View objects
+     * @param container is a container for ViewGroup views
+     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_review, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
+    /**
+     * onButtonPressed
+     * @param uri uri is a string of characters used to identify a resource.
+     */
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

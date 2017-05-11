@@ -1,11 +1,3 @@
-/**
- * Dmitriy Onishchenko
- * Mobile Apps
- *
- * This is a login fragment for our app consisting of a login and sign up button.
- *
- */
-
 package uw.tacoma.edu.paidaid.view;
 
 import android.content.Context;
@@ -34,54 +26,75 @@ import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
 
-/** Login Fragment */
+/** Login Fragment consisting of login / sign-up button*/
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
-
+    /** URL for our login.php file */
     private final static String LOGIN_URL
             = "http://paidaid.x10host.com/login.php?";
 
+    /** Login Activity member variable */
     private LoginActivity mLoginActivity;
+
+    /** Edit text member variable for username */
     private EditText mUsernameEditText;
+
+    /** Edit Text member variable for password */
     private EditText mPasswordEditText;
 
 
-
+    /** Constructor */
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /** Login Fragment */
+    /** Login Fragment - creates a new Login Fragment */
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
+    /**
+     * onCreate
+     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
+    /**
+     * onCreateView
+     * @param inflater instantiates the layout XML file into its corresponding View objects
+     * @param container is a container for ViewGroup views
+     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        /** Load layouts for username & password */
         mUsernameEditText = (EditText) view.findViewById(R.id.username_text);
         mPasswordEditText = (EditText) view.findViewById(R.id.password_text);
 
-        // attach on click listener
+        /** Attach on click listener */
         Button login = (Button) view.findViewById(R.id.login_button);
         login.setOnClickListener(this);
 
+        /** Attach on click listener */
         Button signUp = (Button) view.findViewById(R.id.sign_up_now_button);
         signUp.setOnClickListener(this);
 
         return view;
     }
 
+    /**
+     * onAttach for LoginActivity
+     * @param context is the data for the activity
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -139,7 +152,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
 
     /**
-     * Helper method to create url and try logining in
+     * Helper method to create url and try logging in
+     * @param view the view
      */
     private void tryLogin(View view) {
 
@@ -160,18 +174,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         switch(v.getId()){
             case R.id.login_button:
                 tryLogin(v);
-
                 break;
             case R.id.sign_up_now_button:
                 launchSignUpScreen();
-
+                break;
             default:
                 break;
         }
     }
 
 
-
+    /** Inner LoginTask class dealing with database */
     private class LoginTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -210,7 +223,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         /**
          * It checks to see if there was a problem with the URL(Network) which is when an
-         * exception is caught. It tries to call the parse Method and checks to see if it was successful.
+         * exception is caught. It tries to call the parse method and checks to see if it was successful.
          * If not, it displays the exception.
          *
          * @param result
@@ -229,7 +242,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 if (status.equals("success")) {
 
-                    // go to house screen ///////////////////////////////////////////////
+                    /** Go to home screen */
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                     getActivity().finish();
@@ -251,40 +264,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
