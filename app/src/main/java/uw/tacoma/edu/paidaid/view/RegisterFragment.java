@@ -7,8 +7,6 @@
  */
 
 
-
-
 package uw.tacoma.edu.paidaid.view;
 
 import android.content.Context;
