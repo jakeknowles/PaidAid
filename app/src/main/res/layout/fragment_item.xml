@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:background="@drawable/border_background"
+    android:layout_marginTop="@dimen/margin_top_grid"
+    android:layout_marginRight="@dimen/margin_top_grid"
+    android:gravity="center"
+
+
+    >
 
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/tip_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:padding="@dimen/grid_padding"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/grid_padding"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/storename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:padding="@dimen/grid_padding"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>

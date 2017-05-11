@@ -37,11 +37,17 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
+        holder.mRequest = mValues.get(position);
 
-        String tip = Double.toString(mValues.get(position).getmTipAmount());
-        holder.mIdView.setText(tip);
-        holder.mContentView.setText(mValues.get(position).getmStoreName());
+        String tip = Request.MONEY_SIGN;
+        tip += Double.toString(mValues.get(position).getmTipAmount());
+        String storeName = mValues.get(position).getmStoreName();
+        String distance = Double.toString(mValues.get(position).getmDistanceAway());
+        distance += Request.MILES_UNITS;
+
+        holder.mTipView.setText(tip);
+        holder.mDistanceView.setText(distance);
+        holder.mStoreNameView.setText(storeName);
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +56,7 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    mListener.onListFragmentInteraction(holder.mRequest);
                 }
             }
         });
@@ -81,20 +87,22 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public Request mItem;
+        public final TextView mTipView;
+        public final TextView mDistanceView;
+        public final TextView mStoreNameView;
+        public Request mRequest;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mTipView = (TextView) view.findViewById(R.id.tip_amount);
+            mDistanceView = (TextView) view.findViewById(R.id.distance);
+            mStoreNameView = (TextView) view.findViewById(R.id.storename);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mTipView.getText() + "'";
         }
     }
 

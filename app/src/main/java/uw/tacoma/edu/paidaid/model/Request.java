@@ -14,6 +14,10 @@ import java.util.List;
 public class Request implements Serializable{
 
 
+    public static final String MILES_UNITS = "mi.";
+
+    public static final String MONEY_SIGN = "$";
+
     /** Constant for JSON key tip_amount */
     public static final String TIP_AMOUNT = "tip";
 

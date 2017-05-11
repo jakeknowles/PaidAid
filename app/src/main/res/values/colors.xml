@@ -10,4 +10,10 @@
     <color name="paidAidDarkRed">#790F23</color>
     <color name="black">#000000</color>
 
+    <!--<color name="background_request">#e26a6a</color>-->
+    <color name="background_request">#DD834D</color>
+
+
+    <color name="lightgrey">#bbb</color>
+
 </resources>
