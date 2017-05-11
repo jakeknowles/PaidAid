@@ -117,7 +117,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         }
 
 
-
     @Override
     public void onListFragmentInteraction(Request request) {
 

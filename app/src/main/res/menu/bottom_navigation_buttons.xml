@@ -2,29 +2,32 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--Home button-->
     <item
         android:id="@+id/home_button"
         android:icon="@drawable/house"
         android:title="Home"
         android:enabled="true"/>
 
+    <!--Add button-->
     <item
         android:id="@+id/add_button"
         android:icon="@drawable/camera"
         android:title="Add"
         android:enabled="true"/>
 
+    <!-- Messages button-->
     <item
         android:id="@+id/messages_button"
         android:icon="@drawable/messages"
         android:title="Messages"
         android:enabled="true"/>
 
+    <!--Requests button-->
     <item
         android:id="@+id/requests_button"
         android:icon="@drawable/clock"
         android:title="Requests"
         android:enabled="true"/>
-
 
 </menu>

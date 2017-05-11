@@ -3,17 +3,19 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="grey">#6e726b</color>
+
+    <!-- PaidAid customized colors -->
     <color name="paidAidBlue">#1E91CA</color>
     <color name="paidAidDarkBlue">#174787</color>
     <color name="paidAidRed">#E32330</color>
     <color name="paidAidDarkRed">#790F23</color>
+
+    <!-- Colors -->
+    <color name="grey">#6e726b</color>
     <color name="black">#000000</color>
-
-    <!--<color name="background_request">#e26a6a</color>-->
-    <color name="background_request">#DD834D</color>
-
-
     <color name="lightgrey">#bbb</color>
+
+    <!-- <color name="background_request">#e26a6a</color> -->
+    <color name="background_request">#DD834D</color>
 
 </resources>
