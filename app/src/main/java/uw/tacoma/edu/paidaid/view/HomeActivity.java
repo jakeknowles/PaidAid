@@ -37,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
 
-
+            /** Displays paid aid logo on top action bar */
             getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
             getSupportActionBar().setLogo(R.drawable.topbarpaidaid);
             getSupportActionBar().setDisplayUseLogoEnabled(true);
