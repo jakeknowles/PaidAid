@@ -34,11 +34,15 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getmItemsAndComments());
+
+        String tip = Double.toString(mValues.get(position).getmTipAmount());
+        holder.mIdView.setText(tip);
         holder.mContentView.setText(mValues.get(position).getmStoreName());
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +55,24 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
             }
         });
     }
+
+//    @Override
+//    public void onBindViewHolder(final ViewHolder holder, int position) {
+//        holder.mItem = mValues.get(position);
+//        holder.mIdView.setText(mValues.get(position).getmItemsAndComments());
+//        holder.mContentView.setText(mValues.get(position).getmStoreName());
+//
+//        holder.mView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (null != mListener) {
+//                    // Notify the active callbacks interface (the activity, if the
+//                    // fragment is attached to one) that an item has been selected.
+//                    mListener.onListFragmentInteraction(holder.mItem);
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public int getItemCount() {
@@ -75,4 +97,6 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
             return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
+
+
 }

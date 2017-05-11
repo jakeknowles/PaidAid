@@ -32,7 +32,7 @@ import uw.tacoma.edu.paidaid.model.Request;
 public class RequestFragment extends Fragment {
 
     private static final String DOWNLOAD_REQUESTS_URL =
-            "http://paidaid.x10host.com/list.php?cmd=requests";
+            "http://paidaid.x10host.com/requests.php?cmd=requests";
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters

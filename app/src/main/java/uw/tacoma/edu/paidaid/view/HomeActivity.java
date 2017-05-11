@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
 import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
 import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
@@ -19,7 +20,7 @@ import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
 
 /** Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
  *  Account Button, and the Request Feed. */
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener{
 
         /** Navigation bar */
         private BottomNavigationView mBottomNavigationMenuBar;
@@ -34,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+
 
             /** Finds and assigns screen and navigation bar layout */
             this.mScreen = (ViewPager) findViewById(R.id.pager);
@@ -83,7 +85,28 @@ public class HomeActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
+            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+                RequestFragment requestFragment = new RequestFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, requestFragment)
+                        .commit();
+            }
         }
+
+    @Override
+    public void onListFragmentInteraction(Request request) {
+
+//        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
+//        Bundle args = new Bundle();
+//        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, item);
+//        courseDetailFragment.setArguments(args);
+//
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fragment_container, courseDetailFragment)
+//                .addToBackStack(null)
+//                .commit();
+    }
 }
 
 

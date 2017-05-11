@@ -235,7 +235,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     getActivity().finish();
 
 
-                    Toast.makeText(mLoginActivity.getApplicationContext(), "Successfully Logged in!"
+                    Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)
                             .show();
                 } else {

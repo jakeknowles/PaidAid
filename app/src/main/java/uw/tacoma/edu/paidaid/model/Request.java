@@ -15,25 +15,25 @@ public class Request implements Serializable{
 
 
     /** Constant for JSON key tip_amount */
-    public static final String TIP_AMOUNT = "tip_amount";
+    public static final String TIP_AMOUNT = "tip";
 
     /** Constant for JSON key distance_away */
-    public static final String DISTANCE_AWAY = "distance_away";
+    public static final String DISTANCE_AWAY = "distance";
 
     /** Constant for JSON key store_name */
-    public static final String STORE_NAME = "store_name";
+    public static final String STORE_NAME = "storename";
 
     /** Constant for JSON key expiration_time */
-    public static final String EXPIRATION_TIME = "expiration_time";
+    public static final String EXPIRATION_TIME = "expiration";
 
     /** Constant for JSON key items_and_comments */
-    public static final String ITEMS_AND_COMMENTS = "items_and_comments";
+    public static final String ITEMS_AND_COMMENTS = "items_comments";
 
     /** Constant for JSON key star_rating */
     public static final String STAR_RATING = "star_rating";
 
     // Tip amount for picking up request
-    private double mTipAmount;
+    private double mTip;
 
     // Distance away from request
     private double mDistanceAway;
@@ -51,15 +51,15 @@ public class Request implements Serializable{
     private int mStarRating;
 
     /** Request Constructor */
-    public Request(double theTipAmount, double theDistanceAway, String theStoreName,
-                   double theExpirationTime, String theItemsAndComments, int theStarRating) {
+    public Request(double theTip, double theDistanceAway, String theStoreName,
+                   String theItemsAndComments) {
 
-        mTipAmount = theTipAmount;
+        mTip = theTip;
         mDistanceAway = theDistanceAway;
         mStoreName = theStoreName;
-        mExpirationTime = theExpirationTime;
+//        mExpirationTime = theExpirationTime;
         mItemsAndComments = theItemsAndComments;
-        mStarRating = theStarRating;
+//        mStarRating = theStarRating;
 
     }
 
@@ -67,26 +67,26 @@ public class Request implements Serializable{
     /**
      * Parses the json string, returns an error message if unsuccessful.
      * Returns course list if success.
-     * @param courseJSON
+     * @param requestJSON
      * @return reason or null if successful.
      */
-    public static String parseRequestsJSON(String courseJSON, List<Request> courseList) {
+    public static String parseRequestsJSON(String requestJSON, List<Request> requestsList) {
         String reason = null;
-//        if (courseJSON != null) {
-//            try {
-//                JSONArray arr = new JSONArray(courseJSON);
-//
-//                for (int i = 0; i < arr.length(); i++) {
-//                    JSONObject obj = arr.getJSONObject(i);
-//                    Request course = new Request(obj.getString(Request.ID), obj.getString(Request.SHORT_DESC)
-//                            , obj.getString(Request.LONG_DESC), obj.getString(Request.PRE_REQS));
-//                    courseList.add(course);
-//                }
-//            } catch (JSONException e) {
-//                reason =  "Unable to parse data, Reason: " + e.getMessage();
-//            }
-//
-//        }
+        if (requestJSON != null) {
+            try {
+                JSONArray arr = new JSONArray(requestJSON);
+
+                for (int i = 0; i < arr.length(); i++) {
+                    JSONObject obj = arr.getJSONObject(i);
+                    Request request = new Request(obj.getDouble(Request.TIP_AMOUNT), obj.getDouble(Request.DISTANCE_AWAY)
+                            , obj.getString(Request.STORE_NAME), obj.getString(Request.ITEMS_AND_COMMENTS));
+                    requestsList.add(request);
+                }
+            } catch (JSONException e) {
+                reason =  "Unable to parse data, Reason: " + e.getMessage();
+            }
+
+        }
         return reason;
     }
 
@@ -96,7 +96,7 @@ public class Request implements Serializable{
      * @return tip amount ($0.00)
      */
     public double getmTipAmount() {
-        return mTipAmount;
+        return mTip;
     }
 
     /**
