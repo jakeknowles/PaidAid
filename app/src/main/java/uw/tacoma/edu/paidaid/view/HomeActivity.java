@@ -97,6 +97,15 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                     return true;
                 }
             });
+
+
+            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+                RequestFragment requestFragment = new RequestFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, requestFragment)
+                        .commit();
+            }
+
         }
 
         /** Creates account settings user button on top right of home screen */
@@ -107,13 +116,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             return true;
         }
 
-            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
-                RequestFragment requestFragment = new RequestFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activity_main, requestFragment)
-                        .commit();
-            }
-        }
+
 
     @Override
     public void onListFragmentInteraction(Request request) {
