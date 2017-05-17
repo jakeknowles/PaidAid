@@ -1,5 +1,8 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +18,8 @@ import android.view.View;
 import java.util.ArrayList;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
+import uw.tacoma.edu.paidaid.authenticate.LoginFragment;
 import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
 import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
@@ -40,10 +45,19 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         /** Array to hold fragments */
         private ArrayList<Fragment> mMenuBarArray = new ArrayList<>();
 
+        /**
+         * Shared preferences used to keep track of who's logged in.
+         */
+        private SharedPreferences mSharedPreferences;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+
+            // instantiate shared preferences
+            mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                    , Context.MODE_PRIVATE);
 
 
             /** Displays paid aid logo on top action bar */
@@ -123,6 +137,40 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             inflater.inflate(R.menu.account_settings, menu);
             return true;
         }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.user_account:
+                // launch login or setting activity
+                userSettingsLogin();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
+    /**
+     * Private helper method.
+     * Launches either a login activity if user is not currently logged in
+     * or the user settings activity if they are logged in.
+     */
+    private void userSettingsLogin() {
+
+        if (!mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false)) {
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+
+        } else {
+            Intent i = new Intent(this, AccountSettingsActivity.class);
+            startActivity(i);
+        }
+    }
+
 
     /** Need for future use */
     @Override

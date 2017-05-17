@@ -19,5 +19,10 @@
     <string name="messages_button">MESSAGES</string>
     <string name="requests_button">REQUESTS</string>
 
+    <!-- Shared Preferences -->
+    <string name="LOGIN_PREFS">uw.tacoma.edu.PaidAid.PREFS</string>
+    <string name="LOGGEDIN">loggedin</string>
+    <string name="USERNAME">username</string>
+
 
 </resources>

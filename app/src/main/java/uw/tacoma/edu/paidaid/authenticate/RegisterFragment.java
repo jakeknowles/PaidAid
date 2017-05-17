@@ -1,4 +1,4 @@
-package uw.tacoma.edu.paidaid.view;
+package uw.tacoma.edu.paidaid.authenticate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +25,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
+import uw.tacoma.edu.paidaid.view.HomeActivity;
 
 
 /**

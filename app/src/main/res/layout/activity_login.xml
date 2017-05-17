@@ -5,6 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uw.tacoma.edu.paidaid.view.LoginActivity">
+    tools:context="uw.tacoma.edu.paidaid.authenticate.LoginActivity">
 
 </FrameLayout>

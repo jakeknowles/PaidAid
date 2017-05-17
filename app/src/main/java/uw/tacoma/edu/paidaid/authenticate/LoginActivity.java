@@ -1,5 +1,6 @@
-package uw.tacoma.edu.paidaid.view;
+package uw.tacoma.edu.paidaid.authenticate;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,6 +13,8 @@ import uw.tacoma.edu.paidaid.R;
  * Activity for logging in with username & password
  * */
 public class LoginActivity extends AppCompatActivity {
+
+
 
     /**
      * onCreate loads the activity login layout & then creates a new login fragment

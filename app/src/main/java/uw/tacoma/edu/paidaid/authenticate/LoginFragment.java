@@ -1,7 +1,8 @@
-package uw.tacoma.edu.paidaid.view;
+package uw.tacoma.edu.paidaid.authenticate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.view.HomeActivity;
 
 /**
  * @Author Dmitriy Onishchenko
@@ -34,6 +36,12 @@ import uw.tacoma.edu.paidaid.R;
  * Login Fragment requiring a username and password
  * */
 public class LoginFragment extends Fragment implements View.OnClickListener {
+
+
+    /**
+     * Shared preferences used to keep track if user is logged in or not
+     */
+    private SharedPreferences mSharedPreferences;
 
     /**
      * URL for our login.php file
@@ -70,6 +78,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
 
     }
 
@@ -171,6 +182,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         LoginTask task = new LoginTask();
         task.execute(url);
 
+        mSharedPreferences
+                .edit()
+                .putBoolean(getString(R.string.LOGGEDIN), true)
+                .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                .commit();
+
+
     }
 
     /**
@@ -253,11 +271,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 if (status.equals("success")) {
 
-                    /** Go to home screen */
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    /** Go to home screen upon success */
                     getActivity().finish();
-
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)
