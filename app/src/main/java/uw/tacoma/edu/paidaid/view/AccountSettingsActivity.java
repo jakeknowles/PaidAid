@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
@@ -33,6 +34,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private EditText mUsernameView;
 
+    private RatingBar mRatingBar;
+
     /**
      * onCreate
      * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
@@ -48,8 +51,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         mLogoutButton = (Button) findViewById(R.id.logout_button);
         mUsernameView = (EditText) findViewById(R.id.username_text);
+        mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
 
-
+        mRatingBar.setRating(4.5f);
 
         setUpSettingsFields();
         setUpOnClickListeners();

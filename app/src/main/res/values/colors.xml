@@ -9,12 +9,17 @@
     <color name="paidAidDarkBlue">#174787</color>
     <color name="paidAidRed">#E32330</color>
     <color name="paidAidDarkRed">#790F23</color>
+    <color name="stars">#ffd700</color>
 
     <!-- Colors -->
     <color name="grey">#6e726b</color>
+    <color name="border_grey">#999</color>
+
+
     <color name="black">#000000</color>
     <color name="lightgrey">#bbb</color>
     <color name="light_light_grey">#EEE</color>
+    <color name="white">#FFF</color>
     
     <!-- <color name="background_request">#e26a6a</color> -->
     <color name="background_request">#DD834D</color>
