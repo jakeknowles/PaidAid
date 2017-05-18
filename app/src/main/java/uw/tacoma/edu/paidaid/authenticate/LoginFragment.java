@@ -1,12 +1,11 @@
 package uw.tacoma.edu.paidaid.authenticate;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.view.HomeActivity;
 
 /**
  * @Author Dmitriy Onishchenko
@@ -295,7 +293,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * allow for interaction.
      * */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

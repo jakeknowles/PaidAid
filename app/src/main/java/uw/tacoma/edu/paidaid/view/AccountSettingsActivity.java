@@ -53,7 +53,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mUsernameView = (EditText) findViewById(R.id.username_text);
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
 
-        mRatingBar.setRating(4.5f);
+        mRatingBar.setRating(5.0f);
 
         setUpSettingsFields();
         setUpOnClickListeners();

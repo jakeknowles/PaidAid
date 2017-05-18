@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
-import uw.tacoma.edu.paidaid.authenticate.LoginFragment;
 import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
 import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
@@ -97,22 +96,31 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.home_button:
-                            mScreen.setCurrentItem(0); // Set to Index 1 ( Home )
+                            homeActivityClick();
                             break;
                         case R.id.add_button:
                             mScreen.setCurrentItem(1); // Set to Index 2 ( Add )
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.activity_main, new PostRequestFragment())
+                                    .addToBackStack(null)
+                                    .commit();
                             break;
                         case R.id.messages_button:
                             mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.activity_main, new ReviewFragment())
+                                    .addToBackStack(null)
+                                    .commit();
                             break;
                         case R.id.requests_button:
                             mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
-                            break;
-                        case R.id.user_account: // If user hits account settings button
-                            getSupportFragmentManager()
+                            getFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.activity_main, new MessageFragment())
-                                    .addToBackStack(null).commit();
+                                    .replace(R.id.activity_main, new CurrentRequestsFragment())
+                                    .addToBackStack(null)
+                                    .commit();
                             break;
                     }
                     return true;
@@ -129,7 +137,13 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
         }
 
-        /** Creates account settings user button on top right of home screen */
+    private void homeActivityClick() {
+            Intent i = new Intent(this, HomeActivity.class);
+            startActivity(i);
+    }
+
+
+    /** Creates account settings user button on top right of home screen */
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             MenuInflater inflater = getMenuInflater();
