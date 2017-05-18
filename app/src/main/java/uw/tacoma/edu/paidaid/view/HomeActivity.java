@@ -1,13 +1,12 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -32,7 +31,7 @@ import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
  *
  *  Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
  *  Account Button, and the Request Feed. */
-public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener{
+public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener {
 
         /** Navigation bar */
         private BottomNavigationView mBottomNavigationMenuBar;
@@ -75,20 +74,20 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
 
             /** Creates an adapter that handles fragments so the user can return back. */
-            mScreen.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-
-                /** Method needed for adapter */
-                @Override
-                public Fragment getItem(int position) {
-                    return mMenuBarArray.get(position);
-                }
-
-                /** Method needed for adapter */
-                @Override
-                public int getCount() {
-                    return mMenuBarArray.size();
-                }
-            });
+//            mScreen.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+//
+//                /** Method needed for adapter */
+//                @Override
+//                public Fragment getItem(int position) {
+//                    return mMenuBarArray.get(position);
+//                }
+//
+//                /** Method needed for adapter */
+//                @Override
+//                public int getCount() {
+//                    return mMenuBarArray.size();
+//                }
+//            });
 
             /** Listener for handling events on bottom menu navigation buttons. */
             mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,13 +95,14 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.home_button:
+                            mScreen.setCurrentItem(0); // Set to Index 1 ( Home )
                             homeActivityClick();
                             break;
                         case R.id.add_button:
                             mScreen.setCurrentItem(1); // Set to Index 2 ( Add )
                             getFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.activity_main, new PostRequestFragment())
+                                    .replace(R.id.activity_main, new AddRequestButtonFragment())
                                     .addToBackStack(null)
                                     .commit();
                             break;
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
                             getFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.activity_main, new ReviewFragment())
+                                    .replace(R.id.activity_main, new MessagesButtonFragment())
                                     .addToBackStack(null)
                                     .commit();
                             break;
@@ -118,7 +118,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
                             getFragmentManager()
                                     .beginTransaction()
-                                    .replace(R.id.activity_main, new CurrentRequestsFragment())
+                                    .replace(R.id.activity_main, new RequestsButtonFragment())
                                     .addToBackStack(null)
                                     .commit();
                             break;
@@ -137,6 +137,9 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
         }
 
+    /**
+     * Home button click - launch new home activity
+     */
     private void homeActivityClick() {
             Intent i = new Intent(this, HomeActivity.class);
             startActivity(i);
