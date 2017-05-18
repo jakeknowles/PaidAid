@@ -96,7 +96,11 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                     switch (item.getItemId()) {
                         case R.id.home_button:
                             mScreen.setCurrentItem(0); // Set to Index 1 ( Home )
-                            homeActivityClick();
+                            getFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.activity_main, new HomeButtonFragment())
+                                    .addToBackStack(null)
+                                    .commit();
                             break;
                         case R.id.add_button:
                             mScreen.setCurrentItem(1); // Set to Index 2 ( Add )
@@ -136,14 +140,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             }
 
         }
-
-    /**
-     * Home button click - launch new home activity
-     */
-    private void homeActivityClick() {
-            Intent i = new Intent(this, HomeActivity.class);
-            startActivity(i);
-    }
 
 
     /** Creates account settings user button on top right of home screen */
