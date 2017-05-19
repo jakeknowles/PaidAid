@@ -71,7 +71,9 @@
         android:background="@drawable/add_requests_style"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:textColor="@color/grey" />
+        android:textColor="@color/grey"
+        android:hint="@string/expiration_time"
+        android:paddingLeft="@dimen/text_margin"/>
 
 
     <!-- Items & Comments text field -->
@@ -80,13 +82,15 @@
         android:layout_width="348dp"
         android:layout_height="47dp"
         android:ems="10"
+        android:hint="@string/items_comments"
         android:inputType="textMultiLine"
         android:textColor="@color/grey"
         android:background="@drawable/add_requests_style"
         android:layout_marginBottom="65dp"
         android:layout_alignBottom="@+id/post_request_button"
         android:layout_alignLeft="@+id/expiration_time"
-        android:layout_alignStart="@+id/expiration_time" />
+        android:layout_alignStart="@+id/expiration_time"
+        android:paddingLeft="@dimen/text_margin"/>
 
     <!-- Post button -->
     <Button
