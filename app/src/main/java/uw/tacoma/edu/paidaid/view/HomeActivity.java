@@ -93,7 +93,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
                             if (fragAdd == null) {
                                 addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
-                                mBottomNavigationMenuBar.removeAllViews();
                             } else
                                 replaceFragmentNoBackStack(fragAdd);
                             break;
