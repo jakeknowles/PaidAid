@@ -70,11 +70,16 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
                     switch (item.getItemId()) {
                         case R.id.home_button:
-                            replaceFragmentNoBackStack(getSupportFragmentManager()
-                                    .findFragmentByTag(getString(R.string.home_tag)));
+                            Fragment fragHome = getSupportFragmentManager()
+                                    .findFragmentByTag(getString(R.string.home_tag));
+
+                            if (fragHome == null)
+                                addFragmentNoBackStack(new RequestFragment(), getString(R.string.home_tag));
+                             else
+                                replaceFragmentNoBackStack(fragHome);
                             break;
                         case R.id.add_button:
-                            Fragment fragAdd = (Fragment) getSupportFragmentManager()
+                            Fragment fragAdd = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.add_tag));
 
                             if (fragAdd == null)
@@ -83,7 +88,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                                 replaceFragmentNoBackStack(fragAdd);
                             break;
                         case R.id.messages_button:
-                            Fragment fragMes = (Fragment) getSupportFragmentManager()
+                            Fragment fragMes = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.messages_tag));
 
                             if (fragMes == null)
@@ -92,7 +97,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                                 replaceFragmentNoBackStack(fragMes);
                             break;
                         case R.id.requests_button:
-                            Fragment fragReq = (Fragment) getSupportFragmentManager()
+                            Fragment fragReq = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.myRequests_tag));
 
                             if (fragReq == null)
