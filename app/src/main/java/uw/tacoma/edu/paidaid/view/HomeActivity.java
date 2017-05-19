@@ -8,7 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,9 +36,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         /** Navigation bar */
         private BottomNavigationView mBottomNavigationMenuBar;
 
-        /** View pager variable for each fragment screen */
-        private ViewPager mScreen;
-
         /**
          * Shared preferences used to keep track of who's logged in.
          */
@@ -52,14 +51,16 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                     , Context.MODE_PRIVATE);
 
 
-            /** Displays paid aid logo on top action bar */
-            getSupportActionBar().setDisplayShowHomeEnabled(true); //sets icon on top
-            getSupportActionBar().setLogo(R.drawable.topbarpaidaid);
-            getSupportActionBar().setDisplayUseLogoEnabled(true);
-
             /** Finds and assigns screen and navigation bar layout */
 
             this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
+
+
+            // set action bar toolbar to custom toolbar
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setCustomView(R.layout.toolbar);
+
+
 
             // add the request fragment to populate the grid of requests
             if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {

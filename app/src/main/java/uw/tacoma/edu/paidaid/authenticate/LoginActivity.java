@@ -3,6 +3,7 @@ package uw.tacoma.edu.paidaid.authenticate;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -24,6 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // set action bar toolbar to custom toolbar
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.toolbar_no_logo);
 
         getSupportFragmentManager()
             .beginTransaction()

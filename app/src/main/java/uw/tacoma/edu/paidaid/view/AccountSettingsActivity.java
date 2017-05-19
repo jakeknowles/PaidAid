@@ -49,6 +49,10 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mSharedPrefernces = getSharedPreferences(getString(R.string.LOGIN_PREFS),
                 Context.MODE_PRIVATE);
 
+        // set action bar toolbar to custom toolbar
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.toolbar_no_logo);
+
         mLogoutButton = (Button) findViewById(R.id.logout_button);
         mUsernameView = (EditText) findViewById(R.id.username_text);
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
