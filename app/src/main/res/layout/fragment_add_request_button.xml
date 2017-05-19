@@ -14,69 +14,64 @@
     <EditText
         android:id="@+id/tip_amount_text"
         android:layout_width="350dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        android:hint="@string/tip"
-        android:textColor="@color/grey"
+        android:layout_height="45dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/add_requests_style"
-        android:layout_above="@+id/location"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="23dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:ems="10"
+        android:hint="@string/tip"
+        android:inputType="textPostalAddress"
+        android:paddingLeft="@dimen/text_margin"
+        android:textColor="@color/grey"
+        android:layout_above="@+id/location_request"
+        android:layout_centerHorizontal="true" />
 
     <!-- Location text field -->
     <EditText
         android:id="@+id/location"
         android:layout_width="348dp"
-        android:layout_height="48dp"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        android:hint="Location"
-        android:textColor="@color/grey"
+        android:layout_height="45dp"
         android:background="@drawable/add_requests_style"
-        android:layout_above="@+id/store_name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="22dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:ems="10"
+        android:hint="@string/location"
+        android:inputType="textPostalAddress"
+        android:paddingLeft="@dimen/text_margin"
+        android:textColor="@color/grey"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/store_name_text"
+        android:layout_alignLeft="@+id/tip_amount_text"
+        android:layout_alignStart="@+id/tip_amount_text" />
 
     <!-- Store Name text field -->
     <EditText
         android:id="@+id/store_name"
         android:layout_width="352dp"
-        android:layout_height="49dp"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        android:hint="@string/store_name"
-        android:textColor="@color/grey"
-        android:background="@drawable/add_requests_style"
+        android:layout_height="45dp"
         android:layout_marginBottom="18dp"
-        android:layout_above="@+id/expiration_time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:background="@drawable/add_requests_style"
+        android:ems="10"
+        android:hint="@string/store_name"
+        android:inputType="textPostalAddress"
+        android:paddingLeft="@dimen/text_margin"
+        android:textColor="@color/grey"
+        android:layout_above="@+id/expiration_time_text"
+        android:layout_alignLeft="@+id/location"
+        android:layout_alignStart="@+id/location" />
 
     <!-- Expiration time/date text field -->
     <EditText
         android:id="@+id/expiration_time"
         android:layout_width="351dp"
-        android:layout_height="41dp"
+        android:layout_height="45dp"
+        android:layout_above="@+id/items_comments"
+        android:layout_alignEnd="@+id/location"
+        android:layout_alignLeft="@+id/store_name"
+        android:layout_alignRight="@+id/location"
+        android:layout_alignStart="@+id/store_name"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/add_requests_style"
         android:ems="10"
         android:inputType="textPostalAddress"
-        android:hint="@string/expiration_time"
-        android:textColor="@color/grey"
-        android:background="@drawable/add_requests_style"
-        android:layout_above="@+id/items_comments"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:textColor="@color/grey" />
 
 
     <!-- Items & Comments text field -->
@@ -86,15 +81,12 @@
         android:layout_height="47dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:hint="@string/items_comments"
         android:textColor="@color/grey"
         android:background="@drawable/add_requests_style"
+        android:layout_marginBottom="65dp"
         android:layout_alignBottom="@+id/post_request_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="64dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignLeft="@+id/expiration_time"
+        android:layout_alignStart="@+id/expiration_time" />
 
     <!-- Post button -->
     <Button
@@ -110,6 +102,58 @@
         android:layout_marginLeft="119dp"
         android:layout_marginStart="119dp"
         android:layout_marginBottom="67dp" />
+
+    <TextView
+        android:id="@+id/tip_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tip Amount"
+        android:textStyle="bold"
+        android:layout_above="@+id/tip_amount_text"
+        android:layout_alignLeft="@+id/tip_amount_text"
+        android:layout_alignStart="@+id/tip_amount_text"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp" />
+
+    <TextView
+        android:id="@+id/location_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textStyle="bold"
+        android:layout_above="@+id/location"
+        android:layout_alignLeft="@+id/tip_text"
+        android:layout_alignStart="@+id/tip_text" />
+
+    <TextView
+        android:id="@+id/store_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Store Name"
+        android:textStyle="bold"
+        android:layout_above="@+id/store_name"
+        android:layout_alignLeft="@+id/location_request"
+        android:layout_alignStart="@+id/location_request" />
+
+    <TextView
+        android:id="@+id/expiration_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expiration Time"
+        android:textStyle="bold"
+        android:layout_above="@+id/expiration_time"
+        android:layout_alignLeft="@+id/store_name_text"
+        android:layout_alignStart="@+id/store_name_text" />
+
+    <TextView
+        android:id="@+id/items_comments_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Items / Additional Comments"
+        android:textStyle="bold"
+        android:layout_above="@+id/items_comments"
+        android:layout_alignLeft="@+id/expiration_time_text"
+        android:layout_alignStart="@+id/expiration_time_text" />
 
 
 </RelativeLayout>
