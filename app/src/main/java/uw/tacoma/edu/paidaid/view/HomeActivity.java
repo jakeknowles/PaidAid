@@ -16,10 +16,10 @@ import android.view.MenuItem;
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
 import uw.tacoma.edu.paidaid.model.Request;
-import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
-import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
-import uw.tacoma.edu.paidaid.pager.RequestFragment;
-import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
+import uw.tacoma.edu.paidaid.coreFeatures.AddRequestFragment;
+import uw.tacoma.edu.paidaid.coreFeatures.MyMessagesFragment;
+import uw.tacoma.edu.paidaid.coreFeatures.RequestFragment;
+import uw.tacoma.edu.paidaid.coreFeatures.MyRequestsFragment;
 
 
 /**
@@ -61,6 +61,14 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
             this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
+            // add the request fragment to populate the grid of requests
+            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+
+                RequestFragment requestFragment = new RequestFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
+                        .commit();
+            }
 
 
             /** Listener for handling events on bottom menu navigation buttons. */
@@ -83,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                                     .findFragmentByTag(getString(R.string.add_tag));
 
                             if (fragAdd == null)
-                                addFragmentNoBackStack(new AddRequestButtonFragment(), getString(R.string.add_tag));
+                                addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
                             else
                                 replaceFragmentNoBackStack(fragAdd);
                             break;
@@ -92,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                                     .findFragmentByTag(getString(R.string.messages_tag));
 
                             if (fragMes == null)
-                                addFragmentNoBackStack(new MessagesButtonFragment(), getString(R.string.messages_tag));
+                                addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
                             else
                                 replaceFragmentNoBackStack(fragMes);
                             break;
@@ -101,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                                     .findFragmentByTag(getString(R.string.myRequests_tag));
 
                             if (fragReq == null)
-                                addFragmentNoBackStack(new RequestsButtonFragment(), getString(R.string.myRequests_tag));
+                                addFragmentNoBackStack(new MyRequestsFragment(), getString(R.string.myRequests_tag));
                             else
                                 replaceFragmentNoBackStack(fragReq);
                             break;
@@ -111,14 +119,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             });
 
 
-            // add the request fragment to populate the grid of requests
-            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
 
-                RequestFragment requestFragment = new RequestFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
-                        .commit();
-            }
         }
 
 

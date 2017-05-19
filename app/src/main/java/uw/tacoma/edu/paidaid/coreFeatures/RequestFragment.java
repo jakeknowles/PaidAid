@@ -1,4 +1,4 @@
-package uw.tacoma.edu.paidaid.pager;
+package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.content.Context;
 import android.os.AsyncTask;

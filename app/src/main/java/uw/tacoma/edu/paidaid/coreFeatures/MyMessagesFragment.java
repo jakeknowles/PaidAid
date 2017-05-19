@@ -1,4 +1,4 @@
-package uw.tacoma.edu.paidaid.pager;
+package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,14 +14,14 @@ import uw.tacoma.edu.paidaid.R;
  * @Author Dmitriy Onishchenko
  * @version 5/11/17
  *
- * Add Button Fragment from clicking "Add" on home screen. */
-public class AddRequestButtonFragment extends Fragment {
+/** Messages Button Fragment from clicking "Messages" on home screen. */
+public class MyMessagesFragment extends Fragment {
 
     /** OnFragmentInteractionListener */
     private OnFragmentInteractionListener mListener;
 
     /** Constructor */
-    public AddRequestButtonFragment() {}
+    public MyMessagesFragment() {}
 
     /**
      * onCreate
@@ -42,7 +42,7 @@ public class AddRequestButtonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_add_request_button, container, false);
+        return inflater.inflate(R.layout.fragment_messages_button, container, false);
     }
 
 

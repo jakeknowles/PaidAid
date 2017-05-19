@@ -6,7 +6,8 @@
     android:name="uw.tacoma.edu.paidaid.view.RequestFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/margin_top_grid"
+    android:paddingLeft= "@dimen/margin_top_grid"
     app:layoutManager="LinearLayoutManager"
-    tools:context="uw.tacoma.edu.paidaid.pager.RequestFragment"
-    tools:listitem="@layout/fragment_item" />
+    tools:context="uw.tacoma.edu.paidaid.coreFeatures.RequestFragment"
+    tools:listitem="@layout/fragment_item"
+    android:background="@color/grey"/>

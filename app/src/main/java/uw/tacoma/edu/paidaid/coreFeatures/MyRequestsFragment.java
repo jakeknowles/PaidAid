@@ -1,4 +1,4 @@
-package uw.tacoma.edu.paidaid.pager;
+package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,13 +15,13 @@ import uw.tacoma.edu.paidaid.R;
  * @version 5/11/17
  *
 /** Requests Button Fragment from clicking "Requests" on home screen. */
-public class RequestsButtonFragment extends Fragment {
+public class MyRequestsFragment extends Fragment {
 
     /** OnFragmentInteractionListener */
     private OnFragmentInteractionListener mListener;
 
     /** Constructor */
-    public RequestsButtonFragment() {}
+    public MyRequestsFragment() {}
 
     /**
      * onCreate
