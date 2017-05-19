@@ -15,11 +15,11 @@ import android.view.MenuItem;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
-import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.coreFeatures.AddRequestFragment;
 import uw.tacoma.edu.paidaid.coreFeatures.MyMessagesFragment;
-import uw.tacoma.edu.paidaid.coreFeatures.RequestFragment;
 import uw.tacoma.edu.paidaid.coreFeatures.MyRequestsFragment;
+import uw.tacoma.edu.paidaid.coreFeatures.RequestFragment;
+import uw.tacoma.edu.paidaid.model.Request;
 
 
 /**
@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             }
 
 
+
             /** Listener for handling events on bottom menu navigation buttons. */
             mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -90,9 +91,10 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             Fragment fragAdd = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.add_tag));
 
-                            if (fragAdd == null)
+                            if (fragAdd == null) {
                                 addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
-                            else
+                                mBottomNavigationMenuBar.removeAllViews();
+                            } else
                                 replaceFragmentNoBackStack(fragAdd);
                             break;
                         case R.id.messages_button:
@@ -121,7 +123,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
 
         }
-
 
     /**
      * Method that replaces a fragment without adding it to the backstack
