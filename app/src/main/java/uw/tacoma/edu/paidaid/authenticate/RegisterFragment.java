@@ -2,6 +2,7 @@ package uw.tacoma.edu.paidaid.authenticate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -65,6 +66,11 @@ public class RegisterFragment extends Fragment {
      */
     private LoginActivity mActivity;
 
+    /**
+     * The shared preferences to keep track of user logged in status
+     */
+    SharedPreferences mSharedPreferences;
+
 
     /**
      * Constructor Initialize fields.
@@ -77,6 +83,10 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+
 
     }
 
@@ -213,10 +223,15 @@ public class RegisterFragment extends Fragment {
 
                 if (status.equals("success")) {
 
-                    // go to house screen ///////////////////////////////////////////////
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    // go to home screen
                     getActivity().finish();
+
+                    // save user information and logged in status
+                    mSharedPreferences
+                            .edit()
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                            .commit();
 
 
                     Toast.makeText(mActivity.getApplicationContext(), "Welcome to PaidAid!"

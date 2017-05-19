@@ -180,12 +180,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         LoginTask task = new LoginTask();
         task.execute(url);
 
-        mSharedPreferences
-                .edit()
-                .putBoolean(getString(R.string.LOGGEDIN), true)
-                .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
-                .commit();
-
 
     }
 
@@ -269,8 +263,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                 if (status.equals("success")) {
 
-                    /** Go to home screen upon success */
+                    // Go to home screen upon successful login
+                    // do this my finishing the loginActivity
                     getActivity().finish();
+
+                    // save user information and logged in status
+                    mSharedPreferences
+                            .edit()
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                            .commit();
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)

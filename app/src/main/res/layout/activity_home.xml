@@ -5,14 +5,9 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uw.tacoma.edu.paidaid.view.HomeActivity">
+    tools:context="uw.tacoma.edu.paidaid.view.HomeActivity"
+    android:background="@color/grey">
 
-    <!-- Pager view -->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
 
     <!-- Bottom Navigation Menu Bar -->
     <android.support.design.widget.BottomNavigationView

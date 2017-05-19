@@ -10,7 +10,7 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
-import uw.tacoma.edu.paidaid.view.RequestFragment.OnListFragmentInteractionListener;
+import uw.tacoma.edu.paidaid.pager.RequestFragment.OnListFragmentInteractionListener;
 
 /**
  * @Author Dmitriy Onishchenko

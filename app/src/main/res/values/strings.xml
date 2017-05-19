@@ -24,5 +24,12 @@
     <string name="LOGGEDIN">loggedin</string>
     <string name="USERNAME">username</string>
 
+    <!-- Tags for ID's-->
+    <string name="home_tag">home_requests_tag</string>
+    <string name="messages_tag">messages_tag</string>
+    <string name="myRequests_tag">myRequests_tag</string>
+    <string name="add_tag">add_tag</string>
+
+
 
 </resources>
