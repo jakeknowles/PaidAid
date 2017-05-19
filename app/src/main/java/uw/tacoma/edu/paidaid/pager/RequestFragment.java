@@ -1,4 +1,4 @@
-package uw.tacoma.edu.paidaid.view;
+package uw.tacoma.edu.paidaid.pager;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,6 +22,7 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
+import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
 
 /**
  * @Author Dmitriy Onishchenko

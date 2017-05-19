@@ -8,5 +8,5 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/margin_top_grid"
     app:layoutManager="LinearLayoutManager"
-    tools:context="uw.tacoma.edu.paidaid.view.RequestFragment"
+    tools:context="uw.tacoma.edu.paidaid.pager.RequestFragment"
     tools:listitem="@layout/fragment_item" />

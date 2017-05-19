@@ -1,26 +1,24 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
 import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.pager.AddRequestButtonFragment;
-import uw.tacoma.edu.paidaid.pager.HomeButtonFragment;
 import uw.tacoma.edu.paidaid.pager.MessagesButtonFragment;
+import uw.tacoma.edu.paidaid.pager.RequestFragment;
 import uw.tacoma.edu.paidaid.pager.RequestsButtonFragment;
 
 
@@ -38,9 +36,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
         /** View pager variable for each fragment screen */
         private ViewPager mScreen;
-
-        /** Array to hold fragments */
-        private ArrayList<Fragment> mMenuBarArray = new ArrayList<>();
 
         /**
          * Shared preferences used to keep track of who's logged in.
@@ -63,91 +58,88 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             getSupportActionBar().setDisplayUseLogoEnabled(true);
 
             /** Finds and assigns screen and navigation bar layout */
-            this.mScreen = (ViewPager) findViewById(R.id.pager);
+
             this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
 
-            mMenuBarArray.add(new HomeButtonFragment()); /** Home Button */
-            mMenuBarArray.add(new AddRequestButtonFragment()); /** Add Button */
-            mMenuBarArray.add(new MessagesButtonFragment()); /** Messages Button */
-            mMenuBarArray.add(new RequestsButtonFragment()); /** Requests Button */
-
-
-            /** Creates an adapter that handles fragments so the user can return back. */
-//            mScreen.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-//
-//                /** Method needed for adapter */
-//                @Override
-//                public Fragment getItem(int position) {
-//                    return mMenuBarArray.get(position);
-//                }
-//
-//                /** Method needed for adapter */
-//                @Override
-//                public int getCount() {
-//                    return mMenuBarArray.size();
-//                }
-//            });
 
             /** Listener for handling events on bottom menu navigation buttons. */
             mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                     switch (item.getItemId()) {
                         case R.id.home_button:
-                            mScreen.setCurrentItem(0); // Set to Index 1 ( Home )
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.activity_main, new HomeButtonFragment())
-                                    .addToBackStack(null)
-                                    .commit();
+                            replaceFragmentNoBackStack(getSupportFragmentManager()
+                                    .findFragmentByTag(getString(R.string.home_tag)));
                             break;
                         case R.id.add_button:
-                            mScreen.setCurrentItem(1); // Set to Index 2 ( Add )
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.activity_main, new AddRequestButtonFragment())
-                                    .addToBackStack(null)
-                                    .commit();
+                            Fragment fragAdd = (Fragment) getSupportFragmentManager()
+                                    .findFragmentByTag(getString(R.string.add_tag));
+
+                            if (fragAdd == null)
+                                addFragmentNoBackStack(new AddRequestButtonFragment(), getString(R.string.add_tag));
+                            else
+                                replaceFragmentNoBackStack(fragAdd);
                             break;
                         case R.id.messages_button:
-                            mScreen.setCurrentItem(2); // Set to Index 3 ( Messages )
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.activity_main, new MessagesButtonFragment())
-                                    .addToBackStack(null)
-                                    .commit();
+                            Fragment fragMes = (Fragment) getSupportFragmentManager()
+                                    .findFragmentByTag(getString(R.string.messages_tag));
+
+                            if (fragMes == null)
+                                addFragmentNoBackStack(new MessagesButtonFragment(), getString(R.string.messages_tag));
+                            else
+                                replaceFragmentNoBackStack(fragMes);
                             break;
                         case R.id.requests_button:
-                            mScreen.setCurrentItem(3); // Set to Index 4 ( Requests )
-                            getFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.activity_main, new RequestsButtonFragment())
-                                    .addToBackStack(null)
-                                    .commit();
+                            Fragment fragReq = (Fragment) getSupportFragmentManager()
+                                    .findFragmentByTag(getString(R.string.myRequests_tag));
+
+                            if (fragReq == null)
+                                addFragmentNoBackStack(new RequestsButtonFragment(), getString(R.string.myRequests_tag));
+                            else
+                                replaceFragmentNoBackStack(fragReq);
                             break;
                     }
                     return true;
                 }
             });
 
-            /** New Request Fragment */
+
+            // add the request fragment to populate the grid of requests
             if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+
                 RequestFragment requestFragment = new RequestFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activity_main, requestFragment)
+                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
                         .commit();
             }
-//
-//            /** New AddRequestButtonFragment */
-//            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.addRequestFragment) == null) {
-//                AddRequestButtonFragment addRequestButtonFragment = new AddRequestButtonFragment();
-//                getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.activity_main, addRequestButtonFragment)
-//                        .commit();
-//            }
-
         }
+
+
+    /**
+     * Method that replaces a fragment without adding it to the backstack
+     * @param theFragment the fragment to replace with
+     */
+    public void replaceFragmentNoBackStack(Fragment theFragment) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.activity_main, theFragment)
+                    .commit();
+        }
+
+    /**
+     * Method that adds a new fragment without adding it to the backstack
+     * @param theFragment the new fragment to add
+     * @param theFragmentTag the fragment tag name
+     */
+    public void addFragmentNoBackStack(Fragment theFragment, String theFragmentTag) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activity_main, theFragment, theFragmentTag)
+                    .commit();
+        }
+
 
 
     /** Creates account settings user button on top right of home screen */
