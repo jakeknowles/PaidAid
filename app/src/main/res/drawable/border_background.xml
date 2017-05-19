@@ -5,6 +5,7 @@
     <!-- View background color -->
     <solid
         android:color="@color/background_request" >
+
     </solid>
 
     <!-- View border color and width -->

@@ -1,19 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_request">
+    android:weightSum="1"
+    android:background="@color/light_light_grey">
 
-    <TextView
-        android:layout_width="182dp"
-        android:layout_height="64dp"
-        android:text="Add Request"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteY="192dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <!-- Tip Amount text field -->
+    <EditText
+        android:id="@+id/tip_amount_text"
+        android:layout_width="350dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:hint="@string/tip"
+        android:textColor="@color/grey"
+        android:background="@drawable/add_requests_style"
+        android:layout_above="@+id/location"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="23dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Location text field -->
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="348dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:hint="Location"
+        android:textColor="@color/grey"
+        android:background="@drawable/add_requests_style"
+        android:layout_above="@+id/store_name"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="22dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Store Name text field -->
+    <EditText
+        android:id="@+id/store_name"
+        android:layout_width="352dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:hint="@string/store_name"
+        android:textColor="@color/grey"
+        android:background="@drawable/add_requests_style"
+        android:layout_marginBottom="18dp"
+        android:layout_above="@+id/expiration_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <!-- Expiration time/date text field -->
+    <EditText
+        android:id="@+id/expiration_time"
+        android:layout_width="351dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        android:hint="@string/expiration_time"
+        android:textColor="@color/grey"
+        android:background="@drawable/add_requests_style"
+        android:layout_above="@+id/items_comments"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <!-- Items & Comments text field -->
+    <EditText
+        android:id="@+id/items_comments"
+        android:layout_width="348dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="@string/items_comments"
+        android:textColor="@color/grey"
+        android:background="@drawable/add_requests_style"
+        android:layout_alignBottom="@+id/post_request_button"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!-- Post button -->
+    <Button
+        android:id="@+id/post_request_button"
+        android:layout_width="109dp"
+        android:layout_height="55dp"
+        android:backgroundTint="@color/paidAidBlue"
+        android:text="@string/post_request"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="119dp"
+        android:layout_marginStart="119dp"
+        android:layout_marginBottom="67dp" />
+
+
+</RelativeLayout>

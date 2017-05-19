@@ -32,6 +32,7 @@ public class RequestsButtonFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     /**
      * onCreateView
      * @param inflater instantiates the layout XML file into its corresponding View objects

@@ -24,5 +24,15 @@
     <string name="LOGGEDIN">loggedin</string>
     <string name="USERNAME">username</string>
 
+    <!-- Post Request -->
+    <string name="post_request">Post!</string>
+    <string name="post_request_text">What do you need?</string>
+    <string name="tip">Tip Amount ($0.00)</string>
+    <string name="location">Location</string>
+    <string name="store_name">Store Name</string>
+    <string name="expiration_time">Expires at 12:00pm</string>
+    <string name="items_comments">Items and Additional Comments</string>
+
+
 
 </resources>

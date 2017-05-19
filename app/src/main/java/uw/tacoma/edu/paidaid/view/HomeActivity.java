@@ -138,6 +138,14 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                         .add(R.id.activity_main, requestFragment)
                         .commit();
             }
+//
+//            /** New AddRequestButtonFragment */
+//            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.addRequestFragment) == null) {
+//                AddRequestButtonFragment addRequestButtonFragment = new AddRequestButtonFragment();
+//                getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.activity_main, addRequestButtonFragment)
+//                        .commit();
+//            }
 
         }
 
