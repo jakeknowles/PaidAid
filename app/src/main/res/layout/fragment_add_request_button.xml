@@ -194,5 +194,15 @@
         app:layout_constraintGuide_begin="20dp"
         android:orientation="vertical" />
 
+    <Button
+        android:id="@+id/date_picker_button"
+        android:layout_width="70dp"
+        android:layout_height="39dp"
+        android:text="Date"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="46dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
