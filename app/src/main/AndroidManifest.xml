@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.HomeActivity"
+            android:windowSoftInputMode="adjustPan"
             android:logo="@mipmap/ic_launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
