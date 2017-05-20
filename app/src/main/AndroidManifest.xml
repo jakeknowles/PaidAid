@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/paidaidlogo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".view.HomeActivity"
             android:windowSoftInputMode="adjustPan"
@@ -21,7 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-         <activity android:name=".authenticate.LoginActivity"></activity>
+         <activity android:name=".authenticate.LoginActivity"
+             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity android:name=".view.AccountSettingsActivity" />
         <!--<activity android:name=".view.HomeActivity"></activity>-->
     </application>
