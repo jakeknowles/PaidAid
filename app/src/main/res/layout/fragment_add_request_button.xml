@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/add_request_button_layout"
     android:background="@color/light_light_grey">
 
 
@@ -196,13 +197,14 @@
 
     <Button
         android:id="@+id/date_picker_button"
-        android:layout_width="70dp"
-        android:layout_height="39dp"
-        android:text="Date"
+        android:layout_width="108dp"
+        android:layout_height="38dp"
+        android:text="Recieve by"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="11dp"
-        android:layout_marginRight="46dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="28dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="launchDatePicker"/>
 
 
 </android.support.constraint.ConstraintLayout>

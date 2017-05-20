@@ -1,5 +1,6 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -76,6 +77,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                     switch (item.getItemId()) {
+
                         case R.id.home_button:
                             Fragment fragHome = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.home_tag));
@@ -85,15 +87,17 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                              else
                                 replaceFragmentNoBackStack(fragHome);
                             break;
+
                         case R.id.add_button:
                             Fragment fragAdd = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.add_tag));
 
-                            if (fragAdd == null) {
+                            if (fragAdd == null)
                                 addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
-                            } else
+                             else
                                 replaceFragmentNoBackStack(fragAdd);
                             break;
+
                         case R.id.messages_button:
                             Fragment fragMes = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.messages_tag));
@@ -103,6 +107,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             else
                                 replaceFragmentNoBackStack(fragMes);
                             break;
+
                         case R.id.requests_button:
                             Fragment fragReq = getSupportFragmentManager()
                                     .findFragmentByTag(getString(R.string.myRequests_tag));
@@ -112,14 +117,13 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                             else
                                 replaceFragmentNoBackStack(fragReq);
                             break;
+
                     }
                     return true;
                 }
             });
-
-
-
         }
+
 
     /**
      * Method that replaces a fragment without adding it to the backstack
@@ -185,6 +189,11 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             Intent i = new Intent(this, AccountSettingsActivity.class);
             startActivity(i);
         }
+    }
+
+    public void launchDatePicker() {
+        DialogFragment picker = new DatePickerFragment();
+        picker.show(getFragmentManager(), "datePicker");
     }
 
 

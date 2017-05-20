@@ -17,11 +17,10 @@ import uw.tacoma.edu.paidaid.R;
  * Add Button Fragment from clicking "Add" on home screen. */
 public class AddRequestFragment extends Fragment  {
 
-    /** OnFragmentInteractionListener */
-    private OnFragmentInteractionListener mListener;
 
     /** Constructor */
     public AddRequestFragment() {}
+
 
     /**
      * onCreate
@@ -30,7 +29,9 @@ public class AddRequestFragment extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
+
 
 
     /**
@@ -46,18 +47,10 @@ public class AddRequestFragment extends Fragment  {
     }
 
 
-    /**
-     * onButtonPressed
-     * @param uri uri is a string of characters used to identify a resource.
-     */
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }
