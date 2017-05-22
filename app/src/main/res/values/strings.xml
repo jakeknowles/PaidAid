@@ -39,5 +39,9 @@
     <string name="store_name">Any specific store?</string>
     <string name="items_comments">What do you want picked up?</string>
 
+    <!-- Pick up Request / Request Fragment -->
+    <string name="pickup_request">Pick Up!</string>
+    <string name="type_message">Find out where to meet, time, and other details..</string>
+
 
 </resources>
