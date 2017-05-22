@@ -15,7 +15,7 @@ import uw.tacoma.edu.paidaid.R;
  * @version 5/11/17
  *
  * Add Button Fragment from clicking "Add" on home screen. */
-public class AddRequestFragment extends Fragment  {
+public class AddRequestFragment extends Fragment {
 
 
     /** Constructor */
@@ -31,8 +31,6 @@ public class AddRequestFragment extends Fragment  {
         super.onCreate(savedInstanceState);
 
     }
-
-
 
     /**
      * onCreateView

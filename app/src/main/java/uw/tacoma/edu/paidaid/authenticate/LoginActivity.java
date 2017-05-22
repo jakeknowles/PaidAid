@@ -1,9 +1,7 @@
 package uw.tacoma.edu.paidaid.authenticate;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import uw.tacoma.edu.paidaid.R;
 

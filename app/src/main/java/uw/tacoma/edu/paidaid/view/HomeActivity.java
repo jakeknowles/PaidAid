@@ -1,6 +1,5 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -189,11 +188,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             Intent i = new Intent(this, AccountSettingsActivity.class);
             startActivity(i);
         }
-    }
-
-    public void launchDatePicker() {
-        DialogFragment picker = new DatePickerFragment();
-        picker.show(getFragmentManager(), "datePicker");
     }
 
 

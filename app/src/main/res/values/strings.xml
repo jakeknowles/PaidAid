@@ -29,6 +29,7 @@
     <string name="messages_tag">messages_tag</string>
     <string name="myRequests_tag">myRequests_tag</string>
     <string name="add_tag">add_tag</string>
+    <string name="date_tag">date_tag</string>
 
 
     <!-- Post Request -->
