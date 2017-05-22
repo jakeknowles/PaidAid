@@ -1,6 +1,5 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 
 /**
  * @Author Jake Knowles
@@ -72,19 +72,10 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.activity_main, new DialogFragment())
+                .replace(R.id.activity_main, new DatePickerFragment())
                 .addToBackStack(null)
                 .commit();
 
-    }
-
-    /**
-     * onAttach for LoginActivity
-     * @param context is the data for the activity
-     */
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
 

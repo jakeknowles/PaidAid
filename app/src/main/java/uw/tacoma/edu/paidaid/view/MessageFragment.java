@@ -56,6 +56,8 @@ public class MessageFragment extends Fragment {
             }
         }
 
+
+
         /** OnFragmentInteractionListener */
         public interface OnFragmentInteractionListener {
             void onFragmentInteraction(Uri uri);
