@@ -10,12 +10,15 @@
     <TextView
         android:layout_width="337dp"
         android:layout_height="125dp"
-        android:text="Message Fragment"
+        android:text="Dmitriy Loves Viv"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="175dp"
-        app:layout_constraintHorizontal_bias="0.506" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
 </android.support.constraint.ConstraintLayout>
 
