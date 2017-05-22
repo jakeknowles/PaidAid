@@ -24,5 +24,8 @@
     
     <!-- <color name="background_request">#e26a6a</color> -->
     <color name="background_request">#DD834D</color>
+    <color name="background_test">#9cfcff</color>
+    <color name="background_test2">#eda5ff</color>
+
 
 </resources>

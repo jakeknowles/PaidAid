@@ -10,4 +10,4 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="uw.tacoma.edu.paidaid.coreFeatures.RequestFragment"
     tools:listitem="@layout/fragment_item"
-    android:background="@color/grey"/>
+    android:background="@color/black"/>
