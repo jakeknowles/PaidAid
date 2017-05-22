@@ -3,6 +3,8 @@ package uw.tacoma.edu.paidaid.view;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -13,6 +15,25 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     public DatePickerFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+
+    /**
+     * Interface must be implemented by activities that contain this
+     * fragment to allow interaction.
+     */
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 
     @Override
