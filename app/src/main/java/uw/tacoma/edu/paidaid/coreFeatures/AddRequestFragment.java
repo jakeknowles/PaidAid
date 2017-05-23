@@ -1,5 +1,6 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
+import android.app.DatePickerDialog;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.sql.Date;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
@@ -70,11 +73,10 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
     private void launchCalendar() {
 
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_main, new DatePickerFragment())
-                .addToBackStack(null)
-                .commit();
+
+        DatePickerFragment frag = new DatePickerFragment();
+        frag.show(getFragmentManager(), "launch");
+
 
     }
 

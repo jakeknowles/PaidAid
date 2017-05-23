@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
@@ -56,6 +57,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mLogoutButton = (Button) findViewById(R.id.logout_button);
         mUsernameView = (EditText) findViewById(R.id.username_text);
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
+
+
 
         mRatingBar.setRating(5.0f);
 
