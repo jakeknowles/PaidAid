@@ -98,151 +98,10 @@ public class RequestFragment extends Fragment {
             DownloadRequestsTask task = new DownloadRequestsTask();
             task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
 
-
-
-//
-//
-////            final View tabBar = getActivity().findViewById(R.id.fake_tab);
-////            final View coloredBackgroundView =        findViewById(R.id.colored_background_view);
-//            final View toolbarContainer = getActivity().findViewById(R.id.toolbar);
-////            final View toolbar = getActivity().findViewById(R.id.toolbar);
-//            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                @Override
-//                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//
-//                    super.onScrollStateChanged(recyclerView, newState);
-//                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                        if (Math.abs(toolbarContainer.getTranslationY()) >      toolbarContainer.getHeight()) {
-//                            hideToolbar();
-//                        } else {
-//                            showToolbar();
-//                        }
-//                    }
-//                }
-//                @Override
-//                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                    super.onScrolled(recyclerView, dx, dy);
-//                    if (dy > 0) {
-//                        hideToolbarBy(dy);
-//                    } else {
-//                        showToolbarBy(dy);
-//                    }
-//                }
-//
-//                private void hideToolbarBy(int dy) {
-//                    if (cannotHideMore(dy)) {
-//                        toolbarContainer.setTranslationY(-tabBar.getBottom());
-//                    } else {
-//                        toolbarContainer.setTranslationY(toolbarContainer.getTranslationY() - dy);
-//                    }
-//                }
-//                private boolean cannotHideMore(int dy) {
-//                    return Math.abs(toolbarContainer.getTranslationY() - dy) > 2;
-//                }
-//                private void showToolbarBy(int dy) {
-//                    if (cannotShowMore(dy)) {
-//                        toolbarContainer.setTranslationY(0);
-//                    } else {
-//                        toolbarContainer.setTranslationY(toolbarContainer.getTranslationY() - dy);
-//                    }
-//                }
-//                private boolean cannotShowMore(int dy) {
-//                    return toolbarContainer.getTranslationY() - dy > 0;
-//                }
-//
-//                private void showToolbar() {
-//                    toolbarContainer
-//                            .animate()
-//                            .translationY(0)
-//                            .start();
-//                }
-//                private void hideToolbar() {
-//                    toolbarContainer
-//                            .animate()
-//                            .translationY(-1)
-//                            .start();
-//                }
-//            });
-
-
-
-
-
-
-
         }
 
-
-        final View navBar = getActivity().findViewById(R.id.layout_navigation);
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {
-                    hideToolbarBy(navBar, -dy);
-//                    getActivity().findViewById(R.id.toolbar).setVisibility(View.INVISIBLE);
-//                    getActivity().findViewById(R.id.layout_navigation).setVisibility(View.INVISIBLE);
-                } else {
-
-                    showToolbarBy(navBar, dy);
-
-
-//                    getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
-//                    getActivity().findViewById(R.id.layout_navigation).setVisibility(View.VISIBLE);
-
-                    // Scrolling down
-                }
-            }
-
-            private void hideToolbarBy(View toolBar, int dy) {
-                Log.e("WINDOW", Integer.toString(getActivity().getWindow().getDecorView().getHeight()));
-                Log.e("navbartop", Float.toString(navBar.getTranslationY()));
-                Log.e("navbarheigth", Float.toString(navBar.getHeight()));
-
-
-                if (cannotHideMore(navBar, dy)) {
-                    toolBar.setTranslationY(navBar.getHeight());
-                } else {
-                    toolBar.setTranslationY(navBar.getTranslationY() - dy);
-                }
-            }
-            private boolean cannotHideMore(View toolBar, int dy) {
-                return Math.abs(toolBar.getTranslationY()) > toolBar.getHeight();
-
-            }
-
-            private boolean cannotShowMore(View toolBar, int dy) {
-                    return toolBar.getTranslationY() < 0;
-                }
-
-            private void showToolbarBy(View toolBar, int dy) {
-
-                Log.e("navbartop", Float.toString(navBar.getTranslationY()));
-                Log.e("navbarheigth", Float.toString(navBar.getHeight()));
-                    if (cannotShowMore(toolBar, dy)) {
-                        toolBar.setTranslationY(0);
-                    } else {
-                        toolBar.setTranslationY(toolBar.getTranslationY() + dy);
-                    }
-                }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    // Do something
-                } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    // Do something
-                } else {
-                    // Do something
-                }
-            }
-        });
-
-
+        // hide the navigation bar when scrolling
+        addScrollListener();
 
         return view;
     }
@@ -271,6 +130,70 @@ public class RequestFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Request item);
     }
+
+
+    /**
+     * Scroll listener where we hide the bottom navigtation bar when scrolling through the
+     * requests.
+     */
+    private void addScrollListener() {
+        // get the bottom navigation bar
+        final View navBar = getActivity().findViewById(R.id.layout_navigation);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            /**
+             * Boolean flag to know when the toolbar has reached its original position
+             */
+            private boolean backToTop = true;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {                       // scrolling down
+                    hideToolbarBy(navBar, -dy);
+                } else {                            // scrolling up
+                    showToolbarBy(navBar, dy);
+
+                }
+            }
+
+            private void hideToolbarBy(View toolBar, int dy) {
+
+                if (cannotHideMore(navBar, dy)) {
+                    toolBar.setTranslationY(navBar.getHeight());
+                } else {
+                    toolBar.setTranslationY(navBar.getTranslationY() - dy);
+                }
+
+                // let the listener know that the bar is not where it started from
+                backToTop = false;
+            }
+
+            private boolean cannotHideMore(View toolBar, int dy) {
+                return Math.abs(toolBar.getTranslationY()) >= toolBar.getHeight();
+
+            }
+
+            private boolean cannotShowMore(View toolBar, int dy) {
+                return toolBar.getTranslationY() < 0;
+            }
+
+            private void showToolbarBy(View toolBar, int dy) {
+
+                if (backToTop) return;
+
+                if (cannotShowMore(toolBar, dy)) {
+                    backToTop = true;
+                    toolBar.setTranslationY(0);
+                } else {
+                    toolBar.setTranslationY(toolBar.getTranslationY() + dy);
+                }
+            }
+        });
+    }
+
+
 
 
     /**

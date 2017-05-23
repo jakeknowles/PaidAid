@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             addListerToNavBar();
 
             // hide bottom navigation bar when keyboard is visible
-//            keyboardListener();
+            keyboardListener();
 
         }
 
@@ -250,9 +250,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 return true;
             }
         });
-
-
-
     }
 
 

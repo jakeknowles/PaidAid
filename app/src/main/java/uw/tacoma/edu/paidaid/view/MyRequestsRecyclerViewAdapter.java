@@ -26,6 +26,11 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
      * The list of requests
      */
     private final List<Request> mRequests;
+
+    /**
+     * The max store name string length to display
+     */
+    private final int MAX_STORENAME_LENGTH = 10;
     /**
      * The interaction listener.
      */
@@ -58,6 +63,13 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         String storeName = mRequests.get(position).getmStoreName();
         String distance = Double.toString(mRequests.get(position).getmDistanceAway());
         distance += Request.MILES_UNITS;
+
+
+        // if the the store name is longer than 10 characters
+        // display with dots
+        if (storeName.length() > MAX_STORENAME_LENGTH) {
+            storeName = storeName.substring(0,7).concat("...");
+        }
 
         holder.mTipView.setText(tip);
         holder.mDistanceView.setText(distance);
