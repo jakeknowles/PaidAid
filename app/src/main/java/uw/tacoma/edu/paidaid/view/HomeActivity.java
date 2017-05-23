@@ -3,14 +3,22 @@ package uw.tacoma.edu.paidaid.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
@@ -33,15 +41,20 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         /** Navigation bar */
         private BottomNavigationView mBottomNavigationMenuBar;
 
-        /**
+
+
+    /**
          * Shared preferences used to keep track of who's logged in.
          */
         private SharedPreferences mSharedPreferences;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+//            // set overlay to make the action bar hide on scroll
+//            supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+
 
             // instantiate shared preferences
             mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
@@ -56,6 +69,9 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             // set action bar toolbar to custom toolbar
             getSupportActionBar().setDisplayShowCustomEnabled(true);
             getSupportActionBar().setCustomView(R.layout.toolbar);
+//            getSupportActionBar().setHideOnContentScrollEnabled(true);
+
+
 
 
 
@@ -70,58 +86,15 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
 
 
-            /** Listener for handling events on bottom menu navigation buttons. */
-            mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch (item.getItemId()) {
+            addListerToNavBar();
 
-                        case R.id.home_button:
-                            Fragment fragHome = getSupportFragmentManager()
-                                    .findFragmentByTag(getString(R.string.home_tag));
+            // hide bottom navigation bar when keyboard is visible
+//            keyboardListener();
 
-                            if (fragHome == null)
-                                addFragmentNoBackStack(new RequestFragment(), getString(R.string.home_tag));
-                             else
-                                replaceFragmentNoBackStack(fragHome);
-                            break;
-
-                        case R.id.add_button:
-                            Fragment fragAdd = getSupportFragmentManager()
-                                    .findFragmentByTag(getString(R.string.add_tag));
-
-                            if (fragAdd == null)
-                                addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
-                             else
-                                replaceFragmentNoBackStack(fragAdd);
-                            break;
-
-                        case R.id.messages_button:
-                            Fragment fragMes = getSupportFragmentManager()
-                                    .findFragmentByTag(getString(R.string.messages_tag));
-
-                            if (fragMes == null)
-                                addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
-                            else
-                                replaceFragmentNoBackStack(fragMes);
-                            break;
-
-                        case R.id.requests_button:
-                            Fragment fragReq = getSupportFragmentManager()
-                                    .findFragmentByTag(getString(R.string.myRequests_tag));
-
-                            if (fragReq == null)
-                                addFragmentNoBackStack(new MyRequestsFragment(), getString(R.string.myRequests_tag));
-                            else
-                                replaceFragmentNoBackStack(fragReq);
-                            break;
-
-                    }
-                    return true;
-                }
-            });
         }
+
+
 
 
     /**
@@ -189,6 +162,100 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             startActivity(i);
         }
     }
+
+    /**
+     * Method that listens for keyboard and hides the navigation bar if the keyboard is up
+     *
+     */
+    private void keyboardListener() {
+
+        final View activityRootView = findViewById(R.id.activity_main);
+        activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+                Rect r = new Rect();
+                activityRootView.getWindowVisibleDisplayFrame(r);
+
+                int screenHeight = activityRootView.getRootView().getHeight();
+                Log.e("screenHeight", String.valueOf(screenHeight));
+                int heightDiff = screenHeight - (r.bottom - r.top);
+                Log.e("heightDiff", String.valueOf(heightDiff));
+                boolean visible = heightDiff > screenHeight / 3;
+                Log.e("visible", String.valueOf(visible));
+                if (visible) {
+                    mBottomNavigationMenuBar.setVisibility(View.INVISIBLE);
+                } else {
+                    mBottomNavigationMenuBar.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+
+    }
+
+    /**
+     * Helper method that adds on click listener to bottom navigation bar
+     */
+    private void addListerToNavBar() {
+
+        /** Listener for handling events on bottom menu navigation buttons. */
+        mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.home_button:
+                        Fragment fragHome = getSupportFragmentManager()
+                                .findFragmentByTag(getString(R.string.home_tag));
+
+                        if (fragHome == null)
+                            addFragmentNoBackStack(new RequestFragment(), getString(R.string.home_tag));
+                        else
+                            replaceFragmentNoBackStack(fragHome);
+                        break;
+
+                    case R.id.add_button:
+                        Fragment fragAdd = getSupportFragmentManager()
+                                .findFragmentByTag(getString(R.string.add_tag));
+
+                        if (fragAdd == null)
+                            addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
+                        else
+                            replaceFragmentNoBackStack(fragAdd);
+                        break;
+
+                    case R.id.messages_button:
+                        Fragment fragMes = getSupportFragmentManager()
+                                .findFragmentByTag(getString(R.string.messages_tag));
+
+                        if (fragMes == null)
+                            addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
+                        else
+                            replaceFragmentNoBackStack(fragMes);
+                        break;
+
+                    case R.id.requests_button:
+                        Fragment fragReq = getSupportFragmentManager()
+                                .findFragmentByTag(getString(R.string.myRequests_tag));
+
+                        if (fragReq == null)
+                            addFragmentNoBackStack(new MyRequestsFragment(), getString(R.string.myRequests_tag));
+                        else
+                            replaceFragmentNoBackStack(fragReq);
+                        break;
+
+                }
+                return true;
+            }
+        });
+
+
+
+    }
+
+
 
 
     /** Need for future use */
