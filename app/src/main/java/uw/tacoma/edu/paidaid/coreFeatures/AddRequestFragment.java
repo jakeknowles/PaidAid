@@ -61,14 +61,14 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
         switch(v.getId()){
             case R.id.date_picker_button:
-                launchCalendar(v);
+                launchCalendar();
                 break;
             default:
                 break;
         }
     }
 
-    private void launchCalendar(View v) {
+    private void launchCalendar() {
 
         getFragmentManager()
                 .beginTransaction()
