@@ -21,6 +21,10 @@
         <item name="colorControlActivated">@color/stars</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/paidAidBlue</item>
+    </style>
+
 
 
 </resources>
