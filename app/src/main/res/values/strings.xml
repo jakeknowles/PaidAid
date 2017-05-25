@@ -35,7 +35,7 @@
     <!-- Post Request Text Edits -->
     <string name="post_request">Post!</string>
     <string name="tip">$0.00</string>
-    <string name="location">Share your location</string>
+    <string name="zipCode">Zipcode</string>
     <string name="store_name">Any specific store?</string>
     <string name="items_comments">What do you want picked up?</string>
     <string name="date_picked_text">Recieve by</string>

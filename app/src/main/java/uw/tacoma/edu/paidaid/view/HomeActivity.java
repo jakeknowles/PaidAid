@@ -86,8 +86,8 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
 
 
-
-            addListerToNavBar();
+            // on click listner to bottom nav bar
+            addListenerToNavBar();
 
             // hide bottom navigation bar when keyboard is visible
             keyboardListener();
@@ -178,11 +178,8 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                 activityRootView.getWindowVisibleDisplayFrame(r);
 
                 int screenHeight = activityRootView.getRootView().getHeight();
-                Log.e("screenHeight", String.valueOf(screenHeight));
                 int heightDiff = screenHeight - (r.bottom - r.top);
-                Log.e("heightDiff", String.valueOf(heightDiff));
                 boolean visible = heightDiff > screenHeight / 3;
-                Log.e("visible", String.valueOf(visible));
                 if (visible) {
                     mBottomNavigationMenuBar.setVisibility(View.INVISIBLE);
                 } else {
@@ -197,7 +194,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
     /**
      * Helper method that adds on click listener to bottom navigation bar
      */
-    private void addListerToNavBar() {
+    private void addListenerToNavBar() {
 
         /** Listener for handling events on bottom menu navigation buttons. */
         mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

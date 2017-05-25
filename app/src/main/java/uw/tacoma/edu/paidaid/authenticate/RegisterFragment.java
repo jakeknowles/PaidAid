@@ -215,7 +215,6 @@ public class RegisterFragment extends Fragment {
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
 
-            Log.e("Result Register", result);
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
