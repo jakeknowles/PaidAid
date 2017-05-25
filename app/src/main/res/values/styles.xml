@@ -11,16 +11,16 @@
 
     </style>
 
-
     <style name="AppTheme.PopupOverlay." parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Star Rating Bar Theme -->
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/stars</item>
     </style>
 
+    <!-- DatePicker Theme -->
     <style name="DialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
         <item name="colorAccent">@color/paidAidBlue</item>
     </style>

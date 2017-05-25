@@ -54,5 +54,11 @@
     <string name="submit_review">Submit Review</string>
     <string name="submit_a_review">Submit A Review</string>
 
+    <!-- My Messages Fragment -->
+    <string name="messages_text_view">Your Messages</string>
+
+    <!-- Expired / Current Requests -->
+    <string name="expired_requests_repost_button">Re-post</string>
+
 
 </resources>

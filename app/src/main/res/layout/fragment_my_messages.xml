@@ -5,7 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/grey">
+    android:background="@color/white">
+
+    <!-- Messages Text View -->
+    <TextView
+        android:id="@+id/your_messages_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="107dp"
+        android:layout_marginTop="31dp"
+        android:text="@string/messages_text_view"
+        android:textColor="@color/paidAidRed"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Messages Text Edit -->
+    <EditText
+        android:id="@+id/messages_text_edit"
+        android:layout_width="323dp"
+        android:layout_height="289dp"
+        android:background="@drawable/add_requests_style"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:paddingLeft="@dimen/text_margin"
+        android:textColor="@color/grey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="top|left"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/your_messages_text_view" />
+
 
 </android.support.constraint.ConstraintLayout>
 

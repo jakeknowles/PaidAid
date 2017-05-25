@@ -99,11 +99,11 @@
 
         <!-- Post button -->
         <Button
-            android:id="@+id/post_request_button"
+            android:id="@+id/re-post_request_button"
             android:layout_width="189dp"
             android:layout_height="48dp"
             android:backgroundTint="@color/paidAidBlue"
-            android:text="@string/post_request"
+            android:text="@string/expired_requests_repost_button"
             android:textColor="@android:color/white"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
