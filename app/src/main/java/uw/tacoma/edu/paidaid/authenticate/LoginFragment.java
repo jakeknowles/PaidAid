@@ -260,24 +260,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
 
-                Log.e("Status", status);
-
                 if (status.equals("success")) {
 
-                    // Go to home screen upon successful login
-                    // do this my finishing the loginActivity
-                    getActivity().finish();
+                    String email = (String) jsonObject.get("email");
+                    int userid = (int)  jsonObject.get("userid");
 
                     // save user information and logged in status
                     mSharedPreferences
                             .edit()
                             .putBoolean(getString(R.string.LOGGEDIN), true)
                             .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                            .putString(getString(R.string.EMAIL), email)
+                            .putInt(getString(R.string.USERID), userid)
                             .commit();
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)
                             .show();
+
+                    // Go to home screen upon successful login
+                    // do this my finishing the loginActivity
+                    getActivity().finish();
+
                 } else {
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Failed to Login: "
                                     + jsonObject.get("error")

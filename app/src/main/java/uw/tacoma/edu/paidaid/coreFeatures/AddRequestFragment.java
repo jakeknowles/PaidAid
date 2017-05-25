@@ -33,6 +33,7 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
+import uw.tacoma.edu.paidaid.tasks.GeocodeAsyncTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 import uw.tacoma.edu.paidaid.view.HomeActivity;
 import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
@@ -118,10 +119,7 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
             @Override
             public void onClick(View v) {
 
-
                 getUserInput();
-
-
 
             }
         });
@@ -131,17 +129,54 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
 
     /**
+     * Method that validates the zipcode and if invalid zipcode
+     * asks the user to enter a valid zipcode
+     * @param zipCode the zipcode to validate
+     */
+    private int validateZipCode(String zipCode) {
+
+        if (zipCode.length() > 5 || zipCode.length() < 5) {
+            Toast.makeText(getActivity().getApplicationContext(), "ZipCode must be 5 numbers long", Toast.LENGTH_LONG)
+                    .show();
+            return -1;
+        }
+
+        else return 0;
+    }
+
+
+    private void getLatandLong(String theZipCode) {
+
+        GeocodeAsyncTask task = new GeocodeAsyncTask(getActivity());
+        task.execute(theZipCode);
+
+
+
+
+
+    }
+
+    /**
      * Get the users input and insert into database
      */
     private void getUserInput() {
 
         double tipAmount = 0;
-        int zipCode = 0;
+        String zipCode = (String) mZipCode.getText().toString();
 
         if (mTip.getText().toString().length() != 0)
             tipAmount = Double.parseDouble(mTip.getText().toString());
-        if (mZipCode.getText().toString().length() != 0)
-            zipCode = Integer.parseInt(mZipCode.getText().toString());
+
+
+        if (validateZipCode(zipCode) == -1)
+            return;
+
+        getLatandLong(zipCode);
+
+
+
+
+
 
         final String storeName = mStoreName.getText().toString();
         final String itemsComments = mItemsComments.getText().toString();
@@ -166,8 +201,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
         }
 
     }
-
-
 
 
 
@@ -291,7 +324,8 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
                                 .commit();
                     else
                         getActivity(). getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.activity_main, fragHome)
+                                .detach(fragHome)
+                                .attach(fragHome)
                                 .commit();
 
                     Toast.makeText(getActivity().getApplicationContext(), "Your Request was successfully posted",
@@ -311,23 +345,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
                 Toast.makeText(getActivity().getApplicationContext(), "Something wrong new Request " +
                         e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-
-
-
-
-
-
-
-//            return List<Request> requestsList = new ArrayList<Request>();
-//            result = Request.parseRequestsJSON(result, requestsList);
-//            // Something wrong with the JSON returned.
-//            if (result != null) {
-//                Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
-//                        .show();
-//                return;
-//            }
-
         }
 
     }

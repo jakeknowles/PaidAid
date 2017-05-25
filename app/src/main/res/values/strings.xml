@@ -23,6 +23,8 @@
     <string name="LOGIN_PREFS">uw.tacoma.edu.PaidAid.PREFS</string>
     <string name="LOGGEDIN">loggedin</string>
     <string name="USERNAME">username</string>
+    <string name="EMAIL">email</string>
+    <string name="USERID">userid</string>
 
     <!-- Tags for ID's-->
     <string name="home_tag">home_requests_tag</string>
