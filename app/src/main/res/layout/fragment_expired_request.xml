@@ -47,7 +47,7 @@
             android:layout_marginTop="34dp"
             android:background="@drawable/add_requests_style"
             android:ems="10"
-            android:hint="@string/location"
+            android:hint="@string/zipCode"
             android:inputType="textPostalAddress"
             android:paddingLeft="@dimen/text_margin"
             android:textColor="@color/grey"
