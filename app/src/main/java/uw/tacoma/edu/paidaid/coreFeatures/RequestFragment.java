@@ -98,7 +98,9 @@ public class RequestFragment extends Fragment {
             DownloadRequestsTask task = new DownloadRequestsTask();
             task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
 
+
         }
+
 
         // hide the navigation bar when scrolling
         addScrollListener();
@@ -106,6 +108,30 @@ public class RequestFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Log.e("ON START IS CALLED", "START");
+
+        DownloadRequestsTask task = new DownloadRequestsTask();
+        task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
+
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.e("ON RESUME IS CALLED", "RESUME");
+
+        DownloadRequestsTask task = new DownloadRequestsTask();
+        task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
+
+
+    }
 
     @Override
     public void onAttach(Context context) {
