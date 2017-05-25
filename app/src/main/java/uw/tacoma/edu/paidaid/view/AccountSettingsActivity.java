@@ -35,6 +35,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     private EditText mUsernameView;
 
+    private EditText mEmailView;
+
     private RatingBar mRatingBar;
 
     /**
