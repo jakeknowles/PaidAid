@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
@@ -91,10 +90,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         String username = mSharedPrefernces.getString(getString(R.string.USERNAME), "null");
         mUsernameView.setText(username);
+
     }
-
-
-
 
     @Override
     public void onDestroy() {

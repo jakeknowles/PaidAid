@@ -21,15 +21,14 @@ public class MyMessagesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     /** Constructor */
-    public MyMessagesFragment() {}
+    public MyMessagesFragment() {
 
-    /**
-     * onCreate
-     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
-     */
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 
@@ -44,7 +43,6 @@ public class MyMessagesFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_my_messages, container, false);
     }
-
 
     /**
      * onButtonPressed
