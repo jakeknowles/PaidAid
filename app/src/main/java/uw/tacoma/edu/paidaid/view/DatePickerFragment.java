@@ -9,13 +9,13 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+import uw.tacoma.edu.paidaid.R;
+
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     public DatePickerFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,13 +25,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(getActivity(),
-                android.support.design.R.style.Theme_Design,this,year,month,day);
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), R.style.DialogTheme,this,year,month,day);
 
-//        // Create a new instance of DatePickerDialog and return it
-//        return new DatePickerDialog(getActivity(), this, year, month, day);
-
-        return dpd;
+        return datePicker;
 
     }
 
