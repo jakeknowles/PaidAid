@@ -26,6 +26,7 @@
     <color name="background_request">#DD834D</color>
     <color name="background_test">#9cfcff</color>
     <color name="background_test2">#eda5ff</color>
+    <color name="background_test3">#87ff91</color>
 
 
 </resources>
