@@ -11,14 +11,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
