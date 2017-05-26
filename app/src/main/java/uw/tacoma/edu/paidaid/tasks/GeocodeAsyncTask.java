@@ -2,6 +2,7 @@ package uw.tacoma.edu.paidaid.tasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -109,8 +110,11 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
                         .getJSONObject("geometry")
                         .getJSONObject("location");
 
+                Log.e("this is loc", location.toString());
                 mLatitude = location.getDouble("lat");
                 mLongitude = location.getDouble("lng");
+
+                Log.e("this is lat in geocode", Double.toString(mLatitude));
 
             }
         }

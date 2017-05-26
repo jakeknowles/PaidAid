@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
     /**
      * Shared preferences used to keep track of who's logged in.
      */
-    private SharedPreferences mSharedPreferences;
+    private static SharedPreferences mSharedPreferences;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -259,7 +259,14 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
     }
 
 
+    /**
+     * Checks if user is logged in or not
+     * if they are not display a toast message and take them to login activity
+     * @return true if logged in false otherwise
+     */
     private boolean isUserLoggedIn() {
+
+
 
         boolean loggedIn = mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false);
 
@@ -288,16 +295,18 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                     Intent i = new Intent(activity, LoginActivity.class);
                     startActivity(i);
 
-
                 }
             }, 2000);
 
             return false;
         }
 
+
         return true;
 
+
     }
+
 
 
     /** Need for future use */

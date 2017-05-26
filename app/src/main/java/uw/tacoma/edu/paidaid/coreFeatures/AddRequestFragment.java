@@ -1,5 +1,8 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.tasks.AddRequestsTask;
 import uw.tacoma.edu.paidaid.tasks.GeocodeAsyncTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 
@@ -135,18 +140,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
     }
 
 
-    /**
-     * Helper method to run the google api geocode task
-     * @param theZipCode the zipcode of location
-     * @return the task
-     */
-    private GeocodeAsyncTask getLatandLong(String theZipCode) {
-
-        GeocodeAsyncTask task = new GeocodeAsyncTask(getActivity());
-        return (GeocodeAsyncTask) task.execute(theZipCode);
-
-    }
-
 
 
     /**
@@ -154,54 +147,30 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
      */
     private void getUserInput() {
 
-        double tipAmount = 0;
         String zipCode = (String) mZipCode.getText().toString();
-
-        if (mTip.getText().toString().length() != 0)
-            tipAmount = Double.parseDouble(mTip.getText().toString());
-
 
         // validate the zipcode to make sure it is valid
         // otherwise return
         if (validateZipCode(zipCode) == -1)
             return;
 
+
         // get the lat and long coordinates using google api call
-        GeocodeAsyncTask task = getLatandLong(zipCode);
-        Double lat = task.getLatitude();
-        Double lng = task.getLongitude();
-
-        // if task didn't return the right results
-        if (lat == null || lng == null) {
-            return;
-        }
-
-
-        final String storeName = mStoreName.getText().toString();
-        final String itemsComments = mItemsComments.getText().toString();
-
-        JSONObject post_dict = new JSONObject();
-
-        try {
-            post_dict.put("tip", tipAmount);
-            post_dict.put("zipcode", zipCode);
-            post_dict.put("storename", storeName);
-            post_dict.put("items_comments", itemsComments);
-            post_dict.put("userid", 1);
-            post_dict.put("lat", lat);
-            post_dict.put("lng", lng);
-        } catch (JSONException e) {
-            Log.e("ERROR ADD REQUEST JSON", e.toString());
-        }
-
-        Log.e("JSON", String.valueOf(post_dict));
-
-        // execute httppost request, insert into data base
-        if (post_dict.length() > 0) {
-            new AddRequestsTask().execute(String.valueOf(post_dict));
-        }
+        // and post
+        GeocodeAsyncTask task = new GeocodeAsyncTask();
+        task.execute(zipCode);
 
     }
+
+    private int getUserId() {
+
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+
+        return sharedPref.getInt(getString(R.string.USERID), -1);
+    }
+
+
 
     private void launchCalendar() {
 
@@ -232,119 +201,113 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
     }
 
 
-    /**
-     * A task to download the requests from the database.
-     */
-    private class AddRequestsTask extends AsyncTask<String, String, String> {
+
+
+    private class GeocodeAsyncTask extends AsyncTask<String, String, String> {
+
+        /**
+         * The latitude coordinate of location
+         */
+        private Double mLatitude;
+
+        /**
+         * The longitude coordinate of location
+         */
+        private Double mLongitude;
+
+
+        /**
+         * The url to get lat and long from zipcode
+         */
+        private static final String LAT_LONG_URL =
+                "http://maps.googleapis.com/maps/api/geocode/json?address=";
+
 
         @Override
         protected String doInBackground(String... params) {
 
-            BufferedReader inBuffer = null;
-            String url = ADD_REQUEST_URL;
-            String jsonObject = params[0];
-            String result = "";
+            String zipCode = params[0];
+            String url = LAT_LONG_URL + zipCode;
             HttpURLConnection urlConnection = null;
+            String result = "";
             try {
-
                 URL urlObject = new URL(url);
                 urlConnection = (HttpURLConnection) urlObject.openConnection();
-                urlConnection.setRequestMethod("POST");
-                urlConnection.setDoOutput(true);
-                urlConnection.setDoInput(true);
-                urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                urlConnection.setRequestProperty("Accept", "application/json");
 
-
-                DataOutputStream localDataOutputStream = new DataOutputStream(urlConnection.getOutputStream());
-                localDataOutputStream.writeBytes(jsonObject);
-                localDataOutputStream.flush();
-                localDataOutputStream.close();
-
-                // get the response
                 InputStream content = urlConnection.getInputStream();
+
                 BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
                 String s = "";
                 while ((s = buffer.readLine()) != null) {
                     result += s;
                 }
 
-
-            } catch(Exception e) {
-                result = "Unable to add new request: ";
-                result += e.getMessage();
+            } catch (Exception e) {
+                result = "Unable to Get LAT and LONG: "
+                        + e.getMessage();
             } finally {
                 if (urlConnection != null)
                     urlConnection.disconnect();
-
-                if (inBuffer != null) {
-                    try {
-                        inBuffer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
-            return  result;
+            return result;
+
         }
 
-        /**
-         * It checks to see if there was a problem with the URL(Network), if not tries to parse the
-         * json object, if successful sets the adapter to the RecyclerViewAdapter, if not successful
-         * shows an error message toast.
-         *
-         * @param result
-         */
         @Override
         protected void onPostExecute(String result) {
-
-            // Something wrong with the network or the URL.
-            if (result.startsWith("Unable to")) {
-                Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
-                        .show();
-                return;
-            }
-
+            super.onPostExecute(result);
 
             try {
                 JSONObject jsonObject = new JSONObject(result);
-                String status = (String) jsonObject.get("result");
+                String status = (String) jsonObject.get("status");
 
+                if (status.equals("ZERO_RESULTS")) {
 
-                if(status.equals("success")) {
+                    Toast.makeText(getActivity(), "Invalid ZipCode."
+                            , Toast.LENGTH_SHORT)
+                            .show();
+                } else if (status.equals("OK")) {
 
-                    Fragment fragHome = getActivity().getSupportFragmentManager()
-                            .findFragmentByTag(getString(R.string.home_tag));
+                    // get the location json to get the lat and longitude
+                    JSONArray res = (JSONArray) jsonObject.get("results");
+                    JSONObject location = res.getJSONObject(0)
+                            .getJSONObject("geometry")
+                            .getJSONObject("location");
 
-                    if (fragHome == null)
-                        getActivity(). getSupportFragmentManager().beginTransaction()
-                                .add(R.id.activity_main, fragHome)
-                                .commit();
-                    else
-                        getActivity(). getSupportFragmentManager().beginTransaction()
-                                .detach(fragHome)
-                                .attach(fragHome)
-                                .commit();
+                    mLatitude = location.getDouble("lat");
+                    mLongitude = location.getDouble("lng");
 
-                    Toast.makeText(getActivity().getApplicationContext(), "Your Request was successfully posted",
-                            Toast.LENGTH_LONG).show();
+                    double tipAmount = 0;
+                    if (mTip.getText().length() !=0) tipAmount = Double.parseDouble(mTip.getText().toString());
+                    final String storeName = mStoreName.getText().toString();
+                    final String itemsComments = mItemsComments.getText().toString();
+                    final String zipcode = mZipCode.getText().toString();
+                    final JSONObject post_dict = new JSONObject();
 
-                } else {
+                    try {
+                        post_dict.put("tip", tipAmount);
+                        post_dict.put("zipcode", zipcode);
+                        post_dict.put("storename", storeName);
+                        post_dict.put("items_comments", itemsComments);
+                        post_dict.put("userid", getUserId());
+                        post_dict.put("lat", mLatitude);
+                        post_dict.put("lng", mLongitude);
+                    } catch (JSONException e) {
+                        Log.e("ERROR ADD REQUEST JSON", e.toString());
+                    }
 
-                    String err = (String) jsonObject.get("error");
-                    Toast.makeText(getActivity().getApplicationContext(), "Error! Request not posted " + err,
-                            Toast.LENGTH_LONG).show();
+                    // execute httppost request, insert into data base using async task
+                    if (post_dict.length() > 0) {
+                        new AddRequestsTask(getActivity()).execute(String.valueOf(post_dict));
+                    }
 
                 }
-
-
             } catch (JSONException e) {
-
-                Toast.makeText(getActivity().getApplicationContext(), "Something wrong new Request " +
+                Toast.makeText(getActivity(), "Something wrong with the ZipCode API call" +
                         e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        }
 
+        }
     }
 
 }
