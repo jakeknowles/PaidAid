@@ -1,11 +1,13 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -21,15 +23,14 @@ public class MyMessagesFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     /** Constructor */
-    public MyMessagesFragment() {}
+    public MyMessagesFragment() {
 
-    /**
-     * onCreate
-     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
-     */
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 
@@ -42,19 +43,24 @@ public class MyMessagesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_messages, container, false);
+//        return inflater.inflate(R.layout.fragment_my_messages, container, false);
+        View v = inflater.inflate(R.layout.fragment_my_messages, container, false);
+
+        Button newPage = (Button)v.findViewById(R.id.send_button);
+        newPage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"recipient@example.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+                i.putExtra(Intent.EXTRA_TEXT, "body of email");
+                startActivity(Intent.createChooser(i, "Send mail..."));
+            }});
+        return v;
     }
 
-
-    /**
-     * onButtonPressed
-     * @param uri uri is a string of characters used to identify a resource.
-     */
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {

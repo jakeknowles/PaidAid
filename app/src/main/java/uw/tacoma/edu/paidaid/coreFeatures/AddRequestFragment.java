@@ -1,12 +1,10 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
-import android.app.DatePickerDialog;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,20 +21,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.tasks.GeocodeAsyncTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
-import uw.tacoma.edu.paidaid.view.HomeActivity;
-import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
 
 /**
  * @Author Jake Knowles
@@ -212,9 +202,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
         }
 
     }
-
-
-
 
     private void launchCalendar() {
 

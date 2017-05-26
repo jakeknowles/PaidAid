@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
@@ -55,12 +52,12 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
      */
     private SharedPreferences mSharedPreferences;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-//            // set overlay to make the action bar hide on scroll
-//            supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            // set overlay to make the action bar hide on scroll
+            supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_home);
 
 
         // instantiate shared preferences
@@ -72,11 +69,10 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
 
         this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
-
-        // set action bar toolbar to custom toolbar
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.toolbar);
-//            getSupportActionBar().setHideOnContentScrollEnabled(true);
+            // set action bar toolbar to custom toolbar
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+            getSupportActionBar().setCustomView(R.layout.toolbar);
+            //getSupportActionBar().setHideOnContentScrollEnabled(true);
 
 
 
@@ -207,7 +203,6 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
         mBottomNavigationMenuBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
 
                 switch (item.getItemId()) {
 

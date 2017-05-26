@@ -42,7 +42,8 @@ public class PickUpRequestMessageFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_pick_up_request_message, container, false);
+            return inflater.inflate(R.layout.fragment_my_messages, container, false);
+
         }
 
 
