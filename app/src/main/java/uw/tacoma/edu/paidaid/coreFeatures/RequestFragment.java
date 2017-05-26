@@ -1,6 +1,7 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -253,6 +254,9 @@ public class RequestFragment extends Fragment {
          */
         @Override
         protected void onPostExecute(String result) {
+
+
+
             // Something wrong with the network or the URL.
             if (result.startsWith("Unable to")) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
@@ -274,6 +278,7 @@ public class RequestFragment extends Fragment {
                 mRecyclerView.setAdapter(new MyRequestsRecyclerViewAdapter(requestsList, mListener));
             }
         }
+
 
     }
 }

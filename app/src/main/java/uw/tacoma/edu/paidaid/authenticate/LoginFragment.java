@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -264,6 +265,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                     String email = (String) jsonObject.get("email");
                     int userid = (int)  jsonObject.get("userid");
+                    String ratingS = jsonObject.getString("rating");
+                    float rating = Float.valueOf(ratingS);
 
                     // save user information and logged in status
                     mSharedPreferences
@@ -272,6 +275,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
                             .putString(getString(R.string.EMAIL), email)
                             .putInt(getString(R.string.USERID), userid)
+                            .putFloat(getString(R.string.USER_RATING), rating)
                             .commit();
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"

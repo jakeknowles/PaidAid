@@ -225,6 +225,8 @@ public class RegisterFragment extends Fragment {
                 if (status.equals("success")) {
 
                     int userid = (int)  jsonObject.get("userid");
+                    String ratingS = jsonObject.getString("rating");
+                    float rating = Float.valueOf(ratingS);
 
                     // save user information and logged in status
                     mSharedPreferences
@@ -233,6 +235,7 @@ public class RegisterFragment extends Fragment {
                             .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
                             .putString(getString(R.string.EMAIL), mEmailEditText.getText().toString())
                             .putInt(getString(R.string.USERID), userid)
+                            .putFloat(getString(R.string.USER_RATING), rating)
                             .commit();
 
 

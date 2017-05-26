@@ -61,9 +61,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 
-
-        mRatingBar.setRating(5.0f);
-
         setUpSettingsFields();
         setUpOnClickListeners();
     }
@@ -93,8 +90,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         String username = mSharedPreferences.getString(getString(R.string.USERNAME), "null");
         String email = mSharedPreferences.getString(getString(R.string.EMAIL), "null");
+        float rating = mSharedPreferences.getFloat(getString(R.string.USER_RATING), 5f);
         mUsernameView.setText(username);
         mEmailView.setText(email);
+        mRatingBar.setRating(rating);
+
+
+
+
 
     }
 

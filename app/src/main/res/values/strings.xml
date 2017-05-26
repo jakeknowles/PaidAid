@@ -25,6 +25,7 @@
     <string name="USERNAME">username</string>
     <string name="EMAIL">email</string>
     <string name="USERID">userid</string>
+    <string name="USER_RATING">user_rating</string>
 
     <!-- Tags for ID's-->
     <string name="home_tag">home_requests_tag</string>
