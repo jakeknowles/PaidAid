@@ -7,17 +7,29 @@ import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 import uw.tacoma.edu.paidaid.R;
 
+/**
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/19/17
+ *
+/** DatePickerFragment is a fragment launched to pick a date from a calendar on when you want your
+    request to expire */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    public DatePickerFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Constructor
+     */
+    public DatePickerFragment() {}
 
+    /**
+     * onCreateDialog provided from Dialogs Lab
+     * @param savedInstanceState savedInstanceState
+     * @return datePicker
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -32,6 +44,13 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     }
 
+    /**
+     * onDateSet provided from Dialogs Lab
+     * @param view view
+     * @param year year
+     * @param monthOfYear monthOfYear
+     * @param dayOfMonth dayOfMonth
+     */
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 

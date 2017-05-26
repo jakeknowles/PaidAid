@@ -18,24 +18,22 @@ import uw.tacoma.edu.paidaid.R;
  * @version 5/11/17
  *
 /** Account Settings Activity is the activity launched when the user icon
- * in the top right corner is clicked */
+    in the top right corner is clicked */
 public class AccountSettingsActivity extends AppCompatActivity {
 
-
-    /**
-     * Shared Preferences for user that is logged in.
-     */
+    /** Shared Preferences for user that is logged in. */
     private SharedPreferences mSharedPreferences;
 
-    /**
-     * Logout button
-     */
+    /** Logout button */
     private Button mLogoutButton;
 
+    /** Username text box */
     private EditText mUsernameView;
 
+    /** Email text box */
     private EditText mEmailView;
 
+    /** Rating bar */
     private RatingBar mRatingBar;
 
     /**
@@ -98,9 +96,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     }
 
-
-
-
+    /**
+     * onDestroy finishes the activity
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

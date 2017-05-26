@@ -1,7 +1,6 @@
 package uw.tacoma.edu.paidaid.authenticate;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,8 +25,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
-import uw.tacoma.edu.paidaid.view.HomeActivity;
 
 
 /**
@@ -79,7 +76,10 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    /**
+     * onCreate gets shared preferences
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,18 +90,26 @@ public class RegisterFragment extends Fragment {
 
     }
 
+    /**
+     * Loads XML layout and creates text edits, assigns click listener to button
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
 
         mUsernameEditText = (EditText) view.findViewById(R.id.username_text);
         mEmailEditText = (EditText) view.findViewById(R.id.email_text);
         mPasswordEditText = (EditText) view.findViewById(R.id.password_text);
 
-        // attach on click listener
+        // Attach on click listener
         Button confirm = (Button) view.findViewById(R.id.confirm_button);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +127,11 @@ public class RegisterFragment extends Fragment {
         return view;
     }
 
-
+    /**
+     * LoginActivity - instanceof
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -255,8 +267,6 @@ public class RegisterFragment extends Fragment {
             }
         }
     }
-
-
 
     /**
      * Interface must be implemented by activities that contain this

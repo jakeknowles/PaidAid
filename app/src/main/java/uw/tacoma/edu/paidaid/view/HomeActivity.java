@@ -53,24 +53,27 @@ public class HomeActivity extends AppCompatActivity implements
      */
     private static SharedPreferences mSharedPreferences;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            // set overlay to make the action bar hide on scroll
-            supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_home);
+    /**
+     * Loads layout and Navigation bar
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
+        // Set overlay to make the action bar hide on scroll
+        supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
-        // instantiate shared preferences
+        // Instantiate shared preferences
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
 
         /** Finds and assigns screen and navigation bar layout */
-
         this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
-            // set action bar toolbar to custom toolbar
+            // Set action bar toolbar to custom toolbar
             getSupportActionBar().setDisplayShowCustomEnabled(true);
             getSupportActionBar().setCustomView(R.layout.toolbar);
             //getSupportActionBar().setHideOnContentScrollEnabled(true);
@@ -79,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements
 
 
 
-        // add the request fragment to populate the grid of requests
+        // Add the request fragment to populate the grid of requests
         if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
 
             RequestFragment requestFragment = new RequestFragment();
@@ -90,10 +93,10 @@ public class HomeActivity extends AppCompatActivity implements
 
 
 
-        // on click listner to bottom nav bar
+        // On click listener to bottom nav bar
         addListenerToNavBar();
 
-        // hide bottom navigation bar when keyboard is visible
+        // Hide bottom navigation bar when keyboard is visible
         keyboardListener();
 
     }
@@ -127,13 +130,18 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     /** Creates account settings user button on top right of home screen */
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.account_settings, menu);
-            return true;
-        }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.account_settings, menu);
+        return true;
+    }
 
+    /**
+     * If account settings icon is selected, launch userSettingsLogin()
+     * @param item item
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -309,8 +317,10 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
-
-    /** Need for future use */
+    /**
+     * onListFragmentInteraction makes sure user is logged in to access requests
+     * @param request request
+     */
     @Override
     public void onListFragmentInteraction(Request request) {
 

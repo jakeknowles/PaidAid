@@ -7,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -69,6 +67,11 @@ public class RequestFragment extends Fragment {
     }
 
 
+    /**
+     * Gets Column Count if not NULL
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,14 @@ public class RequestFragment extends Fragment {
         }
     }
 
+    /**
+     * Loads XML layout & deals with Layouts with RecyclerView
+     *
+     * @param inflater inflater
+     * @param container container
+     * @param savedInstanceState savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,14 +112,16 @@ public class RequestFragment extends Fragment {
 
         }
 
-        // hide the navigation bar when scrolling
+        // Hide the navigation bar when scrolling
         addScrollListener();
 
         return view;
     }
 
 
-
+    /**
+     * onResume - Starts DownloadRequestsTask
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -119,6 +132,10 @@ public class RequestFragment extends Fragment {
 
     }
 
+    /**
+     * onAttach assigns mListener with a listener ELSE - exception
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -130,6 +147,9 @@ public class RequestFragment extends Fragment {
         }
     }
 
+    /**
+     * onDetach assigns mListener to null
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -159,6 +179,13 @@ public class RequestFragment extends Fragment {
              */
             private boolean backToTop = true;
 
+            /**
+             * Navigation bar scroll helper
+             *
+             * @param recyclerView recycler view
+             * @param dx x-axis difference
+             * @param dy y-axis difference
+             */
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -170,6 +197,12 @@ public class RequestFragment extends Fragment {
                 }
             }
 
+            /**
+             * Hide Toolbar helper
+             *
+             * @param toolBar toolbar
+             * @param dy y-axis difference
+             */
             private void hideToolbarBy(View toolBar, int dy) {
 
                 if (cannotHideMore(navBar, dy)) {
@@ -182,15 +215,32 @@ public class RequestFragment extends Fragment {
                 backToTop = false;
             }
 
+            /**
+             * Hider help
+             * @param toolBar toolbar
+             * @param dy y-axis difference
+             * @return boolean
+             */
             private boolean cannotHideMore(View toolBar, int dy) {
                 return Math.abs(toolBar.getTranslationY()) >= toolBar.getHeight();
 
             }
 
+            /**
+             * Hider help
+             * @param toolBar toolbar
+             * @param dy y-axis difference
+             * @return boolean
+             */
             private boolean cannotShowMore(View toolBar, int dy) {
                 return toolBar.getTranslationY() < 0;
             }
 
+            /**
+             * Toolbar translation helper
+             * @param toolBar toolbar
+             * @param dy y-axis difference
+             */
             private void showToolbarBy(View toolBar, int dy) {
 
                 if (backToTop) return;

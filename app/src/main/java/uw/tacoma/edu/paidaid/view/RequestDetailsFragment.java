@@ -1,29 +1,26 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.util.zip.Inflater;
+import android.widget.Button;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RequestDetailsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RequestDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class RequestDetailsFragment extends Fragment {
+ * @Author Jake Knowles
+ * @Author Dmitriy Onishchenko
+ * @version 5/26/17
+ *
 
+/** When Request is clicked on home screen, this fragment shows all the details regarding the
+ *  request */
+public class RequestDetailsFragment extends Fragment {
 
     /**
      * Request has been selected
@@ -35,37 +32,19 @@ public class RequestDetailsFragment extends Fragment {
      */
     private Request mRequest;
 
+    /** Listener */
     private OnFragmentInteractionListener mListener;
 
+    /**
+     * Constructor
+     */
     public RequestDetailsFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RequestDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RequestDetailsFragment newInstance(String param1, String param2) {
-        RequestDetailsFragment fragment = new RequestDetailsFragment();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -74,10 +53,26 @@ public class RequestDetailsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_request, container, false);
 
+        Button btn = (Button) view.findViewById(R.id.pickup_request_button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                switch (v.getId()) {
+                    case R.id.pickup_request_button:
+                        launchEmail();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -94,6 +89,14 @@ public class RequestDetailsFragment extends Fragment {
 //                    + " must implement OnFragmentInteractionListener");
 //        }
 //    }
+
+
+    /** Launches Date Picker Calendar fragment */
+    private void launchEmail() {
+        Intent i = new Intent(this.getActivity(), EmailActivity.class);
+        startActivity(i);
+
+    }
 
     @Override
     public void onDetach() {
@@ -112,7 +115,6 @@ public class RequestDetailsFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

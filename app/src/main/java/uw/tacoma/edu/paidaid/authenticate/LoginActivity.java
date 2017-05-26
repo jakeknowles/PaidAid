@@ -13,8 +13,6 @@ import uw.tacoma.edu.paidaid.R;
  * */
 public class LoginActivity extends AppCompatActivity {
 
-
-
     /**
      * onCreate loads the activity login layout & then creates a new login fragment
      * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method

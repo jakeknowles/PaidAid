@@ -296,7 +296,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * OnFragmentInteractionListener, activities must implment this interface to
+     * OnFragmentInteractionListener, activities must implement this interface to
      * allow for interaction.
      * */
     public interface OnFragmentInteractionListener {
