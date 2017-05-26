@@ -15,8 +15,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import uw.tacoma.edu.paidaid.R;
-
 /**
  * Created by dmitriy on 5/25/17.
  */
@@ -47,18 +45,35 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
             "http://maps.googleapis.com/maps/api/geocode/json?address=";
 
 
+    /**
+     * Constructor
+     * @param theActivity
+     */
     public GeocodeAsyncTask(Activity theActivity) {
         mActivity = theActivity;
     }
 
+    /**
+     * Latitude Getter
+     * @return mLatitude
+     */
     public Double getLatitude() {
         return mLatitude;
     }
 
+    /**
+     * Longitude getter
+     * @return mLongitude
+     */
     public Double getLongitude() {
         return mLongitude;
     }
 
+    /**
+     * doInBackground JSON
+     * @param params
+     * @return
+     */
     @Override
     protected String doInBackground(String... params) {
 
@@ -89,6 +104,10 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
     }
 
+    /**
+     * onPostExecute JSON
+     * @param result
+     */
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);

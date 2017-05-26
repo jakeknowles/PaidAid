@@ -46,6 +46,12 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         mListener = listener;
     }
 
+    /**
+     * onCreateViewHolder loads XML layout
+     * @param parent parent
+     * @param viewType viewType
+     * @return
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -54,6 +60,11 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
     }
 
 
+    /**
+     * onBindViewHolder deals with appearance of data for request info
+     * @param holder holder
+     * @param position position
+     */
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mRequest = mRequests.get(position);
@@ -89,8 +100,10 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
     }
 
 
-
-
+    /**
+     * getItemCount
+     * @return requestSize
+     */
     @Override
     public int getItemCount() {
         return mRequests.size();
@@ -135,6 +148,10 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
             mStoreNameView = (TextView) view.findViewById(R.id.storename);
         }
 
+        /**
+         * Customized Display
+         * @return String
+         */
         @Override
         public String toString() {
             return super.toString() + " '" + mTipView.getText() + "'";

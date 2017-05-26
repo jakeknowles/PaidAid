@@ -25,8 +25,6 @@ import uw.tacoma.edu.paidaid.R;
  * Created by dmitriy on 5/26/17.
  */
 
-
-
 /**
  * A task to download the requests from the database.
  */
@@ -43,11 +41,21 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
      */
     private AppCompatActivity mActivity;
 
+
+    /**
+     * Constructor
+     * @param theActivity theActivity
+     */
     public AddRequestsTask(Activity theActivity) {
         mActivity = (AppCompatActivity) theActivity;
     }
 
 
+    /**
+     * doInbackground JSON
+     * @param params
+     * @return
+     */
     @Override
     protected String doInBackground(String... params) {
 

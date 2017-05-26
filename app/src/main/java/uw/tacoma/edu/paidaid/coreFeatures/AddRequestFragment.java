@@ -1,13 +1,11 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +19,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -30,7 +26,6 @@ import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.tasks.AddRequestsTask;
-import uw.tacoma.edu.paidaid.tasks.GeocodeAsyncTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 
 /**
@@ -46,7 +41,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
      */
     private static final String ADD_REQUEST_URL =
             "http://paidaid.x10host.com/addRequest.php?cmd=requests";
-
 
     /**
      * The tip amount.
@@ -162,26 +156,18 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
     }
 
+
+    /**
+     * getUserId gets the users ID
+     *
+     * @return USERID
+     */
     private int getUserId() {
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
         return sharedPref.getInt(getString(R.string.USERID), -1);
-    }
-
-
-
-    private void launchCalendar() {
-
-        DatePickerFragment frag = new DatePickerFragment();
-        frag.show(getFragmentManager(), "launch");
-
-    }
-
-    /** OnFragmentInteractionListener */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
     /**
@@ -198,6 +184,14 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
             default:
                 break;
         }
+    }
+
+    /** Launches Date Picker Calendar fragment */
+    private void launchCalendar() {
+
+        DatePickerFragment frag = new DatePickerFragment();
+        frag.show(getFragmentManager(), "launch");
+
     }
 
 
@@ -310,6 +304,11 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
             }
 
         }
+    }
+
+    /** OnFragmentInteractionListener */
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 
 }
