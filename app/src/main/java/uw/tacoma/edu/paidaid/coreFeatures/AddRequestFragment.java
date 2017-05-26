@@ -25,7 +25,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.Request;
 import uw.tacoma.edu.paidaid.tasks.GeocodeAsyncTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 
@@ -192,7 +191,7 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
         }
 
     }
-    
+
     private void launchCalendar() {
 
         DatePickerFragment frag = new DatePickerFragment();
