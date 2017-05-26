@@ -145,16 +145,19 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
     }
 
 
-    private void getLatandLong(String theZipCode) {
+    /**
+     * Helper method to run the google api geocode task
+     * @param theZipCode the zipcode of location
+     * @return the task
+     */
+    private GeocodeAsyncTask getLatandLong(String theZipCode) {
 
         GeocodeAsyncTask task = new GeocodeAsyncTask(getActivity());
-        task.execute(theZipCode);
-
-
-
-
+        return (GeocodeAsyncTask) task.execute(theZipCode);
 
     }
+
+
 
     /**
      * Get the users input and insert into database
@@ -168,14 +171,20 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
             tipAmount = Double.parseDouble(mTip.getText().toString());
 
 
+        // validate the zipcode to make sure it is valid
+        // otherwise return
         if (validateZipCode(zipCode) == -1)
             return;
 
-        getLatandLong(zipCode);
+        // get the lat and long coordinates using google api call
+        GeocodeAsyncTask task = getLatandLong(zipCode);
+        Double lat = task.getLatitude();
+        Double lng = task.getLongitude();
 
-
-
-
+        // if task didn't return the right results
+        if (lat == null || lng == null) {
+            return;
+        }
 
 
         final String storeName = mStoreName.getText().toString();
@@ -189,6 +198,8 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
             post_dict.put("storename", storeName);
             post_dict.put("items_comments", itemsComments);
             post_dict.put("userid", 1);
+            post_dict.put("lat", lat);
+            post_dict.put("lng", lng);
         } catch (JSONException e) {
             Log.e("ERROR ADD REQUEST JSON", e.toString());
         }

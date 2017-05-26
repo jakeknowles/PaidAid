@@ -1,17 +1,20 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,61 +41,65 @@ import uw.tacoma.edu.paidaid.model.Request;
  *  Account Button, and the Request Feed. */
 public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener {
 
-        /** Navigation bar */
-        private BottomNavigationView mBottomNavigationMenuBar;
+    /** Navigation bar */
+    private BottomNavigationView mBottomNavigationMenuBar;
 
+    /**
+     * Flag to keep track of when a user clicks on features and is not logged in
+     */
+    private boolean mClickedFlag = false;
 
 
     /**
-         * Shared preferences used to keep track of who's logged in.
-         */
-        private SharedPreferences mSharedPreferences;
+     * Shared preferences used to keep track of who's logged in.
+     */
+    private SharedPreferences mSharedPreferences;
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 //            // set overlay to make the action bar hide on scroll
 //            supportRequestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_home);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
 
 
-            // instantiate shared preferences
-            mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                    , Context.MODE_PRIVATE);
+        // instantiate shared preferences
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
 
 
-            /** Finds and assigns screen and navigation bar layout */
+        /** Finds and assigns screen and navigation bar layout */
 
-            this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
+        this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
 
-            // set action bar toolbar to custom toolbar
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setCustomView(R.layout.toolbar);
+        // set action bar toolbar to custom toolbar
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.toolbar);
 //            getSupportActionBar().setHideOnContentScrollEnabled(true);
 
 
 
 
 
-            // add the request fragment to populate the grid of requests
-            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+        // add the request fragment to populate the grid of requests
+        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
 
-                RequestFragment requestFragment = new RequestFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
-                        .commit();
-            }
-
-
-
-            // on click listner to bottom nav bar
-            addListenerToNavBar();
-
-            // hide bottom navigation bar when keyboard is visible
-            keyboardListener();
-
+            RequestFragment requestFragment = new RequestFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
+                    .commit();
         }
+
+
+
+        // on click listner to bottom nav bar
+        addListenerToNavBar();
+
+        // hide bottom navigation bar when keyboard is visible
+        keyboardListener();
+
+    }
 
 
 
@@ -201,6 +208,7 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+
                 switch (item.getItemId()) {
 
                     case R.id.home_button:
@@ -214,6 +222,8 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                         break;
 
                     case R.id.add_button:
+                        if (!isUserLoggedIn()) break;
+
                         Fragment fragAdd = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.add_tag));
 
@@ -224,6 +234,8 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                         break;
 
                     case R.id.messages_button:
+                        if (!isUserLoggedIn()) break;
+
                         Fragment fragMes = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.messages_tag));
 
@@ -234,6 +246,8 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
                         break;
 
                     case R.id.requests_button:
+                        if (!isUserLoggedIn()) break;
+
                         Fragment fragReq = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
 
@@ -250,12 +264,54 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
     }
 
 
+    private boolean isUserLoggedIn() {
+
+        boolean loggedIn = mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false);
+
+        // if flag is set return false prevents repeated attempts
+        if(mClickedFlag) return false;
+
+        if (!loggedIn && !mClickedFlag) {
+
+            Toast mes = Toast.makeText(this.getApplicationContext(),
+                    "You must be logged in to access PaidAid features",
+                    Toast.LENGTH_LONG);
+            mes.show();
+
+            // set clicked flag to true when not logged in
+            mClickedFlag = true;
+
+
+            // launch login screen after delay
+            final Activity activity = this;
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    mClickedFlag = false;
+                    Intent i = new Intent(activity, LoginActivity.class);
+                    startActivity(i);
+
+
+                }
+            }, 2000);
+
+            return false;
+        }
+
+        return true;
+
+    }
 
 
     /** Need for future use */
     @Override
     public void onListFragmentInteraction(Request request) {
 
+
+
+        isUserLoggedIn();
 //        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
 //        Bundle args = new Bundle();
 //        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, item);

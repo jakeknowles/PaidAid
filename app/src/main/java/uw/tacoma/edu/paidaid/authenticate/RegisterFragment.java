@@ -215,6 +215,8 @@ public class RegisterFragment extends Fragment {
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
 
+            Log.e("REGISTER RESULT", result);
+
             try {
                 JSONObject jsonObject = new JSONObject(result);
                 String status = (String) jsonObject.get("result");
@@ -222,20 +224,25 @@ public class RegisterFragment extends Fragment {
 
                 if (status.equals("success")) {
 
-                    // go to home screen
-                    getActivity().finish();
+                    int userid = (int)  jsonObject.get("userid");
 
                     // save user information and logged in status
                     mSharedPreferences
                             .edit()
                             .putBoolean(getString(R.string.LOGGEDIN), true)
                             .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                            .putString(getString(R.string.EMAIL), mEmailEditText.getText().toString())
+                            .putInt(getString(R.string.USERID), userid)
                             .commit();
 
 
                     Toast.makeText(mActivity.getApplicationContext(), "Welcome to PaidAid!"
                             , Toast.LENGTH_LONG)
                             .show();
+
+                    // go to home screen
+                    getActivity().finish();
+
                 } else {
                     Toast.makeText(mActivity.getApplicationContext(), "Failed to Register: "
                                     + jsonObject.get("error")

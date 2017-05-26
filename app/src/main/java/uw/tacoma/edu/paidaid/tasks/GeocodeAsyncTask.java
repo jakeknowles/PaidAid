@@ -2,10 +2,9 @@ package uw.tacoma.edu.paidaid.tasks;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,9 +27,15 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
      */
     private Activity mActivity;
 
-    private String mLatitude;
+    /**
+     * The latitude coordinate of location
+     */
+    private Double mLatitude;
 
-    private String mLongitude;
+    /**
+     * The longitude coordinate of location
+     */
+    private Double mLongitude;
 
 
 
@@ -43,6 +48,14 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
     public GeocodeAsyncTask(Activity theActivity) {
         mActivity = theActivity;
+    }
+
+    public Double getLatitude() {
+        return mLatitude;
+    }
+
+    public Double getLongitude() {
+        return mLongitude;
     }
 
     @Override
@@ -90,25 +103,21 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
                         .show();
             } else if (status.equals("OK")) {
 
+                // get the location json to get the lat and longitude
+                JSONArray res = (JSONArray) jsonObject.get("results");
+                JSONObject location = res.getJSONObject(0)
+                        .getJSONObject("geometry")
+                        .getJSONObject("location");
 
-
-
-
-                Log.e("THIS IS THE JSON", jsonObject.get("results").toString());
-
-                Toast.makeText(mActivity, result.toString(), Toast.LENGTH_SHORT).show();
+                mLatitude = location.getDouble("lat");
+                mLongitude = location.getDouble("lng");
 
             }
         }
         catch (JSONException e) {
-            Toast.makeText(mActivity.getApplicationContext(), "Something wrong with the ZipCode " +
+            Toast.makeText(mActivity.getApplicationContext(), "Something wrong with the ZipCode API call" +
                     e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-
-
-
-
 
     }
 }

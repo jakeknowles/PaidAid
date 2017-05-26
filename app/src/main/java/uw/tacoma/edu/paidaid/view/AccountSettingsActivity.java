@@ -58,6 +58,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
         mLogoutButton = (Button) findViewById(R.id.logout_button);
         mUsernameView = (EditText) findViewById(R.id.username_text);
+        mEmailView = (EditText) findViewById(R.id.email_text);
         mRatingBar = (RatingBar) findViewById(R.id.ratingBar);
 
 
@@ -92,7 +93,10 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private void setUpSettingsFields() {
 
         String username = mSharedPrefernces.getString(getString(R.string.USERNAME), "null");
+        String email = mSharedPrefernces.getString(getString(R.string.EMAIL), "null");
         mUsernameView.setText(username);
+        mEmailView.setText(email);
+
     }
 
 
