@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
@@ -26,7 +25,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
     /**
      * Shared Preferences for user that is logged in.
      */
-    private SharedPreferences mSharedPrefernces;
+    private SharedPreferences mSharedPreferences;
 
     /**
      * Logout button
@@ -49,7 +48,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_settings);
 
         // get shared preferences file
-        mSharedPrefernces = getSharedPreferences(getString(R.string.LOGIN_PREFS),
+        mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
                 Context.MODE_PRIVATE);
 
         // set action bar toolbar to custom toolbar
@@ -77,7 +76,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSharedPrefernces.edit().putBoolean(getString(R.string.LOGGEDIN), false).commit();
+                mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false).commit();
 
                 Toast.makeText(getApplicationContext(), "Come back soon!"
                         , Toast.LENGTH_SHORT)
@@ -92,8 +91,8 @@ public class AccountSettingsActivity extends AppCompatActivity {
      */
     private void setUpSettingsFields() {
 
-        String username = mSharedPrefernces.getString(getString(R.string.USERNAME), "null");
-        String email = mSharedPrefernces.getString(getString(R.string.EMAIL), "null");
+        String username = mSharedPreferences.getString(getString(R.string.USERNAME), "null");
+        String email = mSharedPreferences.getString(getString(R.string.EMAIL), "null");
         mUsernameView.setText(username);
         mEmailView.setText(email);
 

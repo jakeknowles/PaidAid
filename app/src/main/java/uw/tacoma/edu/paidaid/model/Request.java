@@ -71,7 +71,6 @@ public class Request implements Serializable{
         mStoreName = theStoreName;
 //        mExpirationTime = theExpirationTime;
         mItemsAndComments = theItemsAndComments;
-//        mStarRating = theStarRating;
 
     }
 
@@ -141,14 +140,6 @@ public class Request implements Serializable{
      */
     public String getmItemsAndComments() {
         return mItemsAndComments;
-    }
-
-    /**
-     * Getter for mStarRating
-     * @return rating of user1 from 1 - 5
-     */
-    public int getmStarRating() {
-        return mStarRating;
     }
 
 }
