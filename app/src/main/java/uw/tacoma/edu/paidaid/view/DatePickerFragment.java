@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 import uw.tacoma.edu.paidaid.R;
@@ -33,6 +34,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
         // Warning - month is 0 based.
         Toast.makeText(getActivity(), "You picked " + (monthOfYear + 1) + "/" + dayOfMonth + "/" + year,
                 Toast.LENGTH_LONG)

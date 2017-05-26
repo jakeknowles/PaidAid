@@ -201,8 +201,10 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
     }
 
 
-
-
+    /**
+     * Google api call to zecode a zipcode and get its latitude and longitude
+     * coordinates, after that post the new requests
+     */
     private class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
         /**

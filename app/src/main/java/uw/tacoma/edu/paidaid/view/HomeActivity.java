@@ -36,7 +36,8 @@ import uw.tacoma.edu.paidaid.model.Request;
  *
  *  Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
  *  Account Button, and the Request Feed. */
-public class HomeActivity extends AppCompatActivity implements RequestFragment.OnListFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements
+        RequestFragment.OnListFragmentInteractionListener {
 
     /** Navigation bar */
     private BottomNavigationView mBottomNavigationMenuBar;
@@ -313,18 +314,19 @@ public class HomeActivity extends AppCompatActivity implements RequestFragment.O
     @Override
     public void onListFragmentInteraction(Request request) {
 
+        if (isUserLoggedIn()) {
 
+            RequestDetailsFragment requestDetailsFragment = new RequestDetailsFragment();
+            Bundle args = new Bundle();
+            args.putSerializable(RequestDetailsFragment.REQUEST_ITEM_SELECTED, request);
+            requestDetailsFragment.setArguments(args);
 
-        isUserLoggedIn();
-//        CourseDetailFragment courseDetailFragment = new CourseDetailFragment();
-//        Bundle args = new Bundle();
-//        args.putSerializable(CourseDetailFragment.COURSE_ITEM_SELECTED, item);
-//        courseDetailFragment.setArguments(args);
-//
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_container, courseDetailFragment)
-//                .addToBackStack(null)
-//                .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.activity_main, requestDetailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        };
+
     }
     
 }
