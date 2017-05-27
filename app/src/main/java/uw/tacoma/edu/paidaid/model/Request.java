@@ -118,6 +118,29 @@ public class Request implements Serializable{
         return reason;
     }
 
+    /**
+     * Getter mUserID
+     * @return the User ID
+     */
+    public int getmUserID() {
+        return mUserID;
+    }
+
+    /**
+     * Getter mUsername
+     * @return the Username of the user who posted the request
+     */
+    public String getmUsername() {
+        return mUsername;
+    }
+
+    /**
+     * Getter mEmail
+     * @return the email of the user
+     */
+    public String getmEmail() {
+        return mEmail;
+    }
 
     /**
      * Getter for mTipAmount
@@ -152,29 +175,6 @@ public class Request implements Serializable{
         return mItemsAndComments;
     }
 
-    /**
-     * Getter mUserID
-     * @return the User ID
-     */
-    public int getmUserID() {
-        return mUserID;
-    }
-
-    /**
-     * Getter mUsername
-     * @return the Username of the user who posted the request
-     */
-    public String getmUsername() {
-        return mUsername;
-    }
-
-    /**
-     * Getter mEmail
-     * @return the email of the user
-     */
-    public String getmEmail() {
-        return mEmail;
-    }
 
     /**
      * Getter mStarRating
