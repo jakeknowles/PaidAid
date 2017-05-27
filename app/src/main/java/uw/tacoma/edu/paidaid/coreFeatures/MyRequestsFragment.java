@@ -17,9 +17,6 @@ import uw.tacoma.edu.paidaid.R;
 /** Requests Button Fragment from clicking "Requests" on home screen. */
 public class MyRequestsFragment extends Fragment {
 
-    /** OnFragmentInteractionListener */
-    private OnFragmentInteractionListener mListener;
-
     /** Constructor */
     public MyRequestsFragment() {}
 
@@ -45,16 +42,6 @@ public class MyRequestsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_my_requests, container, false);
     }
 
-
-    /**
-     * onButtonPressed
-     * @param uri uri is a string of characters used to identify a resource.
-     */
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {

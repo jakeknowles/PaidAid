@@ -17,9 +17,6 @@ import uw.tacoma.edu.paidaid.R;
 /** Messages Button Fragment from clicking "Messages" on home screen. */
 public class MyMessagesFragment extends Fragment {
 
-    /** OnFragmentInteractionListener */
-    private OnFragmentInteractionListener mListener;
-
     /** Constructor */
     public MyMessagesFragment() {
 

@@ -30,7 +30,7 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
     /**
      * The max store name string length to display
      */
-    private final int MAX_STORENAME_LENGTH = 10;
+    private final int mMAX_STORENAME_LENGTH = 10;
     /**
      * The interaction listener.
      */
@@ -78,7 +78,7 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
 
         // if the the store name is longer than 10 characters
         // display with dots
-        if (storeName.length() > MAX_STORENAME_LENGTH) {
+        if (storeName.length() > mMAX_STORENAME_LENGTH) {
             storeName = storeName.substring(0,7).concat("...");
         }
 
