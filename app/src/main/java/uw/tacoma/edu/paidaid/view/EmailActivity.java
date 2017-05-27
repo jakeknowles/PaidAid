@@ -40,6 +40,7 @@ public class EmailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_pick_up_request_message);
 
+
         /** Text edits where text will be typed in from user and a button to submit text */
         emailSubject = (EditText) findViewById(R.id.subject);
         emailMessage = (EditText) findViewById(R.id.message);

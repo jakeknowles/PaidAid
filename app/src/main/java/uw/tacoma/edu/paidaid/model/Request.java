@@ -29,14 +29,20 @@ public class Request implements Serializable{
     /** Constant for JSON key store_name */
     public static final String STORE_NAME = "storename";
 
-    /** Constant for JSON key expiration_time */
-    public static final String EXPIRATION_TIME = "expiration";
-
     /** Constant for JSON key items_and_comments */
     public static final String ITEMS_AND_COMMENTS = "items_comments";
 
     /** Constant for JSON key star_rating */
     public static final String STAR_RATING = "star_rating";
+
+    /** Constant for JSON user id */
+    public static final String USER_ID = "user_id";
+
+    /** Constant for JSON username */
+    public static final String USERNAME = "username";
+
+    /** Constant for JSON email */
+    public static final String EMAIL = "email";
 
     // Tip amount for picking up request
     private double mTip;
@@ -51,7 +57,16 @@ public class Request implements Serializable{
     private String mItemsAndComments;
 
     // 1 - 5 Star rating
-    private float mStarRating;
+    private double mStarRating;
+
+    // User ID
+    private int mUserID;
+
+    // Username
+    private String mUsername;
+
+    // Email
+    private String mEmail;
 
     /**
      * Requests Constructor
@@ -60,13 +75,17 @@ public class Request implements Serializable{
      * @param theStoreName is the store name where the items are
      * @param theItemsAndComments is the list of items and additional comments if need be
      */
-    public Request(double theTip, double theDistanceAway, String theStoreName,
-                   String theItemsAndComments) {
+    public Request(int theUserID, String theUsername, String theEmail, double theTip, double theDistanceAway,
+                   String theStoreName, String theItemsAndComments, double theStarRating) {
 
+        mUserID = theUserID;
+        mUsername = theUsername;
+        mEmail = theEmail;
         mTip = theTip;
         mDistanceAway = theDistanceAway;
         mStoreName = theStoreName;
         mItemsAndComments = theItemsAndComments;
+        mStarRating = theStarRating;
 
     }
 
@@ -85,8 +104,10 @@ public class Request implements Serializable{
 
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    Request request = new Request(obj.getDouble(Request.TIP_AMOUNT), obj.getDouble(Request.DISTANCE_AWAY)
-                            , obj.getString(Request.STORE_NAME), obj.getString(Request.ITEMS_AND_COMMENTS));
+                    Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
+                            obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
+                            obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
+                            obj.getString(Request.ITEMS_AND_COMMENTS), obj.getDouble(Request.STAR_RATING));
                     requestsList.add(request);
                 }
             } catch (JSONException e) {
@@ -122,12 +143,45 @@ public class Request implements Serializable{
         return mStoreName;
     }
 
+
     /**
      * Getter mItemsAndComments
      * @return the request items and additional comments
      */
     public String getmItemsAndComments() {
         return mItemsAndComments;
+    }
+
+    /**
+     * Getter mUserID
+     * @return the User ID
+     */
+    public int getmUserID() {
+        return mUserID;
+    }
+
+    /**
+     * Getter mUsername
+     * @return the Username of the user who posted the request
+     */
+    public String getmUsername() {
+        return mUsername;
+    }
+
+    /**
+     * Getter mEmail
+     * @return the email of the user
+     */
+    public String getmEmail() {
+        return mEmail;
+    }
+
+    /**
+     * Getter mStarRating
+     * @return the Star Rating for the user
+     */
+    public double getmStarRating() {
+        return mStarRating;
     }
 
 }
