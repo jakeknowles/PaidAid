@@ -33,10 +33,10 @@ public class Request implements Serializable{
     public static final String ITEMS_AND_COMMENTS = "items_comments";
 
     /** Constant for JSON key star_rating */
-    public static final String STAR_RATING = "star_rating";
+    public static final String STAR_RATING = "rating";
 
     /** Constant for JSON user id */
-    public static final String USER_ID = "user_id";
+    public static final String USER_ID = "userid";
 
     /** Constant for JSON username */
     public static final String USERNAME = "username";

@@ -4,19 +4,19 @@
 
     <!-- View background color -->
     <solid
-        android:color="@color/background_test3" >
+        android:color="@color/grid_med" >
 
     </solid>
 
-    <!-- View border color and width -->
-    <stroke
-        android:width="3dp"
-        android:color="@color/paidAidBlue" >
-    </stroke>
+    <!--&lt;!&ndash; View border color and width &ndash;&gt;-->
+    <!--<stroke-->
+        <!--android:width="3dp"-->
+        <!--android:color="@color/black" >-->
+    <!--</stroke>-->
 
     <!-- The radius makes the corners rounded -->
     <corners
-        android:radius="2dp"   >
+        android:radius="4dp"   >
     </corners>
 
 </shape>
