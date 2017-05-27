@@ -1,5 +1,6 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,14 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         holder.mTipView.setText(tip);
         holder.mDistanceView.setText(distance);
         holder.mStoreNameView.setText(storeName);
+
+        if (mRequests.get(position).getmDistanceAway() < 3) {
+            holder.mView.setBackgroundResource(R.drawable.border_requests_green);
+        } else if (mRequests.get(position).getmDistanceAway() > 10) {
+            holder.mView.setBackgroundResource(R.drawable.border_request_red);
+        } else {
+            holder.mView.setBackgroundResource(R.drawable.border_request_med);
+        }
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

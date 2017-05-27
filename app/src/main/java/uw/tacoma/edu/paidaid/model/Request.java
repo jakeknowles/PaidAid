@@ -47,14 +47,11 @@ public class Request implements Serializable{
     // Store name of where items are located
     private String  mStoreName;
 
-    // Time until request expires
-    private double mExpirationTime;
-
     // Items & Comments contained in Request
     private String mItemsAndComments;
 
     // 1 - 5 Star rating
-    private int mStarRating;
+    private float mStarRating;
 
     /**
      * Requests Constructor
@@ -69,7 +66,6 @@ public class Request implements Serializable{
         mTip = theTip;
         mDistanceAway = theDistanceAway;
         mStoreName = theStoreName;
-//        mExpirationTime = theExpirationTime;
         mItemsAndComments = theItemsAndComments;
 
     }
@@ -124,14 +120,6 @@ public class Request implements Serializable{
      */
     public String getmStoreName() {
         return mStoreName;
-    }
-
-    /**
-     * Getter for mExpirationTime
-     * @return the time until the request expires
-     */
-    public double getmExpirationTime() {
-        return mExpirationTime;
     }
 
     /**
