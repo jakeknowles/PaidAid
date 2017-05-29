@@ -97,7 +97,7 @@ public class Request implements Serializable{
      * @return reason or null if successful.
      */
     public static String parseRequestsJSON(String requestJSON, List<Request> requestsList) {
-        String reason = "success";
+        String reason = null;
         if (requestJSON != null) {
             try {
                 JSONArray arr = new JSONArray(requestJSON);
