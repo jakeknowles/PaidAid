@@ -85,6 +85,127 @@ public class RegisterFragmentTest {
                 .check(matches(isDisplayed()));
     }
 
+    @Test
+    public void testRegisterInvalidEmail() {
+
+        Random random = new Random();
+
+        // Generate a random username
+        String username = "username" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        // Generate a random password
+        String password = "password" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        onView(withId(R.id.sign_up_now_button))
+                .perform(click());
+
+
+        onView(withId(R.id.username_text))
+                .perform(typeText(username));
+        onView(withId(R.id.username_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText(password));
+        onView(withId(R.id.password_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email_text))
+                .perform(typeText("abcefghijklmnopqrstuvwxyz"));
+        onView(withId(R.id.email_text)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.confirm_button))
+                .perform(click());
+
+        onView(withText("Failed to Register: Please enter a valid email."))
+                .inRoot(withDecorView(not(is(
+                        mActivityRule2.getActivity()
+                                .getWindow()
+                                .getDecorView()))))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testRegisterInvalidUsername() {
+
+        Random random = new Random();
+
+        // Generate a random email address
+        String email = "email" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1)
+                + "@uw.edu";
+
+        // Generate a random password
+        String password = "password" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        onView(withId(R.id.sign_up_now_button))
+                .perform(click());
+
+
+        onView(withId(R.id.username_text))
+                .perform(typeText("abc"));
+        onView(withId(R.id.username_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText(password));
+        onView(withId(R.id.password_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email_text))
+                .perform(typeText("abcefghijklmnopqrstuvwxyz"));
+        onView(withId(R.id.email_text)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.confirm_button))
+                .perform(click());
+
+        onView(withText("Failed to Register: Please enter a valid email."))
+                .inRoot(withDecorView(not(is(
+                        mActivityRule2.getActivity()
+                                .getWindow()
+                                .getDecorView()))))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testRegisterInvalidPassword() {
+
+        Random random = new Random();
+
+        // Generate a random email address
+        String email = "email" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1)
+                + "@uw.edu";
+
+        // Generate a random username
+        String username = "username" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        onView(withId(R.id.sign_up_now_button))
+                .perform(click());
+
+
+        onView(withId(R.id.username_text))
+                .perform(typeText("abc"));
+        onView(withId(R.id.username_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText("{bad}"));
+        onView(withId(R.id.password_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email_text))
+                .perform(typeText("abcefghijklmnopqrstuvwxyz"));
+        onView(withId(R.id.email_text)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.confirm_button))
+                .perform(click());
+
+        onView(withText("Failed to Register: Please enter a valid email."))
+                .inRoot(withDecorView(not(is(
+                        mActivityRule2.getActivity()
+                                .getWindow()
+                                .getDecorView()))))
+                .check(matches(isDisplayed()));
+    }
 
     public void testLogin() {
 
