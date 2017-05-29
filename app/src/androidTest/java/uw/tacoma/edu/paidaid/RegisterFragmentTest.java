@@ -40,7 +40,7 @@ public class RegisterFragmentTest {
     public ActivityTestRule<HomeActivity> mActivityRule2 = new ActivityTestRule<>(HomeActivity.class);
 
     @Test
-    public void testRegister() {
+    public void testRegisterPass() {
 
         Random random = new Random();
 
@@ -207,10 +207,20 @@ public class RegisterFragmentTest {
                 .check(matches(isDisplayed()));
     }
 
-    public void testLogin() {
+    public void testLoginPass() {
 
         onView(withId(R.id.username_text))
                 .perform(typeText("jake")).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText("password")).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_button))
+                .perform(click());
+    }
+
+    public void testLoginFail() {
+
+        onView(withId(R.id.username_text))
+                .perform(typeText("fail")).perform(closeSoftKeyboard());
         onView(withId(R.id.password_text))
                 .perform(typeText("password")).perform(closeSoftKeyboard());
         onView(withId(R.id.login_button))
