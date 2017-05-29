@@ -1,6 +1,8 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,9 @@ public class RequestDetailsFragment extends Fragment {
 
     /** Request has been selected */
     public final static String REQUEST_ITEM_SELECTED = "request_selected";
+
+    /** Shared Preferences for user that is logged in. */
+    private SharedPreferences mSharedPreferences;
 
     /** Listener */
     private OnFragmentInteractionListener mListener;
@@ -56,6 +61,19 @@ public class RequestDetailsFragment extends Fragment {
     }
 
     /**
+     * onCreate
+     * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+                , Context.MODE_PRIVATE);
+
+    }
+
+    /**
      * onStart updates the request view
      */
     @Override
@@ -80,7 +98,7 @@ public class RequestDetailsFragment extends Fragment {
             mDistanceAwayTextView.setText(Double.toString(request.getmDistanceAway()) + Request.MILES_UNITS);
             mStoreNameTextView.setText(request.getmStoreName());
             mItemsAndCommentsTextView.setText(request.getmItemsAndComments());
-//            mStarRatingTextView.setRating(Double.toString(request.getmStarRating());
+            mStarRatingTextView.setRating((float) request.getmStarRating());
         }
     }
 
@@ -102,8 +120,8 @@ public class RequestDetailsFragment extends Fragment {
         mDistanceAwayTextView = (TextView) view.findViewById(R.id.location);
         mStoreNameTextView = (TextView) view.findViewById(R.id.store_name);
         mItemsAndCommentsTextView = (TextView) view.findViewById(R.id.items_comments);
-        mItemsAndCommentsTextView.setFocusable(false);
-        mItemsAndCommentsTextView.setClickable(true);
+        mItemsAndCommentsTextView.setFocusable(false); // Sets text view to not editable
+        mItemsAndCommentsTextView.setClickable(true);  // Sets text view to clickable / scrollable
 
         mStarRatingTextView = (RatingBar) view.findViewById(R.id.ratingbar);
 

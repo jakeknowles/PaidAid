@@ -56,7 +56,7 @@ public class Request implements Serializable {
     private String mItemsAndComments;
 
     // 1 - 5 Star rating
-    private double mStarRating;
+    private float mStarRating;
 
     // User ID
     private int mUserID;
@@ -75,7 +75,7 @@ public class Request implements Serializable {
      * @param theItemsAndComments is the list of items and additional comments if need be
      */
     public Request(int theUserID, String theUsername, String theEmail, double theTip, double theDistanceAway,
-                   String theStoreName, String theItemsAndComments, double theStarRating) {
+                   String theStoreName, String theItemsAndComments, float theStarRating) {
 
         mUserID = theUserID;
         mUsername = theUsername;
@@ -106,7 +106,7 @@ public class Request implements Serializable {
                     Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
                             obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
                             obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
-                            obj.getString(Request.ITEMS_AND_COMMENTS), obj.getDouble(Request.STAR_RATING));
+                            obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
                     requestsList.add(request);
                 }
             } catch (JSONException e) {
