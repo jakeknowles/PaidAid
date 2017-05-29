@@ -1,14 +1,19 @@
 package uw.tacoma.edu.paidaid.view;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
@@ -19,6 +24,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
@@ -37,7 +47,14 @@ import uw.tacoma.edu.paidaid.model.Request;
  *  Home Screen Activity - Consists of Bottom Navigation Bar Buttons,
  *  Account Button, and the Request Feed. */
 public class HomeActivity extends AppCompatActivity implements
-        RequestFragment.OnListFragmentInteractionListener {
+        RequestFragment.OnListFragmentInteractionListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
+
+    /**
+     * Checking for permissions
+     */
+    private static final int MY_PERMISSIONS_LOCATIONS = 0;
 
     /** Navigation bar */
     private BottomNavigationView mBottomNavigationMenuBar;
@@ -46,6 +63,17 @@ public class HomeActivity extends AppCompatActivity implements
      * Flag to keep track of when a user clicks on features and is not logged in
      */
     private boolean mClickedFlag = false;
+
+
+    /**
+     * The Google api client used for locations
+     */
+    private GoogleApiClient mGoogleApiClient;
+
+
+    private LocationRequest mLocationRequest;
+    private Location mCurrentLocation;
+
 
 
     /**
@@ -69,36 +97,79 @@ public class HomeActivity extends AppCompatActivity implements
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
+        // Set action bar toolbar to custom toolbar
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.toolbar);
+        //getSupportActionBar().setHideOnContentScrollEnabled(true);
+
 
         /** Finds and assigns screen and navigation bar layout */
         this.mBottomNavigationMenuBar = (BottomNavigationView) findViewById(R.id.layout_navigation);
 
-            // Set action bar toolbar to custom toolbar
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setCustomView(R.layout.toolbar);
-            //getSupportActionBar().setHideOnContentScrollEnabled(true);
-
-
-
-
-
-        // Add the request fragment to populate the grid of requests
-        if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
-
-            RequestFragment requestFragment = new RequestFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
-                    .commit();
-        }
-
-
-
-        // On click listener to bottom nav bar
-        addListenerToNavBar();
-
         // Hide bottom navigation bar when keyboard is visible
         keyboardListener();
 
+
+        // Create an instance of GoogleAPIClient.
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+
+        mLocationRequest = new LocationRequest();
+
+
+        // check for permissions to access location
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION
+                            , Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_LOCATIONS);
+        } else {
+
+            // On click listener to bottom nav bar
+            addListenerToNavBar();
+
+            // Add the request fragment to populate the grid of requests
+            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+
+                RequestFragment requestFragment = new RequestFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
+                        .commit();
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
+    }
+
+    protected void onStart() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+        super.onStart();
+    }
+
+    protected void onStop() {
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
     }
 
 
@@ -275,8 +346,6 @@ public class HomeActivity extends AppCompatActivity implements
      */
     private boolean isUserLoggedIn() {
 
-
-
         boolean loggedIn = mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false);
 
         // if flag is set return false prevents repeated attempts
@@ -309,11 +378,7 @@ public class HomeActivity extends AppCompatActivity implements
 
             return false;
         }
-
-
         return true;
-
-
     }
 
 
@@ -336,9 +401,70 @@ public class HomeActivity extends AppCompatActivity implements
                     .addToBackStack(null)
                     .commit();
         };
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_LOCATIONS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permissions granted
+                    setUpWhenPermissionsGranted();
+
+                } else {
+
+                    findViewById(R.id.user_account).setEnabled(false);
+                    Toast.makeText(this, "You need Location Services enabled to use PaidAid",
+                            Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
+
+
+    /**
+     * Helper method that is called when user accepts location services.
+     */
+    private void setUpWhenPermissionsGranted() {
+
+        // On click listener to bottom nav bar
+        addListenerToNavBar();
+
+        // Add the request fragment to populate the grid of requests
+        if (getSupportFragmentManager().findFragmentByTag(getString(R.string.home_tag)) == null) {
+
+            RequestFragment requestFragment = new RequestFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
+                    .commit();
+
+            Toast.makeText(this, "Welcome to PaidAid!",
+                    Toast.LENGTH_LONG).show();
+
+        }
 
     }
-    
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
 
 

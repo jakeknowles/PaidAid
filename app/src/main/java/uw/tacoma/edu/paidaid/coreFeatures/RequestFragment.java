@@ -306,9 +306,7 @@ public class RequestFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            Log.e("REQUEST", result);
-
-
+            //Log.e("REQUEST", result);
 
             // Something wrong with the network or the URL.
             if (result.startsWith("Unable to")) {
@@ -320,6 +318,7 @@ public class RequestFragment extends Fragment {
             List<Request> requestsList = new ArrayList<Request>();
             result = Request.parseRequestsJSON(result, requestsList);
             // Something wrong with the JSON returned.
+
             if (result != null) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG)
                         .show();
