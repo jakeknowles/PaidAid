@@ -22,13 +22,14 @@ import uw.tacoma.edu.paidaid.R;
 public class EmailActivity extends Activity {
 
     /** Send email button */
-    Button sendEmail;
+    public Button mSendEmail;
 
     /** Subject of email */
-    EditText emailSubject;
+    public EditText mEmailSubject;
 
     /** Message content of email */
-    EditText emailMessage;
+    public EditText mEmailMessage;
+
 
     /**
      * onCreate loads up XML layout for Email Activity
@@ -42,24 +43,26 @@ public class EmailActivity extends Activity {
 
 
         /** Text edits where text will be typed in from user and a button to submit text */
-        emailSubject = (EditText) findViewById(R.id.subject);
-        emailMessage = (EditText) findViewById(R.id.message);
-        sendEmail = (Button) findViewById(R.id.send_button);
+        mEmailSubject = (EditText) findViewById(R.id.subject);
+        mEmailMessage = (EditText) findViewById(R.id.message);
+        mSendEmail = (Button) findViewById(R.id.send_button);
 
         /** Listener on button for sending email */
-        sendEmail.setOnClickListener(new View.OnClickListener() {
+        mSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String subject = emailSubject.getText().toString();
-                String message = emailMessage.getText().toString();
+                String subject = mEmailSubject.getText().toString();
+                String message = mEmailMessage.getText().toString();
 
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_SUBJECT, subject);
                 email.putExtra(Intent.EXTRA_TEXT, message);
                 email.setType("text/plain");
                 startActivity(Intent.createChooser(email, "Send Email Via"));
+                finish();
 
             }
         });
     }
+
 }

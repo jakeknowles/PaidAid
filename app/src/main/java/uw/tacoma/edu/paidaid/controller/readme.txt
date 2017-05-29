@@ -1,30 +1,42 @@
-This phase of your project must meet the following minimum Android requirements
+MINIMUM REQUIREMENTS IMPLEMENTED:
 
-1. Fix any bugs from the previous phase that the instructor or peer reviewers found.
-   Address how you incorporated (or didn’t) these changes in your README.txt file.
+1. Bugs from previous phase that our peer reviewers found are corrected and implemented.
+    - Bottom Navigation Bar now works properly
 
-2. You must implement 90% of the use cases that you provided in your proposal. Talk to the
-   instructor as to what you plan to leave out or add and document this in the README.txt file.
+2. 100 % of User stories are implemented -
+   DONE · As a non-registered user, I want to be able to register with Paid Aid, so that I can access
+     all that the app has to offer.
+   DONE · As a user, I want to be able to log into the app, so I can access all of the app's features.
+   DONE · As a user, I want to create a request, so that I can get my request fulfilled.
+   DONE · As a user, I want to be able to swipe through the requests, so that I can view all of the requests.
+   · As a user, I want to be able to select a request, so that I can get see the details of the request.
+   · As a user, I want to be able to message another user, so that I can confirm the request with them.
+   · As a user, I want to be able to see the rating of other users, so that I can see their reputation.
+   · As a user, I want to submit a rating, so that I submit my experience with the user.
 
-3. Your app must save data to the device’s storage using SQLite and one other storage mechanism
+3. We implemented SharedPreferences for storing Users usernames, passwords, and emails.
+
+   HELP - Your app must save data to the device’s storage using SQLite and one other storage mechanism
    (SharedPreferences or File Storage). Explain in your README.txt file as to where and why you
     used the data storage.
 
-4. Your app must use web services to make the app functional. Using dummy data is not allowed
+4. We use web services for all of our requests. We grab data from our requests stored in the Database
+   and populate the request when a user clicks on one to see the details in case they are interested.
+
+   HELP - Your app must use web services to make the app functional. Using dummy data is not allowed
    for this phase. Explain in your README.txt file as to where and why you used web services.
 
-5. Your app must use Content Sharing to send or receive information pertinent to the app. Content
-   Sharing is sharing information from mobile devices via email, text messaging, or social media.
-   Examples: Send a recipe using email, share top score on social media, etc. Explain in your
-   README.txt file as to where we can find this.
+5. We implemented Content Sharing via email messaging. To send an email, you must interested in a
+   request. When a user clicks on a request, and then clicks "Pick Up", they are able to send an email
+   to the user who posted the request. The email feature is solely for figuring our details
+   (where, when, etc.) when users are interested in helping out someone.
 
-6. Your app must allow Sign-In with custom accounts and/or using social media accounts. If you
-   promised to do both then you should have them implemented for this phase. If implementing social
-   media account login, make sure to provide a test account. If using Facebook login, login under
-   Facebook Developers, go to application, Roles, on top navigation for tabs, click Test Users
-   and add.
+6. We implemented custom account Sign-In. A new account can be registered, using the normal account
+   registration validation scheme: must type in a username not registered yet / must not be blank,
+   a password that is at least 7+ characters, and an email with an '@' sign.
 
-7. Your app uses graphics to display images – an icon for the app and a logo count as graphics.
+7. We use graphics for our icon that appears in the emulator and also our logo shown plenty of times
+   on many different screens throughout our app.
 
 8. You must write at least one JUnit class for a model class and at least one Instrumentation test
    to test a fragment/activity in your project. The tests need to be thorough not trivial. Your app

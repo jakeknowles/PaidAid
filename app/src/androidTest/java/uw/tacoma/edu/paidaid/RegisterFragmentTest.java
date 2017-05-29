@@ -8,7 +8,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Random;
+
 import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
+import uw.tacoma.edu.paidaid.view.HomeActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -33,28 +36,63 @@ public class RegisterFragmentTest {
     @Rule
     public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(LoginActivity.class);
 
+    @Rule
+    public ActivityTestRule<HomeActivity> mActivityRule2 = new ActivityTestRule<>(HomeActivity.class);
+
     @Test
     public void testRegister() {
 
-        // Type text and then press the button.
-        onView(withId(R.id.username_text))
-                .perform(typeText("test@uw.edu"));
-        onView(withId(R.id.username_text)).perform(closeSoftKeyboard());
-        onView(withId(R.id.password_text))
-                .perform(typeText("myPassword"));
-        onView(withId(R.id.password_text)).perform(closeSoftKeyboard());
-        onView(withId(R.id.login_button))
+        Random random = new Random();
+
+        // Generate a random email address
+        String email = "email" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1)
+                + "@uw.edu";
+
+        // Generate a random username
+        String username = "username" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        // Generate a random password
+        String password = "password" + (random.nextInt(400) + 1)
+                + (random.nextInt(900) + 1) + (random.nextInt(700) + 1)
+                + (random.nextInt(400) + 1) + (random.nextInt(100) + 1);
+
+        onView(withId(R.id.sign_up_now_button))
                 .perform(click());
 
-        onView(withText("success"))
+
+        onView(withId(R.id.username_text))
+                .perform(typeText(username));
+        onView(withId(R.id.username_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText(password));
+        onView(withId(R.id.password_text)).perform(closeSoftKeyboard());
+        onView(withId(R.id.email_text))
+                .perform(typeText(email));
+        onView(withId(R.id.email_text)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.confirm_button))
+                .perform(click());
+
+        onView(withText("Welcome to PaidAid!"))
                 .inRoot(withDecorView(not(is(
-                        mActivityRule.getActivity()
+                        mActivityRule2.getActivity()
                                 .getWindow()
                                 .getDecorView()))))
                 .check(matches(isDisplayed()));
     }
 
 
+    public void testLogin() {
 
-
+        onView(withId(R.id.username_text))
+                .perform(typeText("jake")).perform(closeSoftKeyboard());
+        onView(withId(R.id.password_text))
+                .perform(typeText("password")).perform(closeSoftKeyboard());
+        onView(withId(R.id.login_button))
+                .perform(click());
+    }
 }

@@ -20,6 +20,15 @@ public class Request implements Serializable{
     /** Money symbol when forming string to display */
     public static final String MONEY_SIGN = "$";
 
+    /** Constant for JSON user id */
+    public static final String USER_ID = "userid";
+
+    /** Constant for JSON username */
+    public static final String USERNAME = "username";
+
+    /** Constant for JSON email */
+    public static final String EMAIL = "email";
+
     /** Constant for JSON key tip_amount */
     public static final String TIP_AMOUNT = "tip";
 
@@ -34,15 +43,6 @@ public class Request implements Serializable{
 
     /** Constant for JSON key star_rating */
     public static final String STAR_RATING = "rating";
-
-    /** Constant for JSON user id */
-    public static final String USER_ID = "userid";
-
-    /** Constant for JSON username */
-    public static final String USERNAME = "username";
-
-    /** Constant for JSON email */
-    public static final String EMAIL = "email";
 
     // Tip amount for picking up request
     private double mTip;
@@ -118,6 +118,29 @@ public class Request implements Serializable{
         return reason;
     }
 
+    /**
+     * Getter mUserID
+     * @return the User ID
+     */
+    public int getmUserID() {
+        return mUserID;
+    }
+
+    /**
+     * Getter mUsername
+     * @return the Username of the user who posted the request
+     */
+    public String getmUsername() {
+        return mUsername;
+    }
+
+    /**
+     * Getter mEmail
+     * @return the email of the user
+     */
+    public String getmEmail() {
+        return mEmail;
+    }
 
     /**
      * Getter for mTipAmount
@@ -152,29 +175,6 @@ public class Request implements Serializable{
         return mItemsAndComments;
     }
 
-    /**
-     * Getter mUserID
-     * @return the User ID
-     */
-    public int getmUserID() {
-        return mUserID;
-    }
-
-    /**
-     * Getter mUsername
-     * @return the Username of the user who posted the request
-     */
-    public String getmUsername() {
-        return mUsername;
-    }
-
-    /**
-     * Getter mEmail
-     * @return the email of the user
-     */
-    public String getmEmail() {
-        return mEmail;
-    }
 
     /**
      * Getter mStarRating
@@ -183,5 +183,6 @@ public class Request implements Serializable{
     public double getmStarRating() {
         return mStarRating;
     }
+
 
 }
