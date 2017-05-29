@@ -114,7 +114,6 @@ public class RegisterFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String url = buildRegisterUrl(v);
 
                 RegisterTask task = new RegisterTask();

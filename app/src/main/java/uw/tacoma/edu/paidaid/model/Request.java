@@ -11,11 +11,10 @@ import java.util.List;
  * Request object that contains all necessary request info
  * (tip amount, distance, store name, expiration time, items & comments, rating)
  */
-public class Request implements Serializable{
-
+public class Request implements Serializable {
 
     /** Units for miles when forming string */
-    public static final String MILES_UNITS = "mi.";
+    public static final String MILES_UNITS = " miles";
 
     /** Money symbol when forming string to display */
     public static final String MONEY_SIGN = "$";
