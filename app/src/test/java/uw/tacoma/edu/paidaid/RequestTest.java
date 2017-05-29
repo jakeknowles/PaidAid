@@ -1,34 +1,67 @@
 package uw.tacoma.edu.paidaid;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import uw.tacoma.edu.paidaid.model.Request;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by jake on 5/22/17.
  */
 
 public class RequestTest {
-    public String testJSON = "{\"user_id\":\"123456789\",\"username\":" +
-                             "\"test123\",\"email\":\"jake@gmail.com\",\"tip\":\"10.00\"," +
-                             "\"distance\":\"20\"," + "\"storename\":\"Costco\"," +
-                             "\"items_and_comments\":\", 2 Vacuums, , Box of Fruit Snacks, Almonds, 2 Tubs of Red Licorice, " +
-                             "Black 5 person Tent, 3 Sleeping Bags, 10 Cases of AAA Batteries,\"rating\":\"4.1\" }";
+    @Mock
+    JSONArray jsonArray;
+
+    @Mock
+    JSONObject jsonObject;
+
+    private Request mRequest = null;
+
+
     public int theUserID = 1;
-    public String theUsername = "test123";
+    public String theUsername = "jake";
     public String theEmail = "test@gmail.com";
     public double theTip = 10.00;
     public double theDistanceAway = 5.0;
     public String theStoreName = "Costco";
-    public String theItemsAndComments = "7 boxes fruit snacks";
+    public String theItemsAndComments = "7 Boxes of Fruit Snacks";
     public double theStarRating = 4.5;
 
-    public Request mRequest = new Request(theUserID, theUsername, theEmail, theTip, theDistanceAway,
+
+    @Before
+    public void setUp() {
+         mRequest = new Request(theUserID, theUsername, theEmail, theTip, theDistanceAway,
                 theStoreName, theItemsAndComments, theStarRating);
+//        mRequest = new Request(1, "jake", "test@gmail.com", 10.00, 5.0,
+//                   "Costco", "7 Boxes of Fruit Snacks", 4.5);
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test (expected=java.lang.RuntimeException.class)
+    public void parseRequestsJSON() {
+
+        when(Request.parseRequestsJSON(anyString(), any(List.class))).thenReturn("Test");
+            assertEquals("Success", Request.parseRequestsJSON("[{\"user_id\":\"123456789\",\"username\":" +
+                    "\"jake\",\"email\":\"test@gmail.com\",\"tip\":\"10.00\"," +
+                    "\"distance\":\"5.0\"," + "\"storename\":\"Costco\"," +
+                    "\"items_and_comments\":\", 7 Boxes of Fruit Snacks,\"rating\":\"4.5\" }]", new ArrayList<Request>()));
+
+    }
 
 
     @Test
@@ -41,7 +74,7 @@ public class RequestTest {
         assertEquals(theUserID, mRequest.getmUserID());
     }
 
-    @Test
+    @Test (expected=java.lang.AssertionError.class)
     public void testgetmUsername() {
         assertEquals(theUsername, mRequest.getmUsername());
     }
@@ -76,19 +109,4 @@ public class RequestTest {
         assertTrue(theStarRating == mRequest.getmStarRating());
     }
 
-    @Test
-    public void parseRequestsJSON() {
-
-//        ArrayList<Request> mRequestList = Request.parseRequestsJSON();
-//        Request testRequest = mRequestList.get(0);
-//        assertEquals("User ID does not match", 1 == testRequest.getmUserID());
-//        assertTrue("Username does not match", "jake" == testRequest.getmUsername();
-//        assertTrue("Email does not match", "jake@gmail.com" == testRequest.getmEmail());
-//        assertTrue("Tip amount does not match", 5.0 == testRequest.getmTipAmount());
-//        assertEquals("Distace does not match", 5.0 == testRequest.getmDistanceAway());
-//        assertEquals("Store name does not match", "Costco" == testRequest.getmStoreName());
-//        assertEquals("Items does not match", "10 Boxes of AAA Batteries" == testRequest.getmItemsAndComments());
-//        assertEquals("Star Rating does not match", 4.2 == testRequest.getmStarRating());
-
-    }
 }

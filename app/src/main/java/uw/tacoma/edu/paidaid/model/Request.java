@@ -97,7 +97,7 @@ public class Request implements Serializable{
      * @return reason or null if successful.
      */
     public static String parseRequestsJSON(String requestJSON, List<Request> requestsList) {
-        String reason = null;
+        String reason = "success";
         if (requestJSON != null) {
             try {
                 JSONArray arr = new JSONArray(requestJSON);
@@ -183,5 +183,6 @@ public class Request implements Serializable{
     public double getmStarRating() {
         return mStarRating;
     }
+
 
 }
