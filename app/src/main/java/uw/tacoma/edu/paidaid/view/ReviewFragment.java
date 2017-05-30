@@ -28,7 +28,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.authenticate.LoginActivity;
 import uw.tacoma.edu.paidaid.coreFeatures.RequestFragment;
 
 /**
@@ -296,7 +295,7 @@ public class ReviewFragment extends Fragment {
 
             } catch (JSONException e) {
 
-                Toast.makeText(getActivity(), "Something wrong submit review: " +
+                Toast.makeText(getActivity(), "Something wrong with submitting review: " +
                         e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }

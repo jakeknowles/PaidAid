@@ -56,12 +56,14 @@ public class HomeActivity extends AppCompatActivity implements
         LocationListener {
 
 
+    private static int UPDATE_INTERVAL = 1;
 
 
+    private static int FASTEST_INTERVAL = 5;
 
-    private static int UPDATE_INTERVAL = 1; // 10 sec
-    private static int FATEST_INTERVAL = 5; // 5 sec
-    private static int DISPLACEMENT = 10; // 10 meters
+
+    private static int DISPLACEMENT = 10;
+
     /**
      * Checking for permissions
      */
@@ -83,11 +85,11 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     private LocationRequest mLocationRequest;
+
+
     private Location mCurrentLocation;
 
-    /*
 
-     */
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
 
     /**
@@ -96,7 +98,6 @@ public class HomeActivity extends AppCompatActivity implements
      */
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-
 
 
     /**
@@ -144,10 +145,10 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
 
-        // creates and sets up the location request
+        // Creates and sets up the location request
         createLocationRequest();
 
-        // check for permissions to access location
+        // Check for permissions to access location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -203,9 +204,6 @@ public class HomeActivity extends AppCompatActivity implements
         super.onStop();
     }
 
-
-
-
     /**
      * Method that replaces a fragment without adding it to the backstack
      * @param theFragment the fragment to replace with
@@ -228,8 +226,6 @@ public class HomeActivity extends AppCompatActivity implements
                 .add(R.id.activity_main, theFragment, theFragmentTag)
                 .commit();
     }
-
-
 
     /** Creates account settings user button on top right of home screen */
     @Override
@@ -264,7 +260,6 @@ public class HomeActivity extends AppCompatActivity implements
     public Location getCurrentLocation() {
         return mCurrentLocation;
     }
-
 
     /**
      * Private helper method.
@@ -308,7 +303,6 @@ public class HomeActivity extends AppCompatActivity implements
                 }
             }
         });
-
     }
 
     /**
@@ -352,7 +346,6 @@ public class HomeActivity extends AppCompatActivity implements
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
                         changeScreen(fragReq, getString(R.string.myRequests_tag), new MyRequestsFragment());
                         break;
-
                 }
                 mBottomNavigationMenuBar.setTranslationY(0);
                 return true;
@@ -384,7 +377,7 @@ public class HomeActivity extends AppCompatActivity implements
 
         boolean loggedIn = mSharedPreferences.getBoolean(getString(R.string.LOGGEDIN), false);
 
-        // if flag is set return false prevents repeated attempts
+        // If flag is set return false prevents repeated attempts
         if(mClickedFlag) return false;
 
         if (!loggedIn && !mClickedFlag) {
@@ -394,11 +387,11 @@ public class HomeActivity extends AppCompatActivity implements
                     Toast.LENGTH_LONG);
             mes.show();
 
-            // set clicked flag to true when not logged in
+            // Set clicked flag to true when not logged in
             mClickedFlag = true;
 
 
-            // launch login screen after delay
+            // Launch login screen after delay
             final Activity activity = this;
 
             new Handler().postDelayed(new Runnable() {
@@ -527,7 +520,7 @@ public class HomeActivity extends AppCompatActivity implements
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
