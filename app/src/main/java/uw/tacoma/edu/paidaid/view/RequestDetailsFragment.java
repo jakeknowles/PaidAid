@@ -77,6 +77,7 @@ public class RequestDetailsFragment extends Fragment {
 
         Bundle args = getArguments();
         if (args != null) {
+
             // Set article based on argument passed in
             mRequest = (Request) args.getSerializable(REQUEST_SELECTED);
             updateView(mRequest);
@@ -175,12 +176,13 @@ public class RequestDetailsFragment extends Fragment {
         Fragment frag = new ReviewFragment();
         Bundle args = new Bundle();
 
-        if (args != null) {
-            args.putString("REQUEST_USERNAME", mRequest.getmUsername());
-            frag.setArguments(args);
-        }
+        args.putString("REQUEST_USERNAME", mRequest.getmUsername());
+        args.putInt("REQUEST_USERID", mRequest.getmUserID());
+        frag.setArguments(args);
 
-        getFragmentManager().beginTransaction().add(R.id.activity_main, frag).commit();
+        getFragmentManager().beginTransaction()
+                .add(R.id.activity_main, frag)
+                .addToBackStack(null).commit();
 
     }
 

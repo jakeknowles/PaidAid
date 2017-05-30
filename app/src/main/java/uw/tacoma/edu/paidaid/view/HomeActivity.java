@@ -52,9 +52,15 @@ public class HomeActivity extends AppCompatActivity implements
         RequestFragment.OnListFragmentInteractionListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener
-         {
+        LocationListener {
 
+
+
+
+
+    private static int UPDATE_INTERVAL = 1; // 10 sec
+    private static int FATEST_INTERVAL = 5; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
     /**
      * Checking for permissions
      */
@@ -136,20 +142,8 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
 
-
+        // creates and sets up the location request
         createLocationRequest();
-
-
-//        mLocationRequest = new LocationRequest();
-//        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
-//        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-
-//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-
 
         // check for permissions to access location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -178,38 +172,6 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
     }
-
-
-
-//    /**
-//     * Requests location updates from the FusedLocationApi.
-//     */
-//    protected void startLocationUpdates() {
-//        // The final argument to {@code requestLocationUpdates()} is a LocationListener
-//        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED &&
-//                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-//                        == PackageManager.PERMISSION_GRANTED) {
-//            LocationServices.FusedLocationApi.requestLocationUpdates(
-//                    mGoogleApiClient, mLocationRequest, this);
-//        }
-//    }
-
-//    /**
-//     * Removes location updates from the FusedLocationApi.
-//     */
-//    protected void stopLocationUpdates() {
-//        // It is a good practice to remove location requests when the activity is in a paused or
-//        // stopped state. Doing so helps battery performance and is especially
-//        // recommended in applications that request frequent location updates.
-//
-//        // The final argument to {@code requestLocationUpdates()} is a LocationListener
-//        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
-//        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-//        }
-//    }
 
 
     @Override
@@ -362,7 +324,7 @@ public class HomeActivity extends AppCompatActivity implements
                     case R.id.home_button:
                         Fragment fragHome = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.home_tag));
-                        changeScreen(fragHome, new RequestFragment());
+                        changeScreen(fragHome, getString(R.string.home_tag), new RequestFragment());
                         break;
 
                     case R.id.add_button:
@@ -370,7 +332,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragAdd = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.add_tag));
-                        changeScreen(fragAdd, new AddRequestFragment());
+                        changeScreen(fragAdd, getString(R.string.add_tag), new AddRequestFragment());
                         break;
 
                     case R.id.messages_button:
@@ -378,7 +340,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragMes = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.messages_tag));
-                        changeScreen(fragMes, new MyMessagesFragment());
+                        changeScreen(fragMes, getString(R.string.messages_tag), new MyMessagesFragment());
                         break;
 
                     case R.id.requests_button:
@@ -386,7 +348,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragReq = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
-                        changeScreen(fragReq, new MyRequestsFragment());
+                        changeScreen(fragReq, getString(R.string.myRequests_tag), new MyRequestsFragment());
                         break;
 
                 }
@@ -401,10 +363,10 @@ public class HomeActivity extends AppCompatActivity implements
      * Helper method launches the correct fragment
      * @param theFragment
      */
-    private void changeScreen(Fragment theFragment, Fragment newFragmentToLaunch) {
+    private void changeScreen(Fragment theFragment, String theTag, Fragment newFragmentToLaunch) {
 
         if (theFragment == null)
-            addFragmentNoBackStack(newFragmentToLaunch, getString(R.string.messages_tag));
+            addFragmentNoBackStack(newFragmentToLaunch, theTag);
         else
             replaceFragmentNoBackStack(theFragment);
     }
@@ -522,17 +484,8 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
-             private static int UPDATE_INTERVAL = 1; // 10 sec
-             private static int FATEST_INTERVAL = 5; // 5 sec
-             private static int DISPLACEMENT = 10; // 10 meters
 
-             private void createLocationRequest() {
-                 mLocationRequest = new LocationRequest();
-                 mLocationRequest.setInterval(UPDATE_INTERVAL);
-                 mLocationRequest.setFastestInterval(FATEST_INTERVAL);
-                 mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                 mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
-             }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -564,8 +517,14 @@ public class HomeActivity extends AppCompatActivity implements
                 }
             }
         }
+    }
 
-
+    private void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
 
     @Override

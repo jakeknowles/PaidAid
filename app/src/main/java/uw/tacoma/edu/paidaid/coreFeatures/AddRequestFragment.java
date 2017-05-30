@@ -37,12 +37,6 @@ import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 public class AddRequestFragment extends DialogFragment implements View.OnClickListener {
 
     /**
-     * The url to add a new request
-     */
-    private static final String ADD_REQUEST_URL =
-            "http://paidaid.x10host.com/addRequest.php?cmd=requests";
-
-    /**
      * The tip amount.
      */
     private EditText mTip;

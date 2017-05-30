@@ -3,7 +3,6 @@ package uw.tacoma.edu.paidaid.tasks;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 
@@ -20,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.coreFeatures.RequestFragment;
 
 /**
  * @Author: Jake Knowles
@@ -35,7 +35,7 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
      * The url to add a new request
      */
     private static final String ADD_REQUEST_URL =
-            "http://paidaid.x10host.com/addRequest.php?cmd=requests";
+            "http://paidaid.x10host.com/addRequest.php?";
 
     /**
      * The Activity using this task.
@@ -124,8 +124,6 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
             return;
         }
 
-        Log.e("result ", result);
-
         try {
             JSONObject jsonObject = new JSONObject(result);
             String status = (String) jsonObject.get("result");
@@ -138,7 +136,7 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
 
                 if (fragHome == null)
                     mActivity.getSupportFragmentManager().beginTransaction()
-                            .add(R.id.activity_main, fragHome)
+                            .add(R.id.activity_main, new RequestFragment())
                             .commit();
                 else
                     mActivity.getSupportFragmentManager().beginTransaction()

@@ -145,6 +145,8 @@ public class RequestFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        Log.e("resume is called", "request fragment");
+
         DownloadRequestsTask task = new DownloadRequestsTask();
         task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
 
@@ -341,7 +343,7 @@ public class RequestFragment extends Fragment {
             // need to calculate the distance of the request from them to your location
             // pass the json object with lat and lng and get back a json with distance that
             // was calculated with a call to google's api matrix distance
-            result = getNewJSonString(result);
+//            result = getNewJSonString(result);
 
 
             List<Request> requestsList = new ArrayList<Request>();
