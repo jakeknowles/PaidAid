@@ -343,7 +343,7 @@ public class HomeActivity extends AppCompatActivity implements
                         Fragment fragReq = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
                         changeScreen(fragReq, getString(R.string.myRequests_tag), new MyRequestsFragment());
-                        break;5
+                        break;
                 }
                 return true;
             }
