@@ -289,11 +289,7 @@ public class HomeActivity extends AppCompatActivity implements
                     case R.id.home_button:
                         Fragment fragHome = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.home_tag));
-
-                        if (fragHome == null)
-                            addFragmentNoBackStack(new RequestFragment(), getString(R.string.home_tag));
-                        else
-                            replaceFragmentNoBackStack(fragHome);
+                        changeScreen(fragHome);
                         break;
 
                     case R.id.add_button:
@@ -301,11 +297,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragAdd = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.add_tag));
-
-                        if (fragAdd == null)
-                            addFragmentNoBackStack(new AddRequestFragment(), getString(R.string.add_tag));
-                        else
-                            replaceFragmentNoBackStack(fragAdd);
+                        changeScreen(fragAdd);
                         break;
 
                     case R.id.messages_button:
@@ -313,11 +305,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragMes = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.messages_tag));
-
-                        if (fragMes == null)
-                            addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
-                        else
-                            replaceFragmentNoBackStack(fragMes);
+                        changeScreen(fragMes);
                         break;
 
                     case R.id.requests_button:
@@ -325,17 +313,27 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragReq = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
-
-                        if (fragReq == null)
-                            addFragmentNoBackStack(new MyRequestsFragment(), getString(R.string.myRequests_tag));
-                        else
-                            replaceFragmentNoBackStack(fragReq);
+                        changeScreen(fragReq);
                         break;
 
                 }
                 return true;
             }
         });
+    }
+
+
+
+    /**
+     * Helper method launches the correct fragment
+     * @param theFragment
+     */
+    private void changeScreen(Fragment theFragment) {
+
+        if (theFragment == null)
+            addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
+        else
+            replaceFragmentNoBackStack(theFragment);
     }
 
 
