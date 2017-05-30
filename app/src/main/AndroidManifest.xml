@@ -4,11 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
-
 
     <application
         android:allowBackup="true"
@@ -36,7 +33,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".view.AccountSettingsActivity" />
         <!-- <activity android:name=".view.HomeActivity"></activity> -->
-        <activity android:name=".view.EmailActivity"></activity>
+        <activity android:name=".view.EmailActivity" />
+        <activity android:name=".view.AccountSettingsRatingActivity"></activity>
     </application>
 
 </manifest>

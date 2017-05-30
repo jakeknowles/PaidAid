@@ -17,9 +17,12 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Created by jake on 5/22/17.
+ * @Author: Jake Knowles
+ * @Author  Dmitriy Onishchenko
+ * @version 5/29/2017
  */
 
+/** JUnit Test for Request class -- Testing getters and JSONParser method */
 public class RequestTest {
     @Mock
     JSONArray jsonArray;
@@ -37,7 +40,7 @@ public class RequestTest {
     public double theDistanceAway = 5.0;
     public String theStoreName = "Costco";
     public String theItemsAndComments = "7 Boxes of Fruit Snacks";
-    public double theStarRating = 4.5;
+    public float theStarRating =  4;
 
 
     @Before
@@ -47,13 +50,13 @@ public class RequestTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testParseRequestsJSONSuccess() {
 
 
-        String json = "[{'userid':'123456789','username':'jake', 'email': 'test@gmail.com'," +
-                "'tip':'10.00', 'distance':'5.0','storename':'Costco'," +
-                "'items_comments':'7 Boxes of Fruit Snacks','rating':'4.5' }]";
+        String json = "[{'userid':'123456789','username':'jake','email':'test@gmail.com'," +
+                "'tip':'10.00','distance':'5.0','storename':'Costco'," +
+                "'items_comments':'7 Boxes of Fruit Snacks','rating':'4'}]";
         String result = Request.parseRequestsJSON(json, new ArrayList<Request>());
 
         assertNull(result);
@@ -64,8 +67,8 @@ public class RequestTest {
     public void testParseRequestsJSONFail() {
 
 
-        String json = "[{'user_id':'123456789','username':'jake', 'email': 'test@gmail.com'," +
-                "'tip':'10.00', 'distance':'5.0','store_name':'Costco'," +
+        String json = "[{'user_id':'123456789','username':'jake','email':'test@gmail.com'," +
+                "'tip':'10.00','distance':'5.0','store_name':'Costco'," +
                 "'itemscomments':'7 Boxes of Fruit Snacks','rating':'4.5' }]";
         String result = Request.parseRequestsJSON(json, new ArrayList<Request>());
 

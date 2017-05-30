@@ -1,12 +1,9 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +23,17 @@ import uw.tacoma.edu.paidaid.model.Request;
 /** When Request is clicked on home screen, this fragment shows all the details regarding the request */
 public class RequestDetailsFragment extends Fragment {
 
-    /** Request has been selected */
-    public final static String REQUEST_ITEM_SELECTED = "request_selected";
-
-    /** Shared Preferences for user that is logged in. */
-    private SharedPreferences mSharedPreferences;
-
     /** Listener */
     private OnFragmentInteractionListener mListener;
+
+    /** Request Item Selected Constant */
+    public final static String REQUEST_ITEM_SELECTED = "request_selected";
+
+    /** Request Selected Constant */
+    public final static String REQUEST_USER_EMAIL = "request_user_email";
+
+    /** Request Selected Constant */
+    public final static String REQUEST_USERNAME = "request_username";
 
     /** Request Selected Constant */
     public final static String REQUEST_SELECTED = "request_selected";
@@ -54,7 +54,10 @@ public class RequestDetailsFragment extends Fragment {
     private TextView mItemsAndCommentsTextView;
 
     /** Rating Bar for populating with the star rating of the user */
-    private RatingBar mStarRatingTextView;
+    private RatingBar mStarRating;
+
+    /** Request */
+    private Request mRequest;
 
     /** Constructor */
     public RequestDetailsFragment() {
@@ -69,9 +72,6 @@ public class RequestDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                , Context.MODE_PRIVATE);
-
     }
 
     /**
@@ -84,7 +84,8 @@ public class RequestDetailsFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             // Set article based on argument passed in
-            updateView((Request) args.getSerializable(REQUEST_SELECTED));
+            mRequest = (Request) args.getSerializable(REQUEST_SELECTED);
+            updateView(mRequest);
         }
     }
 
@@ -99,7 +100,7 @@ public class RequestDetailsFragment extends Fragment {
             mDistanceAwayTextView.setText(Double.toString(request.getmDistanceAway()) + Request.MILES_UNITS);
             mStoreNameTextView.setText(request.getmStoreName());
             mItemsAndCommentsTextView.setText(request.getmItemsAndComments());
-            mStarRatingTextView.setRating((float) request.getmStarRating());
+            mStarRating.setRating((float) request.getmStarRating());
 
         }
     }
@@ -118,18 +119,22 @@ public class RequestDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_request, container, false);
 
         mUsernameTextView = (TextView) view.findViewById(R.id.username_account_fill);
+        mUsernameTextView.setFocusable(false); // Sets text view to not editable
+        mUsernameTextView.setClickable(true);  // Sets text view to clickable / scrollable
+
         mTipTextView = (TextView) view.findViewById(R.id.tip_amount_text);
         mDistanceAwayTextView = (TextView) view.findViewById(R.id.location);
         mStoreNameTextView = (TextView) view.findViewById(R.id.store_name);
+
         mItemsAndCommentsTextView = (TextView) view.findViewById(R.id.items_comments);
         mItemsAndCommentsTextView.setFocusable(false); // Sets text view to not editable
         mItemsAndCommentsTextView.setClickable(true);  // Sets text view to clickable / scrollable
 
-        mStarRatingTextView = (RatingBar) view.findViewById(R.id.ratingbar);
+        mStarRating = (RatingBar) view.findViewById(R.id.ratingbar);
 
-        Button btn = (Button) view.findViewById(R.id.pickup_request_button);
+        Button button = (Button) view.findViewById(R.id.pickup_request_button);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -144,6 +149,21 @@ public class RequestDetailsFragment extends Fragment {
             }
         });
 
+        mUsernameTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                switch (v.getId()) {
+                    case R.id.username_account_fill:
+                        launchReview();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         return view;
     }
 
@@ -151,6 +171,17 @@ public class RequestDetailsFragment extends Fragment {
     /** Launches Date Picker Calendar fragment */
     private void launchEmail() {
         Intent i = new Intent(this.getActivity(), EmailActivity.class);
+        startActivity(i);
+
+    }
+
+    /** Launches Date Picker Calendar fragment */
+    private void launchReview() {
+
+
+        Intent i = new Intent(this.getActivity(), AccountSettingsRatingActivity.class);
+        i.putExtra(REQUEST_USER_EMAIL, mRequest.getmEmail());
+        i.putExtra(REQUEST_USERNAME, mRequest.getmUsername());
         startActivity(i);
 
     }

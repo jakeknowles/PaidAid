@@ -16,8 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by dmitriy on 5/25/17.
+ * @Author: Jake Knowles
+ * @Author  Dmitriy Onishchenko
+ * @version 5/29/2017
+ *
  */
+
 
 public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 

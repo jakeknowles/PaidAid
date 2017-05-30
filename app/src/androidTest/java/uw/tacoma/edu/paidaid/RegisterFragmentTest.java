@@ -26,9 +26,13 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 
 /**
- * Created by jake on 5/26/17.
+ * @Author: Jake Knowles
+ * @Author  Dmitriy Onishchenko
+ * @version 5/29/2017
  */
 
+/** Instrumented Test for Register Fragment -- Testing for valid username, email, and password & small
+ *  login tests */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class RegisterFragmentTest {
