@@ -91,12 +91,11 @@ public class RequestDetailsFragment extends Fragment {
     public void updateView(Request request) {
         if (request != null) {
             mUsernameTextView.setText(request.getmUsername());
-            mTipTextView.setText(Request.MONEY_SIGN + Double.toString(request.getmTipAmount()));
+            mTipTextView.setText(Request.MONEY_SIGN + String.format("%.2f", request.getmTipAmount()));
             mDistanceAwayTextView.setText(Double.toString(request.getmDistanceAway()) + Request.MILES_UNITS);
             mStoreNameTextView.setText(request.getmStoreName());
             mItemsAndCommentsTextView.setText(request.getmItemsAndComments());
             mStarRating.setRating((float) request.getmStarRating());
-
         }
     }
 

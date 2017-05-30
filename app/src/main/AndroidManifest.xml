@@ -32,7 +32,6 @@
             android:name=".authenticate.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".view.AccountSettingsActivity" />
-        <!-- <activity android:name=".view.HomeActivity"></activity> -->
         <activity android:name=".view.EmailActivity" />
     </application>
 
