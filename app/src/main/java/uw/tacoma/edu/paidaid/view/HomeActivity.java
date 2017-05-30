@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
@@ -49,7 +51,9 @@ import uw.tacoma.edu.paidaid.model.Request;
 public class HomeActivity extends AppCompatActivity implements
         RequestFragment.OnListFragmentInteractionListener,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener
+         {
 
     /**
      * Checking for permissions
@@ -73,6 +77,18 @@ public class HomeActivity extends AppCompatActivity implements
 
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
+
+    /*
+
+     */
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+
+    /**
+     * The fastest rate for active location updates. Exact. Updates will never be more frequent
+     * than this value.
+     */
+    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
+            UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
 
 
@@ -120,7 +136,19 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
 
-        mLocationRequest = new LocationRequest();
+
+        createLocationRequest();
+
+
+//        mLocationRequest = new LocationRequest();
+//        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+
+        // Sets the fastest rate for active location updates. This interval is exact, and your
+        // application will never receive updates faster than this value.
+//        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+
+//        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
 
 
         // check for permissions to access location
@@ -151,6 +179,39 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
+
+
+//    /**
+//     * Requests location updates from the FusedLocationApi.
+//     */
+//    protected void startLocationUpdates() {
+//        // The final argument to {@code requestLocationUpdates()} is a LocationListener
+//        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
+//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                == PackageManager.PERMISSION_GRANTED &&
+//                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+//                        == PackageManager.PERMISSION_GRANTED) {
+//            LocationServices.FusedLocationApi.requestLocationUpdates(
+//                    mGoogleApiClient, mLocationRequest, this);
+//        }
+//    }
+
+//    /**
+//     * Removes location updates from the FusedLocationApi.
+//     */
+//    protected void stopLocationUpdates() {
+//        // It is a good practice to remove location requests when the activity is in a paused or
+//        // stopped state. Doing so helps battery performance and is especially
+//        // recommended in applications that request frequent location updates.
+//
+//        // The final argument to {@code requestLocationUpdates()} is a LocationListener
+//        // (http://developer.android.com/reference/com/google/android/gms/location/LocationListener.html).
+//        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+//        }
+//    }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -158,14 +219,20 @@ public class HomeActivity extends AppCompatActivity implements
             mGoogleApiClient.disconnect();
     }
 
+    @Override
     protected void onStart() {
+
+        Log.e("ON START ", "METHOD CALLED");
+
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         }
         super.onStart();
     }
 
+    @Override
     protected void onStop() {
+
         if (mGoogleApiClient != null) {
             mGoogleApiClient.disconnect();
         }
@@ -181,10 +248,10 @@ public class HomeActivity extends AppCompatActivity implements
      */
     public void replaceFragmentNoBackStack(Fragment theFragment) {
 
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_main, theFragment)
-                    .commit();
-        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.activity_main, theFragment)
+                .commit();
+    }
 
     /**
      * Method that adds a new fragment without adding it to the backstack
@@ -193,10 +260,10 @@ public class HomeActivity extends AppCompatActivity implements
      */
     public void addFragmentNoBackStack(Fragment theFragment, String theFragmentTag) {
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_main, theFragment, theFragmentTag)
-                    .commit();
-        }
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.activity_main, theFragment, theFragmentTag)
+                .commit();
+    }
 
 
 
@@ -226,7 +293,13 @@ public class HomeActivity extends AppCompatActivity implements
         }
     }
 
-
+    /**
+     * Get the current location
+     * @return current Location
+     */
+    public Location getCurrentLocation() {
+        return mCurrentLocation;
+    }
 
 
     /**
@@ -289,7 +362,7 @@ public class HomeActivity extends AppCompatActivity implements
                     case R.id.home_button:
                         Fragment fragHome = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.home_tag));
-                        changeScreen(fragHome);
+                        changeScreen(fragHome, new RequestFragment());
                         break;
 
                     case R.id.add_button:
@@ -297,7 +370,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragAdd = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.add_tag));
-                        changeScreen(fragAdd);
+                        changeScreen(fragAdd, new AddRequestFragment());
                         break;
 
                     case R.id.messages_button:
@@ -305,7 +378,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragMes = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.messages_tag));
-                        changeScreen(fragMes);
+                        changeScreen(fragMes, new MyMessagesFragment());
                         break;
 
                     case R.id.requests_button:
@@ -313,7 +386,7 @@ public class HomeActivity extends AppCompatActivity implements
 
                         Fragment fragReq = getSupportFragmentManager()
                                 .findFragmentByTag(getString(R.string.myRequests_tag));
-                        changeScreen(fragReq);
+                        changeScreen(fragReq, new MyRequestsFragment());
                         break;
 
                 }
@@ -328,10 +401,10 @@ public class HomeActivity extends AppCompatActivity implements
      * Helper method launches the correct fragment
      * @param theFragment
      */
-    private void changeScreen(Fragment theFragment) {
+    private void changeScreen(Fragment theFragment, Fragment newFragmentToLaunch) {
 
         if (theFragment == null)
-            addFragmentNoBackStack(new MyMessagesFragment(), getString(R.string.messages_tag));
+            addFragmentNoBackStack(newFragmentToLaunch, getString(R.string.messages_tag));
         else
             replaceFragmentNoBackStack(theFragment);
     }
@@ -449,20 +522,76 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
+             private static int UPDATE_INTERVAL = 1; // 10 sec
+             private static int FATEST_INTERVAL = 5; // 5 sec
+             private static int DISPLACEMENT = 10; // 10 meters
+
+             private void createLocationRequest() {
+                 mLocationRequest = new LocationRequest();
+                 mLocationRequest.setInterval(UPDATE_INTERVAL);
+                 mLocationRequest.setFastestInterval(FATEST_INTERVAL);
+                 mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+                 mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+             }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
+        Log.e("HOME ACTIVITY", "CONNECTED");
+
+        // If the initial location was never previously requested, we use
+        // FusedLocationApi.getLastLocation() to get it. If it was previously requested, we store
+        // its value in the Bundle and check for it in onCreate(). We
+        // do not request it again unless the user specifically requests location updates by pressing
+        // the Start Updates button.
+        //
+        // Because we cache the value of the initial location in the Bundle, it means that if the
+        // user launches the activity,
+        // moves to a new location, and then changes the device orientation, the original location
+        // is displayed as the activity is re-created.
+        if (mCurrentLocation == null) {
+
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                if (mCurrentLocation != null) {
+                    Log.i("THIS IS THE LOCATION", mCurrentLocation.toString());
+                } else {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
+//                    Toast.makeText(this, "Unable to get locations please restart App", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
 
     }
 
     @Override
     public void onConnectionSuspended(int i) {
+        // The connection to Google Play services was lost for some reason. We call connect() to
+        // attempt to re-establish the connection.
+        Log.e("HOME ACTIVITY", "Connection suspended");
+        mGoogleApiClient.connect();
 
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    public void onConnectionFailed(@NonNull ConnectionResult result) {
+        Log.e("HOME ACTIVITY", "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+
 
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mCurrentLocation = location;
+        Log.i("LOCATION CHANGED", mCurrentLocation.toString());
+
+
+    }
+
 }
 
 

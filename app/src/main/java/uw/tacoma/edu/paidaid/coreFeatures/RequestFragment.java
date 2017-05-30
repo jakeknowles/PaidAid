@@ -2,6 +2,7 @@ package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,6 +29,7 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
+import uw.tacoma.edu.paidaid.view.HomeActivity;
 import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
 
 /**
@@ -41,6 +47,13 @@ public class RequestFragment extends Fragment {
      */
     private static final String DOWNLOAD_REQUESTS_URL =
             "http://paidaid.x10host.com/requests.php?cmd=requests";
+
+    /**
+     * URL to calculate the distance.. need to add additional parameters see buildDistanceURL()
+     */
+    private static final String DISTANCE_URL =
+            "http://maps.googleapis.com/maps/api/directions/json?origin=";
+
 
     /**
      * The column count argument.
@@ -62,6 +75,10 @@ public class RequestFragment extends Fragment {
      */
     private RecyclerView mRecyclerView;
 
+    private Double mLatitude;
+
+    private Double mLongitude;
+
     /**
      * Constructor initialize fields.
      */
@@ -81,6 +98,7 @@ public class RequestFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
     }
 
     /**
@@ -110,7 +128,6 @@ public class RequestFragment extends Fragment {
 
             DownloadRequestsTask task = new DownloadRequestsTask();
             task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
-
 
         }
 
@@ -306,6 +323,11 @@ public class RequestFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
+            // get the location and set the latitude and longitude
+            Location loc = ((HomeActivity) getActivity()).getCurrentLocation();
+            mLatitude = loc.getLatitude();
+            mLongitude = loc.getLongitude();
+
             //Log.e("REQUEST", result);
 
             // Something wrong with the network or the URL.
@@ -314,6 +336,13 @@ public class RequestFragment extends Fragment {
                         .show();
                 return;
             }
+
+
+            // need to calculate the distance of the request from them to your location
+            // pass the json object with lat and lng and get back a json with distance that
+            // was calculated with a call to google's api matrix distance
+            result = getNewJSonString(result);
+
 
             List<Request> requestsList = new ArrayList<Request>();
             result = Request.parseRequestsJSON(result, requestsList);
@@ -329,6 +358,57 @@ public class RequestFragment extends Fragment {
             if (!requestsList.isEmpty()) {
                 mRecyclerView.setAdapter(new MyRequestsRecyclerViewAdapter(requestsList, mListener));
             }
+        }
+
+        /**
+         * Parses the json string, returns an error message if unsuccessful.
+         * Returns new json object with calculated distance
+         * @param requestJSON
+         * @return reason or null if successful.
+         */
+        private String getNewJSonString(String requestJSON) {
+            String reason = null;
+            if (requestJSON != null) {
+                try {
+                    JSONArray arr = new JSONArray(requestJSON);
+
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject obj = arr.getJSONObject(i);
+
+                        double lat = obj.getDouble("lat");
+                        double lng = obj.getDouble("lng");
+                        String distURL = buildDistanceURL(lat, lng);
+
+                        Log.e("URL", distURL);
+
+
+
+//                        Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
+//                                obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
+//                                obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
+//                                obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
+//                        requestsList.add(request);
+                    }
+                } catch (JSONException e) {
+                    reason =  "Unable to parse data, Reason: " + e.getMessage();
+                }
+            }
+            return reason;
+        }
+
+
+        private String buildDistanceURL(double lat, double lng) {
+
+            StringBuilder url = new StringBuilder(DISTANCE_URL);
+            url.append(mLatitude);
+            url.append(",");
+            url.append(mLongitude);
+            url.append("&destination=");
+            url.append(lat);
+            url.append(",");
+            url.append(lng);
+
+            return url.toString();
         }
 
 

@@ -110,8 +110,6 @@ public class Request implements Serializable {
                             obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
                             obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
                     requestsList.add(request);
-
-                    Log.e("user and rating", obj.getString(Request.USERNAME) + (float) obj.getDouble(Request.STAR_RATING));
                 }
             } catch (JSONException e) {
                 reason =  "Unable to parse data, Reason: " + e.getMessage();
