@@ -177,12 +177,14 @@ public class RequestDetailsFragment extends Fragment {
 
     }
 
-    /** Launches Date Picker Calendar fragment */
+    /** Launches Review fragment */
     private void launchReview() {
-        Fragment fragment1 = new ReviewFragment();
+
+        Fragment frag = new ReviewFragment();
         FragmentManager fragmentManager = getFragmentManager();
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.activity_main, fragment1);
+        fragmentTransaction.replace(R.id.activity_main, frag);
         fragmentTransaction.commit();
 
 //        Intent i = new Intent(this.getActivity(), AccountSettingsRatingActivity.class);
