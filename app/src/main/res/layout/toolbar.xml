@@ -10,7 +10,8 @@
     android:background="@color/paidAidBlue"
     android:orientation="horizontal">
 
-<ImageView
+    <!-- Tool Bar Customization Image View-->
+    <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/paidaidlogotoolbar"
@@ -20,7 +21,7 @@
         android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-
+    <!-- Tool Bar Customization Image View-->
     <ImageView
         android:layout_width="110dp"
         android:layout_height="25dp"
@@ -30,18 +31,6 @@
         app:layout_constraintLeft_toRightOf="@+id/toolbar_corner_logo"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-        <!--<TextView-->
-            <!--android:id="@+id/toolbar_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerHorizontal="true"-->
-
-            <!--android:layout_centerVertical="true"-->
-            <!--android:text="@string/app_name"-->
-            <!--android:textColor="#ffffff"-->
-            <!--android:textStyle="bold" />-->
-
 
 </android.support.constraint.ConstraintLayout>
 

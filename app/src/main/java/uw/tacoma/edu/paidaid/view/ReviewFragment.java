@@ -28,6 +28,7 @@ public class ReviewFragment extends Fragment {
     private RatingBar mStarRating;
 
     private Button mSubmitButton;
+
     /** Constructor */
     public ReviewFragment() {}
 
@@ -68,14 +69,11 @@ public class ReviewFragment extends Fragment {
             }
         });
 
-
         return view;
     }
-
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
-
 }

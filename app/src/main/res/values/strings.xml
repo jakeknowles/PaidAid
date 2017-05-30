@@ -63,7 +63,6 @@
     <!-- Expired / Current Requests -->
     <string name="expired_requests_post_again_button">Re-post</string>
 
-
     <!-- Location Services Google-->
     <string name="google_app_id">10</string>
 

@@ -19,8 +19,6 @@
     <!-- Colors -->
     <color name="grey">#6e726b</color>
     <color name="border_grey">#999</color>
-
-
     <color name="black">#000000</color>
     <color name="lightgrey">#bbb</color>
     <color name="light_light_grey">#EEE</color>
@@ -34,10 +32,5 @@
     <color name="background_test4">#87ff91</color>
     <color name="background_test3">#E6E6DC</color>
     <color name="background_test6">#CCFFCC</color>
-
-
-
-
-
 
 </resources>
