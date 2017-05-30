@@ -5,15 +5,15 @@ MINIMUM REQUIREMENTS IMPLEMENTED:
     - Readme.txt is fixed. (Password must be 5+ characters long)
 
 2. 100 % of User stories are implemented -
-   DONE · As a non-registered user, I want to be able to register with Paid Aid, so that I can access
-     all that the app has to offer.
-   DONE · As a user, I want to be able to log into the app, so I can access all of the app's features.
-   DONE · As a user, I want to create a request, so that I can get my request fulfilled.
-   DONE · As a user, I want to be able to swipe through the requests, so that I can view all of the requests.
-   DONE · As a user, I want to be able to select a request, so that I can get see the details of the request.
-   DONE · As a user, I want to be able to message another user, so that I can confirm the request with them.
-   DONE · As a user, I want to be able to see the rating of other users, so that I can see their reputation.
-   · As a user, I want to submit a rating, so that I submit my experience with the user.
+    · As a non-registered user, I want to be able to register with Paid Aid, so that I can access
+      all that the app has to offer.
+    · As a user, I want to be able to log into the app, so I can access all of the app's features.
+    · As a user, I want to create a request, so that I can get my request fulfilled.
+    · As a user, I want to be able to swipe through the requests, so that I can view all of the requests.
+    · As a user, I want to be able to select a request, so that I can get see the details of the request.
+    · As a user, I want to be able to message another user, so that I can confirm the request with them.
+    · As a user, I want to be able to see the rating of other users, so that I can see their reputation.
+   NOT DONE YET· As a user, I want to submit a rating, so that I submit my experience with the user.
 
 3. We implemented SharedPreferences for storing Users usernames, passwords, and emails.
 

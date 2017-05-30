@@ -80,7 +80,6 @@ public class ReviewFragment extends Fragment {
 
     /**
      * onCreate
-     *
      * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
      */
     @Override
@@ -90,9 +89,8 @@ public class ReviewFragment extends Fragment {
 
     /**
      * onCreateView
-     *
-     * @param inflater           instantiates the layout XML file into its corresponding View objects
-     * @param container          is a container for ViewGroup views
+     * @param inflater instantiates the layout XML file into its corresponding View objects
+     * @param container is a container for ViewGroup views
      * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
      */
     @Override

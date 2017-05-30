@@ -253,8 +253,6 @@
             app:srcCompat="@drawable/calendar"
             app:layout_constraintRight_toLeftOf="@+id/expired_date_text_box"
             android:layout_marginRight="0dp" />
-
-
-
+        
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

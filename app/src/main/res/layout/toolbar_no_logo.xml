@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@color/paidAidBlue">
 
+    <!-- Tool Bar Customization -->
     <ImageView
         android:id="@+id/toolbar_paidaid_text"
         android:layout_width="110dp"
