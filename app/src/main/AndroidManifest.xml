@@ -34,7 +34,6 @@
         <activity android:name=".view.AccountSettingsActivity" />
         <!-- <activity android:name=".view.HomeActivity"></activity> -->
         <activity android:name=".view.EmailActivity" />
-        <activity android:name=".view.AccountSettingsRatingActivity"></activity>
     </application>
 
 </manifest>

@@ -54,8 +54,8 @@
     <string name="type_message">Find out where to meet, time, and other details..</string>
 
     <!-- Review Fragment -->
-    <string name="submit_review">Submit Review</string>
-    <string name="submit_a_review">Submit A Review</string>
+    <string name="submit_rating">Submit Rating</string>
+    <string name="submit_a_rating">Submit A Rating</string>
 
     <!-- My Messages Fragment -->
     <string name="messages_text_view">Your Messages</string>

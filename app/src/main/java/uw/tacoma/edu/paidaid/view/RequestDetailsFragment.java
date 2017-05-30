@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,12 +179,16 @@ public class RequestDetailsFragment extends Fragment {
 
     /** Launches Date Picker Calendar fragment */
     private void launchReview() {
+        Fragment fragment1 = new ReviewFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.activity_main, fragment1);
+        fragmentTransaction.commit();
 
-
-        Intent i = new Intent(this.getActivity(), AccountSettingsRatingActivity.class);
-        i.putExtra(REQUEST_USER_EMAIL, mRequest.getmEmail());
-        i.putExtra(REQUEST_USERNAME, mRequest.getmUsername());
-        startActivity(i);
+//        Intent i = new Intent(this.getActivity(), AccountSettingsRatingActivity.class);
+//        i.putExtra(REQUEST_USER_EMAIL, mRequest.getmEmail());
+//        i.putExtra(REQUEST_USERNAME, mRequest.getmUsername());
+//        startActivity(i);
 
     }
 
