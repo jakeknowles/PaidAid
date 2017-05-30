@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -78,6 +80,8 @@ public class RequestFragment extends Fragment {
 
     private Double mLongitude;
 
+    private ProgressBar mProgressBar;
+
     /**
      * Constructor initialize fields.
      */
@@ -112,21 +116,20 @@ public class RequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        View v = view.findViewById(R.id.list);
+        mProgressBar = (ProgressBar)view.findViewById(R.id.progBar);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            mRecyclerView = (RecyclerView) view;
+        if (v instanceof RecyclerView) {
+            Context context = v.getContext();
+            RecyclerView recyclerView = (RecyclerView) v;
+            mRecyclerView = (RecyclerView) v;
 
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
-            DownloadRequestsTask task = new DownloadRequestsTask();
-            task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
 
         }
 
@@ -144,7 +147,7 @@ public class RequestFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.e("resume is called", "request fragment");
+        Log.i("resume is called", "request fragment");
 
         DownloadRequestsTask task = new DownloadRequestsTask();
         task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
@@ -284,6 +287,13 @@ public class RequestFragment extends Fragment {
     private class DownloadRequestsTask extends AsyncTask<String, Void, String> {
 
         @Override
+        protected void onPreExecute() {
+
+//            mProgress = (ProgressBar) getActivity().findViewById(R.id.list).findViewById(R.id.progBar);
+            mProgressBar.setVisibility(View.VISIBLE);
+
+        }
+        @Override
         protected String doInBackground(String... urls) {
             String response = "";
             HttpURLConnection urlConnection = null;
@@ -310,7 +320,6 @@ public class RequestFragment extends Fragment {
                 }
             }
 
-
             return response;
         }
 
@@ -326,6 +335,12 @@ public class RequestFragment extends Fragment {
 
             // get the location and set the latitude and longitude
             Location loc = ((HomeActivity) getActivity()).getCurrentLocation();
+
+            while(loc == null) {
+                Log.e("GOT HERE WHILE", "WHILE LOOP");
+                loc = ((HomeActivity) getActivity()).getCurrentLocation();
+            }
+
             mLatitude = loc.getLatitude();
             mLongitude = loc.getLongitude();
 
@@ -357,7 +372,9 @@ public class RequestFragment extends Fragment {
 
             // Everything is good, show the list of courses.
             if (!requestsList.isEmpty()) {
+                mProgressBar.setVisibility(View.GONE);
                 mRecyclerView.setAdapter(new MyRequestsRecyclerViewAdapter(requestsList, mListener));
+
             }
         }
 

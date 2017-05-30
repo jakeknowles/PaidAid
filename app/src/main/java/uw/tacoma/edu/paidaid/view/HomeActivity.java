@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -119,6 +120,7 @@ public class HomeActivity extends AppCompatActivity implements
         // Instantiate shared preferences
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
+
 
         // Set action bar toolbar to custom toolbar
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -345,6 +347,7 @@ public class HomeActivity extends AppCompatActivity implements
                         changeScreen(fragReq, getString(R.string.myRequests_tag), new MyRequestsFragment());
                         break;
                 }
+                mBottomNavigationMenuBar.setTranslationY(0);
                 return true;
             }
         });
@@ -426,6 +429,8 @@ public class HomeActivity extends AppCompatActivity implements
                     .replace(R.id.activity_main, requestDetailsFragment)
                     .addToBackStack(null)
                     .commit();
+
+            mBottomNavigationMenuBar.setTranslationY(0);
         };
     }
 
