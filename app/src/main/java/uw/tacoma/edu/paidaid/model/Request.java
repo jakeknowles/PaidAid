@@ -10,6 +10,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * @Author: Jake Knowles
+ * @Author  Dmitriy Onishchenko
+ * @version 5/29/2017
+ *
+/**
  * Request object that contains all necessary request info
  * (tip amount, distance, store name, expiration time, items & comments, rating)
  */
@@ -181,7 +186,7 @@ public class Request implements Serializable {
      * Getter mStarRating
      * @return the Star Rating for the user
      */
-    public double getmStarRating() {
+    public float getmStarRating() {
         return mStarRating;
     }
 

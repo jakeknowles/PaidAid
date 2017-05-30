@@ -22,9 +22,10 @@ import java.net.URL;
 import uw.tacoma.edu.paidaid.R;
 
 /**
- * Created by dmitriy on 5/26/17.
- */
-
+ * @Author: Jake Knowles
+ * @Author  Dmitriy Onishchenko
+ * @version 5/29/2017
+ *
 /**
  * A task to download the requests from the database.
  */

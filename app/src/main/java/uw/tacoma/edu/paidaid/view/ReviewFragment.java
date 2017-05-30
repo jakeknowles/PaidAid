@@ -1,11 +1,14 @@
 package uw.tacoma.edu.paidaid.view;
 
-import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RatingBar;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -18,9 +21,13 @@ import uw.tacoma.edu.paidaid.R;
  * and then this fragment gives users an option to give a star rating (1 - 5) */
 public class ReviewFragment extends Fragment {
 
-    /** OnFragmentInteractionListener */
-    private OnFragmentInteractionListener mListener;
+    /** Username text view for populating with the username of the request poster */
+    private EditText mUsernameTextView;
 
+    /** Rating Bar */
+    private RatingBar mStarRating;
+
+    private Button mSubmitButton;
     /** Constructor */
     public ReviewFragment() {}
 
@@ -42,22 +49,33 @@ public class ReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_review, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_review, container, false);
+
+        String value = getArguments().getString("REQUEST_USERNAME");
+
+        mSubmitButton = (Button) view.findViewById(R.id.submit_rating);
+        mStarRating = (RatingBar) view.findViewById(R.id.ratingBar);
 
 
-    /**
-     * onButtonPressed
-     * @param uri uri is a string of characters used to identify a resource.
-     */
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        mUsernameTextView = (EditText) view.findViewById(R.id.username_text);
+        mUsernameTextView.setText(value);
+
+
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        return view;
     }
+
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }
