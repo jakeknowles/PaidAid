@@ -93,10 +93,6 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mEmailView.setText(email);
         mRatingBar.setRating(rating);
 
-
-
-
-
     }
 
     /**

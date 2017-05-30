@@ -1,7 +1,6 @@
 package uw.tacoma.edu.paidaid.coreFeatures;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -190,7 +189,7 @@ public class RequestFragment extends Fragment {
      * requests.
      */
     private void addScrollListener() {
-        // get the bottom navigation bar
+        // Get the bottom navigation bar
         final View navBar = getActivity().findViewById(R.id.layout_navigation);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

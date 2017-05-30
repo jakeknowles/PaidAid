@@ -13,7 +13,7 @@ MINIMUM REQUIREMENTS IMPLEMENTED:
     · As a user, I want to be able to select a request, so that I can get see the details of the request.
     · As a user, I want to be able to message another user, so that I can confirm the request with them.
     · As a user, I want to be able to see the rating of other users, so that I can see their reputation.
-   NOT DONE YET· As a user, I want to submit a rating, so that I submit my experience with the user.
+    · As a user, I want to submit a rating, so that I can submit my experience with the user.
 
 3. We implemented SharedPreferences for storing Users usernames, passwords, and emails.
 
@@ -21,19 +21,20 @@ MINIMUM REQUIREMENTS IMPLEMENTED:
    (SharedPreferences or File Storage). Explain in your README.txt file as to where and why you
     used the data storage.
 
-4. We use web services for all of our requests. We grab data from our requests stored in the Database
-   and populate the request when a user clicks on one to see the details in case they are interested.
+4. We implemented web services for all of our requests. We grab data from our requests stored in the
+   Database and populate the request when a user clicks on one to see the details in case they are
+   interested. We also used web services with GeoCoding, getting the longitude and latitude of where
+   a user is located. We also used web services to retrieve ratings of users.
 
-   HELP - Your app must use web services to make the app functional. Using dummy data is not allowed
-   for this phase. Explain in your README.txt file as to where and why you used web services.
 
 5. We implemented Content Sharing via email messaging. To send an email, you must be interested in a
    request. When a user clicks on a request, and then clicks "Pick Up", they are able to send an email
    to the user who posted the request. The email feature is solely for figuring our details
    (where, when, etc.) when users are interested in helping out someone.
-    - To use email messaging, you must go to 'emails' on the emulators 'apps' screen and have your
-    email account logged in on the emulator. This allows for you to send an email to a recipient via
-    PaidAid. This allows users to have an email option when the prompt "Send Email Via" pops up.
+    - To make email messaging easier to use, you should go to 'emails' on the emulators 'apps' screen
+      and have your email account logged in on the emulator. This allows for you to send an email to
+      a recipient via PaidAid with your email filled in. This allows users to have an email option
+      when the prompt "Send Email Via" pops up.
 
 6. We implemented custom account Sign-In. A new account can be registered, using the normal account
    registration validation scheme:
