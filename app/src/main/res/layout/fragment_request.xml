@@ -251,6 +251,6 @@
         android:layout_marginTop="29dp"
         android:layout_marginLeft="173dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:isIndicator="true"/>
+        android:isIndicator="true" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
