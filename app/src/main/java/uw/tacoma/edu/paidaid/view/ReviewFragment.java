@@ -6,8 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
@@ -21,15 +20,15 @@ import uw.tacoma.edu.paidaid.model.Request;
  * and then this fragment gives users an option to give a star rating (1 - 5) */
 public class ReviewFragment extends Fragment {
 
+    /** Request Item Selected Constant */
+    public final static String REQUEST_ITEM_SELECTED = "request_selected";
+
     /** Request Selected Constant */
     public final static String REQUEST_SELECTED = "request_selected";
 
 
     /** Username text view for populating with the username of the request poster */
-    private TextView mUsernameTextView;
-
-    /** Rating bar */
-    private RatingBar mStarRating;
+    private EditText mUsernameTextView;
 
     /** Request */
     private Request mRequest;
@@ -47,31 +46,6 @@ public class ReviewFragment extends Fragment {
     }
 
     /**
-     * onStart updates the request view
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        Bundle args = getArguments();
-        if (args != null) {
-            // Set article based on argument passed in
-            mRequest = (Request) args.getSerializable(REQUEST_SELECTED);
-            updateView(mRequest);
-        }
-    }
-
-    /**
-     * updateView uses getter methods to update request view for the user to see the contents of the request
-     * @param request request is the request needed to be picked up
-     */
-    public void updateView(Request request) {
-        if (request != null) {
-            mUsernameTextView.setText(request.getmUsername());
-        }
-    }
-
-    /**
      * onCreateView
      * @param inflater instantiates the layout XML file into its corresponding View objects
      * @param container is a container for ViewGroup views
@@ -82,15 +56,38 @@ public class ReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_review, container, false);
 
-        mUsernameTextView = (TextView) view.findViewById(R.id.username_text);
+        String value = getArguments().getString("REQUEST_USERNAME");
+
+
+        mUsernameTextView = (EditText) view.findViewById(R.id.username_text);
+        mUsernameTextView.setText(value);
+
+        mUsernameTextView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                switch (v.getId()) {
+                    case R.id.submit_rating:
+                            goBackToRequestDetails();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
         return view;
     }
 
+    public void goBackToRequestDetails() {
+        
+    }
 
 
     /** OnFragmentInteractionListener */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }

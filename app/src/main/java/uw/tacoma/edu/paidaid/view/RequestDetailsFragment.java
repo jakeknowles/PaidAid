@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,9 +28,6 @@ public class RequestDetailsFragment extends Fragment {
 
     /** Request Item Selected Constant */
     public final static String REQUEST_ITEM_SELECTED = "request_selected";
-
-    /** Request Selected Constant */
-    public final static String REQUEST_USER_EMAIL = "request_user_email";
 
     /** Request Selected Constant */
     public final static String REQUEST_USERNAME = "request_username";
@@ -181,16 +176,14 @@ public class RequestDetailsFragment extends Fragment {
     private void launchReview() {
 
         Fragment frag = new ReviewFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        Bundle args = new Bundle();
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.activity_main, frag);
-        fragmentTransaction.commit();
+        if (args != null) {
+            args.putString("REQUEST_USERNAME", mRequest.getmUsername());
+            frag.setArguments(args);
+        }
 
-//        Intent i = new Intent(this.getActivity(), AccountSettingsRatingActivity.class);
-//        i.putExtra(REQUEST_USER_EMAIL, mRequest.getmEmail());
-//        i.putExtra(REQUEST_USERNAME, mRequest.getmUsername());
-//        startActivity(i);
+        getFragmentManager().beginTransaction().add(R.id.activity_main, frag).commit();
 
     }
 
