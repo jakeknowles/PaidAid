@@ -27,7 +27,7 @@
         app:menu="@menu/bottom_navigation_buttons"
         android:background="@color/light_light_grey" />
 
-
+    <!-- Paid Aid Logo -->
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="257dp"
@@ -36,18 +36,15 @@
         android:layout_marginTop="100dp"
         app:srcCompat="@drawable/paidaid" />
 
+    <!-- Frame Layout -->
     <FrameLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
         android:id="@+id/activity_main">
 
-
     </FrameLayout>
-
-
-
 </RelativeLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>
