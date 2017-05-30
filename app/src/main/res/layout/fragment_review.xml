@@ -54,8 +54,10 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="212dp"
-        android:isIndicator="true"
-        android:progressBackgroundTint="@color/lightgrey"/>
+        android:isIndicator="false"
+        android:progressBackgroundTint="@color/lightgrey"
+        android:rating="5"
+        android:clickable="true"/>
 
     <TextView
         android:id="@+id/submit_a_review_text"
@@ -86,5 +88,15 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="30dp"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="105dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="31dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="85dp"
+        tools:layout_editor_absoluteY="389dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -6,10 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.Request;
 
 /**
  * @Author Jake Knowles
@@ -20,19 +21,13 @@ import uw.tacoma.edu.paidaid.model.Request;
  * and then this fragment gives users an option to give a star rating (1 - 5) */
 public class ReviewFragment extends Fragment {
 
-    /** Request Item Selected Constant */
-    public final static String REQUEST_ITEM_SELECTED = "request_selected";
-
-    /** Request Selected Constant */
-    public final static String REQUEST_SELECTED = "request_selected";
-
-
     /** Username text view for populating with the username of the request poster */
     private EditText mUsernameTextView;
 
-    /** Request */
-    private Request mRequest;
+    /** Rating Bar */
+    private RatingBar mStarRating;
 
+    private Button mSubmitButton;
     /** Constructor */
     public ReviewFragment() {}
 
@@ -58,30 +53,23 @@ public class ReviewFragment extends Fragment {
 
         String value = getArguments().getString("REQUEST_USERNAME");
 
+        mSubmitButton = (Button) view.findViewById(R.id.submit_rating);
+        mStarRating = (RatingBar) view.findViewById(R.id.ratingBar);
+
 
         mUsernameTextView = (EditText) view.findViewById(R.id.username_text);
         mUsernameTextView.setText(value);
 
-        mUsernameTextView.setOnClickListener(new View.OnClickListener() {
 
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                switch (v.getId()) {
-                    case R.id.submit_rating:
-                            goBackToRequestDetails();
-                        break;
-                    default:
-                        break;
-                }
             }
         });
 
-        return view;
-    }
 
-    public void goBackToRequestDetails() {
-        
+        return view;
     }
 
 

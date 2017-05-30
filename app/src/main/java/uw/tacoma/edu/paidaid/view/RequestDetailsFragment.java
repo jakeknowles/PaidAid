@@ -30,9 +30,6 @@ public class RequestDetailsFragment extends Fragment {
     public final static String REQUEST_ITEM_SELECTED = "request_selected";
 
     /** Request Selected Constant */
-    public final static String REQUEST_USERNAME = "request_username";
-
-    /** Request Selected Constant */
     public final static String REQUEST_SELECTED = "request_selected";
 
     /** Username text view for populating with the username of the request poster */
