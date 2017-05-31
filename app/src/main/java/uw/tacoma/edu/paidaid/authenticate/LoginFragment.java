@@ -300,8 +300,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             email);
 
 
-
-
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)
                             .show();
