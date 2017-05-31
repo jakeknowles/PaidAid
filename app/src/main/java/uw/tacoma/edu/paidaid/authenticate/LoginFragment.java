@@ -64,6 +64,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mPasswordEditText;
 
 
+    /** UserDB used for SQLite */
     private UserDB mUserDB;
 
 
@@ -84,6 +85,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
+        mUserDB = new UserDB(getActivity());
 
     }
 
@@ -110,6 +112,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         /** Attach on click listener */
         Button signUp = (Button) view.findViewById(R.id.sign_up_now_button);
         signUp.setOnClickListener(this);
+
 
         return view;
     }
@@ -213,11 +216,19 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
      * */
     private class LoginTask extends AsyncTask<String, Void, String> {
 
+        /**
+         * onPreExecute
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         * doInBackground - login stuff
+         * @param urls
+         * @return String
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -275,12 +286,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // save user information and logged in status
                     mSharedPreferences
                             .edit()
-                            .putBoolean(getString(R.string.LOGGEDIN), true)
-                            .putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
-                            .putString(getString(R.string.EMAIL), email)
-                            .putInt(getString(R.string.USERID), userid)
-                            .putFloat(getString(R.string.USER_RATING), rating)
-                            .commit();
+                            .putBoolean(getString(R.string.LOGGEDIN), true).commit();
+
+                            /** Shared Preferences */
+                            //.putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
+                            //.putString(getString(R.string.EMAIL), email)
+                            //.putInt(getString(R.string.USERID), userid)
+                            //.putFloat(getString(R.string.USER_RATING), rating)
+                            //.commit();
+
+                    /** SQLite Implementation */
+                    mUserDB.insertUser(userid, rating, mUsernameEditText.getText().toString(),
+                            email);
 
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
@@ -288,7 +305,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             .show();
 
                     // Go to home screen upon successful login
-                    // do this my finishing the loginActivity
+                    // do this by finishing the loginActivity
                     getActivity().finish();
 
                 } else {

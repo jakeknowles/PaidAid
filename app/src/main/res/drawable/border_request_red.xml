@@ -5,16 +5,8 @@
     <!-- View background color -->
     <solid
         android:color="@color/grid_red" >
-
     </solid>
 
-    <!--&lt;!&ndash; View border color and width &ndash;&gt;-->
-    <!--<stroke-->
-        <!--android:width="3dp"-->
-        <!--android:color="@color/black" >-->
-    <!--</stroke>-->
-
-    <!-- The radius makes the corners rounded -->
     <corners
         android:radius="4dp"   >
     </corners>

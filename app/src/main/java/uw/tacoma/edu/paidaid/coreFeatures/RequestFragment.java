@@ -37,8 +37,7 @@ import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
  * @Author Jake Knowles
  * @version 5/5/2017
  *
- * A fragment representing a list of Requests.
- *
+ * Fragment representing a list of Requests.
  */
 public class RequestFragment extends Fragment {
 
@@ -75,10 +74,13 @@ public class RequestFragment extends Fragment {
      */
     private RecyclerView mRecyclerView;
 
+    /** Latitude */
     private Double mLatitude;
 
+    /** Longitude */
     private Double mLongitude;
 
+    /** Progress bar loading feature */
     private ProgressBar mProgressBar;
 
     /**
@@ -91,7 +93,7 @@ public class RequestFragment extends Fragment {
     /**
      * Gets Column Count if not NULL
      *
-     * @param savedInstanceState
+     * @param savedInstanceState savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -286,6 +288,9 @@ public class RequestFragment extends Fragment {
      */
     private class DownloadRequestsTask extends AsyncTask<String, Void, String> {
 
+        /**
+         * onPreExecute
+         */
         @Override
         protected void onPreExecute() {
 
@@ -293,6 +298,12 @@ public class RequestFragment extends Fragment {
             mProgressBar.setVisibility(View.VISIBLE);
 
         }
+
+        /**
+         * doInBackground -- loading request data
+         * @param urls urls
+         * @return String
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -344,7 +355,7 @@ public class RequestFragment extends Fragment {
             mLatitude = loc.getLatitude();
             mLongitude = loc.getLongitude();
 
-            //Log.e("REQUEST", result);
+            // Log.e("REQUEST", result);
 
             // Something wrong with the network or the URL.
             if (result.startsWith("Unable to")) {
@@ -402,6 +413,12 @@ public class RequestFragment extends Fragment {
         }
 
 
+        /**
+         * buildDistanceURL
+         * @param lat latitude
+         * @param lng longitude
+         * @return String
+         */
         private String buildDistanceURL(double lat, double lng) {
 
             StringBuilder url = new StringBuilder(DISTANCE_URL);

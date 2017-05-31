@@ -3,13 +3,13 @@
 
     <!-- SQLite Strings -->
     <string name="CREATE_USER_SQL">
-        CREATE TABLE IF NOT EXISTS User
+        CREATE TABLE IF NOT EXISTS Users
         (userid TEXT PRIMARY KEY, user_rating TEXT,
         username TEXT, email TEXT)
     </string>
 
     <string name="DROP_USER_SQL">
-        DROP TABLE IF EXISTS User
+        DROP TABLE IF EXISTS Users
     </string>
 
 

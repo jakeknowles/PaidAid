@@ -32,13 +32,14 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), R.style.DialogTheme,this,year,month,day);
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), R.style.DialogTheme, this, year, month, day);
 
         return datePicker;
 
@@ -54,7 +55,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-        // Warning - month is 0 based.
         Toast.makeText(getActivity(), "You picked " + (monthOfYear + 1) + "/" + dayOfMonth + "/" + year,
                 Toast.LENGTH_LONG)
                 .show();

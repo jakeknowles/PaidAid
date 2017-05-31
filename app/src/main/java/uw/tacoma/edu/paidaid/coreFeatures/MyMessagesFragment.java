@@ -22,6 +22,10 @@ public class MyMessagesFragment extends Fragment {
 
     }
 
+    /**
+     * onCreate
+     * @param savedInstanceState savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
