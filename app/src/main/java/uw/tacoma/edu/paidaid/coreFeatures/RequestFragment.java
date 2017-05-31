@@ -15,13 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,7 +25,6 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
-import uw.tacoma.edu.paidaid.tasks.DistanceTask;
 import uw.tacoma.edu.paidaid.view.HomeActivity;
 import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
 

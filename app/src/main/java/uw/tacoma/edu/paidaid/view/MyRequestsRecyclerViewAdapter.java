@@ -72,7 +72,7 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         String tip = Request.MONEY_SIGN;
         tip += String.format("%.2f",(mRequests.get(position).getmTipAmount()));
         String storeName = mRequests.get(position).getmStoreName();
-        String distance = Double.toString(mRequests.get(position).getmDistanceAway());
+        String distance = String.format("%.2f",(mRequests.get(position).getmDistanceAway()));
         distance += Request.MILES_UNITS;
 
 

@@ -92,7 +92,7 @@ public class RequestDetailsFragment extends Fragment {
         if (request != null) {
             mUsernameTextView.setText(request.getmUsername());
             mTipTextView.setText(Request.MONEY_SIGN + String.format("%.2f", request.getmTipAmount()));
-            mDistanceAwayTextView.setText(Double.toString(request.getmDistanceAway()) + Request.MILES_UNITS);
+            mDistanceAwayTextView.setText(String.format("%.2f",request.getmDistanceAway()) + Request.MILES_UNITS);
             mStoreNameTextView.setText(request.getmStoreName());
             mItemsAndCommentsTextView.setText(request.getmItemsAndComments());
             mStarRating.setRating((float) request.getmStarRating());
