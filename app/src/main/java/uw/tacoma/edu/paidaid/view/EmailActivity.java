@@ -3,12 +3,12 @@ package uw.tacoma.edu.paidaid.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import uw.tacoma.edu.paidaid.R;
-import uw.tacoma.edu.paidaid.model.Request;
 
 /**
  * @Author Jake Knowles
@@ -31,13 +31,8 @@ public class EmailActivity extends Activity {
     /** Message content of email */
     public EditText mEmailMessage;
 
-    /** Request */
-    private Request mRequest;
-
-    /** Email */
-    private EditText mEmail;
-
-
+    /** Email of person */
+    public String mRecipient = "";
 
     /**
      * onCreate loads up XML layout for Email Activity
@@ -54,9 +49,11 @@ public class EmailActivity extends Activity {
         mEmailMessage = (EditText) findViewById(R.id.message);
         mSendEmail = (Button) findViewById(R.id.send_button);
 
-
-
-
+        Bundle args = getIntent().getExtras();
+        if (args != null) {
+            mRecipient = args.getString("REQUEST_EMAIL");
+            Log.e("email", mRecipient);
+        }
 
         /** Listener on button for sending email */
         mSendEmail.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +61,10 @@ public class EmailActivity extends Activity {
             public void onClick(View view) {
                 String subject = mEmailSubject.getText().toString();
                 String message = mEmailMessage.getText().toString();
-                String recipient = mRequest.getmEmail();
 
 
                 Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, recipient);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[] {mRecipient});
                 email.putExtra(Intent.EXTRA_SUBJECT, subject);
                 email.putExtra(Intent.EXTRA_TEXT, message);
                 email.setType("text/plain");

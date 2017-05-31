@@ -165,7 +165,7 @@ public class RequestDetailsFragment extends Fragment {
     /** Launches Date Picker Calendar fragment */
     private void launchEmail() {
         Intent i = new Intent(this.getActivity(), EmailActivity.class);
-        i.putExtra("Email", mRequest.getmEmail());
+        i.putExtra("REQUEST_EMAIL", mRequest.getmEmail());
         startActivity(i);
 
     }
