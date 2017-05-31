@@ -44,20 +44,19 @@ public class RequestTest {
     public double theLongitude = 10.0;
     public double theLatitude = 10.0;
 
-
     @Before
     public void setUp() {
-         mRequest = new Request(theUserID, theUsername, theEmail, theTip, theDistanceAway,
-                theStoreName, theItemsAndComments, theStarRating, theLongitude, theLatitude);
+         mRequest = new Request(theUserID, theUsername, theEmail, theTip, theLatitude, theLongitude, theDistanceAway,
+                theStoreName, theItemsAndComments, theStarRating);
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test
     public void testParseRequestsJSONSuccess() {
 
 
         String json = "[{'userid':'123456789','username':'jake','email':'test@gmail.com'," +
-                "'tip':'10.00','distance':'5.0','storename':'Costco'," +
+                "'tip':'10.00', 'lat':'10.0', 'lng':'10.0', 'distance':'5.0','storename':'Costco'," +
                 "'items_comments':'7 Boxes of Fruit Snacks','rating':'4'}]";
         String result = Request.parseRequestsJSON(json, new ArrayList<Request>());
 
@@ -124,12 +123,12 @@ public class RequestTest {
     }
 
     @Test
-    public double getLatitude() {
+    public void getLatitude() {
         assertEquals(theLatitude, mRequest.getLatitude());
     }
 
     @Test
-    public double getLongitude() {
+    public void getLongitude() {
         assertEquals(theLongitude, mRequest.getLongitude());
     }
 
