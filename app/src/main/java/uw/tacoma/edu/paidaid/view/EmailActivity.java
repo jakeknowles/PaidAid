@@ -30,6 +30,9 @@ public class EmailActivity extends Activity {
     /** Message content of email */
     public EditText mEmailMessage;
 
+    /** Subject of email */
+    public EditText mEmail;
+
 
     /**
      * onCreate loads up XML layout for Email Activity
@@ -54,13 +57,14 @@ public class EmailActivity extends Activity {
                 String subject = mEmailSubject.getText().toString();
                 String message = mEmailMessage.getText().toString();
 
+
                 Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[] {"d.onish2010@gmail.com"});
                 email.putExtra(Intent.EXTRA_SUBJECT, subject);
                 email.putExtra(Intent.EXTRA_TEXT, message);
                 email.setType("text/plain");
                 startActivity(Intent.createChooser(email, "Send Email Via"));
                 finish();
-
             }
         });
     }
