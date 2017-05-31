@@ -20,12 +20,12 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.data.UserDB;
 
 /**
  * @Author Dmitriy Onishchenko
@@ -64,6 +64,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText mPasswordEditText;
 
 
+    private UserDB mUserDB;
+
+
     /**
      * Constructor
      * */
@@ -80,6 +83,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
+
 
     }
 
@@ -277,6 +281,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             .putInt(getString(R.string.USERID), userid)
                             .putFloat(getString(R.string.USER_RATING), rating)
                             .commit();
+
 
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)

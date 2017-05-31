@@ -191,7 +191,7 @@ public class RequestFragment extends Fragment {
      * requests.
      */
     private void addScrollListener() {
-        
+
         // Get the bottom navigation bar
         final View navBar = getActivity().findViewById(R.id.layout_navigation);
 
