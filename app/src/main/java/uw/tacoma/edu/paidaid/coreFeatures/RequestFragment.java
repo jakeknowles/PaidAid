@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +33,7 @@ import java.util.List;
 
 import uw.tacoma.edu.paidaid.R;
 import uw.tacoma.edu.paidaid.model.Request;
+import uw.tacoma.edu.paidaid.tasks.DistanceTask;
 import uw.tacoma.edu.paidaid.view.HomeActivity;
 import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
 
@@ -54,7 +58,6 @@ public class RequestFragment extends Fragment {
      */
     private static final String DISTANCE_URL =
             "http://maps.googleapis.com/maps/api/directions/json?origin=";
-
 
     /**
      * The column count argument.
@@ -130,7 +133,6 @@ public class RequestFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-
         }
 
         // Hide the navigation bar when scrolling
@@ -148,11 +150,8 @@ public class RequestFragment extends Fragment {
         super.onResume();
 
         Log.i("resume is called", "request fragment");
-
         DownloadRequestsTask task = new DownloadRequestsTask();
         task.execute(new String[]{DOWNLOAD_REQUESTS_URL});
-
-
     }
 
     /**
@@ -212,12 +211,10 @@ public class RequestFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {                       // scrolling down
+                if (dy > 0)                        // scrolling down
                     hideToolbarBy(navBar, -dy);
-                } else {                            // scrolling up
+                 else                              // scrolling up
                     showToolbarBy(navBar, dy);
-
-                }
             }
 
             /**
@@ -227,12 +224,10 @@ public class RequestFragment extends Fragment {
              * @param dy y-axis difference
              */
             private void hideToolbarBy(View toolBar, int dy) {
-
-                if (cannotHideMore(navBar, dy)) {
+                if (cannotHideMore(navBar, dy))
                     toolBar.setTranslationY(navBar.getHeight());
-                } else {
+                else
                     toolBar.setTranslationY(navBar.getTranslationY() - dy);
-                }
 
                 // let the listener know that the bar is not where it started from
                 backToTop = false;
@@ -288,8 +283,6 @@ public class RequestFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-
-//            mProgress = (ProgressBar) getActivity().findViewById(R.id.list).findViewById(R.id.progBar);
             mProgressBar.setVisibility(View.VISIBLE);
 
         }
@@ -337,8 +330,8 @@ public class RequestFragment extends Fragment {
             Location loc = ((HomeActivity) getActivity()).getCurrentLocation();
 
             while(loc == null) {
-                Log.e("GOT HERE WHILE", "WHILE LOOP");
-                loc = ((HomeActivity) getActivity()).getCurrentLocation();
+                Log.i("GOT HERE WHILE", "WHILE LOOP");
+                loc = ((HomeActivity) getActivity()).getFusedLocation();
             }
 
             mLatitude = loc.getLatitude();
@@ -354,12 +347,6 @@ public class RequestFragment extends Fragment {
             }
 
 
-            // need to calculate the distance of the request from them to your location
-            // pass the json object with lat and lng and get back a json with distance that
-            // was calculated with a call to google's api matrix distance
-//            result = getNewJSonString(result);
-
-
             List<Request> requestsList = new ArrayList<Request>();
             result = Request.parseRequestsJSON(result, requestsList);
             // Something wrong with the JSON returned.
@@ -372,63 +359,54 @@ public class RequestFragment extends Fragment {
 
             // Everything is good, show the list of courses.
             if (!requestsList.isEmpty()) {
+
+                // calculate and set distances for all requests
+                setDistances(requestsList);
+
                 mProgressBar.setVisibility(View.GONE);
                 mRecyclerView.setAdapter(new MyRequestsRecyclerViewAdapter(requestsList, mListener));
 
             }
         }
 
-        /**
-         * Parses the json string, returns an error message if unsuccessful.
-         * Returns new json object with calculated distance
-         * @param requestJSON
-         * @return reason or null if successful.
-         */
-        private String getNewJSonString(String requestJSON) {
-            String reason = null;
-            if (requestJSON != null) {
-                try {
-                    JSONArray arr = new JSONArray(requestJSON);
 
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject obj = arr.getJSONObject(i);
-
-                        double lat = obj.getDouble("lat");
-                        double lng = obj.getDouble("lng");
-                        String distURL = buildDistanceURL(lat, lng);
-
-                        Log.e("URL", distURL);
+    }
 
 
+    private void setDistances(List<Request> theRequests) {
 
-//                        Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
-//                                obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
-//                                obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
-//                                obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
-//                        requestsList.add(request);
-                    }
-                } catch (JSONException e) {
-                    reason =  "Unable to parse data, Reason: " + e.getMessage();
-                }
-            }
-            return reason;
+        Location from = new Location("From");
+        from.setLatitude(mLatitude);
+        from.setLongitude(mLongitude);
+
+        for (Request req: theRequests) {
+            Location to = new Location("To");
+            to.setLatitude(req.getLatitude());
+            to.setLongitude(req.getLongitude());
+
+            double dis = calculateDistanceMiles(from, to);
+
+            req.setDistanceAway(dis);
+
         }
 
+    }
 
-        private String buildDistanceURL(double lat, double lng) {
+    /**
+     * Calculates the distacne between two Locatons
+     * @param from the source
+     * @param to the destination
+     * @return distance in miles
+     */
+    public double calculateDistanceMiles(Location from, Location to) {
 
-            StringBuilder url = new StringBuilder(DISTANCE_URL);
-            url.append(mLatitude);
-            url.append(",");
-            url.append(mLongitude);
-            url.append("&destination=");
-            url.append(lat);
-            url.append(",");
-            url.append(lng);
+        double distanceMeters = from.distanceTo(to);
+        Double metersInMile = 1609.34;
 
-            return url.toString();
-        }
+        // convert meters to miles
+        double miles = distanceMeters / metersInMile;
 
+        return miles;
 
     }
 }

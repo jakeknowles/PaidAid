@@ -74,6 +74,10 @@ public class Request implements Serializable {
     // Email
     private String mEmail;
 
+    private Double mLatitude;
+
+    private Double mLongitude;
+
     /**
      * Requests Constructor
      * @param theTip is the tip in cash rewarded to user for picking up request
@@ -81,13 +85,16 @@ public class Request implements Serializable {
      * @param theStoreName is the store name where the items are
      * @param theItemsAndComments is the list of items and additional comments if need be
      */
-    public Request(int theUserID, String theUsername, String theEmail, double theTip, double theDistanceAway,
+    public Request(int theUserID, String theUsername, String theEmail, double theTip, double theLatitude,
+                   double theLongitude, double theDistanceAway,
                    String theStoreName, String theItemsAndComments, float theStarRating) {
 
         mUserID = theUserID;
         mUsername = theUsername;
         mEmail = theEmail;
         mTip = theTip;
+        mLatitude = theLatitude;
+        mLongitude = theLongitude;
         mDistanceAway = theDistanceAway;
         mStoreName = theStoreName;
         mItemsAndComments = theItemsAndComments;
@@ -112,6 +119,7 @@ public class Request implements Serializable {
                     JSONObject obj = arr.getJSONObject(i);
                     Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
                             obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
+                            obj.getDouble("lat"), obj.getDouble("lng"),
                             obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
                             obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
                     requestsList.add(request);
@@ -188,6 +196,18 @@ public class Request implements Serializable {
      */
     public float getmStarRating() {
         return mStarRating;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setDistanceAway(double theDistance) {
+        mDistanceAway = theDistance;
     }
 
 

@@ -164,7 +164,8 @@ public class HomeActivity extends AppCompatActivity implements
             addListenerToNavBar();
 
             // Add the request fragment to populate the grid of requests
-            if (savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null) {
+            if ((savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null)
+                    && mCurrentLocation != null) {
 
                 RequestFragment requestFragment = new RequestFragment();
                 getSupportFragmentManager().beginTransaction()
@@ -259,6 +260,17 @@ public class HomeActivity extends AppCompatActivity implements
      */
     public Location getCurrentLocation() {
         return mCurrentLocation;
+    }
+
+    public Location getFusedLocation() {
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            return LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        }
+        return null;
     }
 
     /**
@@ -390,7 +402,6 @@ public class HomeActivity extends AppCompatActivity implements
             // Set clicked flag to true when not logged in
             mClickedFlag = true;
 
-
             // Launch login screen after delay
             final Activity activity = this;
 
@@ -401,10 +412,8 @@ public class HomeActivity extends AppCompatActivity implements
                     mClickedFlag = false;
                     Intent i = new Intent(activity, LoginActivity.class);
                     startActivity(i);
-
                 }
             }, 2000);
-
             return false;
         }
         return true;
@@ -443,14 +452,13 @@ public class HomeActivity extends AppCompatActivity implements
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
                     // permissions granted
                     setUpWhenPermissionsGranted();
 
                 } else {
 
                     findViewById(R.id.user_account).setEnabled(false);
-                    Toast.makeText(this, "You need Location Services enabled to use PaidAid",
+                    Toast.makeText(this.getApplicationContext(), "You need Location Services enabled to use PaidAid",
                             Toast.LENGTH_LONG).show();
                 }
                 return;
@@ -464,11 +472,13 @@ public class HomeActivity extends AppCompatActivity implements
      */
     private void setUpWhenPermissionsGranted() {
 
-        // On click listener to bottom nav bar
-        addListenerToNavBar();
 
         // Add the request fragment to populate the grid of requests
-        if (getSupportFragmentManager().findFragmentByTag(getString(R.string.home_tag)) == null) {
+        if (getSupportFragmentManager().findFragmentByTag(getString(R.string.home_tag)) == null
+                && mCurrentLocation != null) {
+
+            // On click listener to bottom nav bar
+            addListenerToNavBar();
 
             RequestFragment requestFragment = new RequestFragment();
             getSupportFragmentManager().beginTransaction()
@@ -478,6 +488,9 @@ public class HomeActivity extends AppCompatActivity implements
             Toast.makeText(this, "Welcome to PaidAid!",
                     Toast.LENGTH_LONG).show();
 
+        } else if (mCurrentLocation == null){
+            findViewById(R.id.user_account).setEnabled(false);
+            Toast.makeText(this, "Unable to get locations please restart App", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -509,9 +522,9 @@ public class HomeActivity extends AppCompatActivity implements
                 mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (mCurrentLocation != null) {
                     Log.i("THIS IS THE LOCATION", mCurrentLocation.toString());
+                    setUpWhenPermissionsGranted();
                 } else {
                     LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
-//                    Toast.makeText(this, "Unable to get locations please restart App", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -544,6 +557,8 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
+        setUpWhenPermissionsGranted();
+
         Log.i("LOCATION CHANGED", mCurrentLocation.toString());
 
 

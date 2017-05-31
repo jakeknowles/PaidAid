@@ -278,6 +278,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             .putFloat(getString(R.string.USER_RATING), rating)
                             .commit();
 
+
+
                     Toast.makeText(mLoginActivity.getApplicationContext(), "Welcome Back!"
                             , Toast.LENGTH_LONG)
                             .show();
