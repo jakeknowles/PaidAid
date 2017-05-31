@@ -286,12 +286,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     // save user information and logged in status
                     mSharedPreferences
                             .edit()
-                            .putBoolean(getString(R.string.LOGGEDIN), true).commit();
+                            .putBoolean(getString(R.string.LOGGEDIN), true)
+                            .putInt(getString(R.string.USERID), userid).commit();
 
                             /** Shared Preferences */
                             //.putString(getString(R.string.USERNAME), mUsernameEditText.getText().toString())
                             //.putString(getString(R.string.EMAIL), email)
-                            //.putInt(getString(R.string.USERID), userid)
                             //.putFloat(getString(R.string.USER_RATING), rating)
                             //.commit();
 

@@ -3,6 +3,7 @@ package uw.tacoma.edu.paidaid.tasks;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Toast;
 import android.support.v7.app.AppCompatActivity;
 
@@ -62,6 +63,7 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
 
         BufferedReader inBuffer = null;
         String jsonObject = params[0];
+
         String result = "";
         HttpURLConnection urlConnection = null;
         try {
