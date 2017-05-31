@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -192,6 +191,7 @@ public class RequestFragment extends Fragment {
      * requests.
      */
     private void addScrollListener() {
+        
         // Get the bottom navigation bar
         final View navBar = getActivity().findViewById(R.id.layout_navigation);
 
@@ -234,7 +234,7 @@ public class RequestFragment extends Fragment {
                     toolBar.setTranslationY(navBar.getTranslationY() - dy);
                 }
 
-                // let the listener know that the bar is not where it started from
+                // Let the listener know that the bar is not where it started from
                 backToTop = false;
             }
 
@@ -333,7 +333,7 @@ public class RequestFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            // get the location and set the latitude and longitude
+            // Get the location and set the latitude and longitude
             Location loc = ((HomeActivity) getActivity()).getCurrentLocation();
 
             while(loc == null) {
@@ -352,12 +352,6 @@ public class RequestFragment extends Fragment {
                         .show();
                 return;
             }
-
-
-            // need to calculate the distance of the request from them to your location
-            // pass the json object with lat and lng and get back a json with distance that
-            // was calculated with a call to google's api matrix distance
-//            result = getNewJSonString(result);
 
 
             List<Request> requestsList = new ArrayList<Request>();
@@ -399,13 +393,6 @@ public class RequestFragment extends Fragment {
 
                         Log.e("URL", distURL);
 
-
-
-//                        Request request = new Request(obj.getInt(Request.USER_ID), obj.getString(Request.USERNAME),
-//                                obj.getString(Request.EMAIL), obj.getDouble(Request.TIP_AMOUNT),
-//                                obj.getDouble(Request.DISTANCE_AWAY), obj.getString(Request.STORE_NAME),
-//                                obj.getString(Request.ITEMS_AND_COMMENTS), (float) obj.getDouble(Request.STAR_RATING));
-//                        requestsList.add(request);
                     }
                 } catch (JSONException e) {
                     reason =  "Unable to parse data, Reason: " + e.getMessage();
