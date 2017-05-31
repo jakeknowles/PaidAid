@@ -101,9 +101,7 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 getUserInput();
-
             }
         });
 
