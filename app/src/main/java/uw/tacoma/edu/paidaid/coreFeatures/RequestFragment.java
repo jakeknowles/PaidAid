@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -42,8 +41,7 @@ import uw.tacoma.edu.paidaid.view.MyRequestsRecyclerViewAdapter;
  * @Author Jake Knowles
  * @version 5/5/2017
  *
- * A fragment representing a list of Requests.
- *
+ * Fragment representing a list of Requests.
  */
 public class RequestFragment extends Fragment {
 
@@ -79,10 +77,13 @@ public class RequestFragment extends Fragment {
      */
     private RecyclerView mRecyclerView;
 
+    /** Latitude */
     private Double mLatitude;
 
+    /** Longitude */
     private Double mLongitude;
 
+    /** Progress bar loading feature */
     private ProgressBar mProgressBar;
 
     /**
@@ -95,7 +96,7 @@ public class RequestFragment extends Fragment {
     /**
      * Gets Column Count if not NULL
      *
-     * @param savedInstanceState
+     * @param savedInstanceState savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -191,6 +192,7 @@ public class RequestFragment extends Fragment {
      * requests.
      */
     private void addScrollListener() {
+
         // Get the bottom navigation bar
         final View navBar = getActivity().findViewById(R.id.layout_navigation);
 
@@ -229,7 +231,7 @@ public class RequestFragment extends Fragment {
                 else
                     toolBar.setTranslationY(navBar.getTranslationY() - dy);
 
-                // let the listener know that the bar is not where it started from
+                // Let the listener know that the bar is not where it started from
                 backToTop = false;
             }
 
@@ -281,11 +283,20 @@ public class RequestFragment extends Fragment {
      */
     private class DownloadRequestsTask extends AsyncTask<String, Void, String> {
 
+        /**
+         * onPreExecute
+         */
         @Override
         protected void onPreExecute() {
             mProgressBar.setVisibility(View.VISIBLE);
 
         }
+
+        /**
+         * doInBackground -- loading request data
+         * @param urls urls
+         * @return String
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -326,7 +337,7 @@ public class RequestFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            // get the location and set the latitude and longitude
+            // Get the location and set the latitude and longitude
             Location loc = ((HomeActivity) getActivity()).getCurrentLocation();
 
             while(loc == null) {
@@ -337,7 +348,7 @@ public class RequestFragment extends Fragment {
             mLatitude = loc.getLatitude();
             mLongitude = loc.getLongitude();
 
-            //Log.e("REQUEST", result);
+            // Log.e("REQUEST", result);
 
             // Something wrong with the network or the URL.
             if (result.startsWith("Unable to")) {

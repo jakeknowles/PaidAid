@@ -112,9 +112,9 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
 
     /**
-     * Method that validates the zipcode and if invalid zipcode
-     * asks the user to enter a valid zipcode
-     * @param zipCode the zipcode to validate
+     * Method that validates the zip code and if invalid zipcode
+     * asks the user to enter a valid zip code
+     * @param zipCode the zip code to validate
      */
     private int validateZipCode(String zipCode) {
 
@@ -128,8 +128,6 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
     }
 
 
-
-
     /**
      * Get the users input and insert into database
      */
@@ -137,14 +135,12 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
         String zipCode = (String) mZipCode.getText().toString();
 
-        // validate the zipcode to make sure it is valid
-        // otherwise return
+        // Validate the zip code to make sure it is valid - otherwise return
         if (validateZipCode(zipCode) == -1)
             return;
 
 
-        // get the lat and long coordinates using google api call
-        // and post
+        // Get the lat and long coordinates using google api call and post
         GeocodeAsyncTask task = new GeocodeAsyncTask();
         task.execute(zipCode);
 
@@ -156,13 +152,13 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
      *
      * @return USERID
      */
-    private int getUserId() {
+     private int getUserId() {
 
         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
         return sharedPref.getInt(getString(R.string.USERID), -1);
-    }
+     }
 
     /**
      * Onclick method part of the onClick listener.
@@ -212,7 +208,11 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
         private static final String LAT_LONG_URL =
                 "http://maps.googleapis.com/maps/api/geocode/json?address=";
 
-
+        /**
+         * doInBackground works with location stuff
+         * @param params
+         * @return String
+         */
         @Override
         protected String doInBackground(String... params) {
 
@@ -243,6 +243,10 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
 
         }
 
+        /**
+         * onPostExecute get JSON data
+         * @param result result
+         */
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -258,7 +262,7 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
                             .show();
                 } else if (status.equals("OK")) {
 
-                    // get the location json to get the lat and longitude
+                    // Get the location json to get the lat and longitude
                     JSONArray res = (JSONArray) jsonObject.get("results");
                     JSONObject location = res.getJSONObject(0)
                             .getJSONObject("geometry")
@@ -286,7 +290,7 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
                         Log.e("ERROR ADD REQUEST JSON", e.toString());
                     }
 
-                    // execute httppost request, insert into data base using async task
+                    // Execute http post request, insert into data base using async task
                     if (post_dict.length() > 0) {
                         new AddRequestsTask(getActivity()).execute(String.valueOf(post_dict));
                     }

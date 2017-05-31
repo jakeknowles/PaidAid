@@ -70,14 +70,13 @@ public class MyRequestsRecyclerViewAdapter extends RecyclerView.Adapter<MyReques
         holder.mRequest = mRequests.get(position);
 
         String tip = Request.MONEY_SIGN;
-        tip += Double.toString(mRequests.get(position).getmTipAmount());
+        tip += String.format("%.2f",(mRequests.get(position).getmTipAmount()));
         String storeName = mRequests.get(position).getmStoreName();
         String distance = Double.toString(mRequests.get(position).getmDistanceAway());
         distance += Request.MILES_UNITS;
 
 
-        // if the the store name is longer than 10 characters
-        // display with dots
+        // If the the store name is longer than 10 characters - display with dots
         if (storeName.length() > mMAX_STORENAME_LENGTH) {
             storeName = storeName.substring(0,7).concat("...");
         }

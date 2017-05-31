@@ -22,7 +22,7 @@ import java.net.URL;
  *
  */
 
-
+/** Task for finding longitude & latitude */
 public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
     /**
@@ -39,8 +39,6 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
      * The longitude coordinate of location
      */
     private Double mLongitude;
-
-
 
     /**
      * The url to get lat and long from zipcode
@@ -75,8 +73,8 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
     /**
      * doInBackground JSON
-     * @param params
-     * @return
+     * @param params params
+     * @return String
      */
     @Override
     protected String doInBackground(String... params) {
@@ -110,7 +108,7 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
 
     /**
      * onPostExecute JSON
-     * @param result
+     * @param result result
      */
     @Override
     protected void onPostExecute(String result) {
@@ -127,7 +125,7 @@ public class GeocodeAsyncTask extends AsyncTask<String, String, String> {
                         .show();
             } else if (status.equals("OK")) {
 
-                // get the location json to get the lat and longitude
+                // Get the location json to get the lat and longitude
                 JSONArray res = (JSONArray) jsonObject.get("results");
                 JSONObject location = res.getJSONObject(0)
                         .getJSONObject("geometry")

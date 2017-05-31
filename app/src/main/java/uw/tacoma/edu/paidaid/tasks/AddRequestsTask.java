@@ -80,7 +80,7 @@ public class AddRequestsTask extends AsyncTask<String, String, String> {
             localDataOutputStream.flush();
             localDataOutputStream.close();
 
-            // get the response
+            // Get the response
             InputStream content = urlConnection.getInputStream();
             BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
             String s = "";

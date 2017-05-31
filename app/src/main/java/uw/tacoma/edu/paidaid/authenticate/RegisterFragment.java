@@ -66,7 +66,7 @@ public class RegisterFragment extends Fragment {
     /**
      * The shared preferences to keep track of user logged in status
      */
-    SharedPreferences mSharedPreferences;
+    public SharedPreferences mSharedPreferences;
 
 
     /**
@@ -182,11 +182,19 @@ public class RegisterFragment extends Fragment {
      */
     private class RegisterTask extends AsyncTask<String, Void, String> {
 
+        /**
+         * onPreExecute
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+        /**
+         * doInBackground works with register stuff
+         * @param urls
+         * @return String
+         */
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -224,8 +232,8 @@ public class RegisterFragment extends Fragment {
          */
         @Override
         protected void onPostExecute(String result) {
-            // Something wrong with the network or the URL.
 
+            // Something wrong with the network or the URL
             Log.e("REGISTER RESULT", result);
 
             try {
@@ -239,7 +247,7 @@ public class RegisterFragment extends Fragment {
                     String ratingS = jsonObject.getString("rating");
                     float rating = Float.valueOf(ratingS);
 
-                    // save user information and logged in status
+                    // Save user information and logged in status
                     mSharedPreferences
                             .edit()
                             .putBoolean(getString(R.string.LOGGEDIN), true)
@@ -254,7 +262,7 @@ public class RegisterFragment extends Fragment {
                             , Toast.LENGTH_LONG)
                             .show();
 
-                    // go to home screen
+                    // Go to home screen
                     getActivity().finish();
 
                 } else {

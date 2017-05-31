@@ -11,6 +11,7 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.data.UserDB;
 
 /**
  * @Author Jake Knowles
@@ -36,6 +37,9 @@ public class AccountSettingsActivity extends AppCompatActivity {
     /** Rating bar */
     private RatingBar mRatingBar;
 
+    /** UserDB for SQLite */
+    private UserDB mUserDB;
+
     /**
      * onCreate
      * @param savedInstanceState is a reference to a Bundle object that is passed into the onCreate method
@@ -45,11 +49,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
 
-        // get shared preferences file
+        // Get shared preferences file
         mSharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFS),
                 Context.MODE_PRIVATE);
 
-        // set action bar toolbar to custom toolbar
+        // SQLite mUserDB
+        mUserDB = new UserDB(this);
+
+        // Set action bar toolbar to custom toolbar
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.toolbar_no_logo);
 
@@ -71,7 +78,12 @@ public class AccountSettingsActivity extends AppCompatActivity {
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mSharedPreferences.edit().putBoolean(getString(R.string.LOGGEDIN), false).commit();
+
+                /** SQLite implementation */
+                mUserDB.logoutUser();
+
 
                 Toast.makeText(getApplicationContext(), "Come back soon!"
                         , Toast.LENGTH_SHORT)
@@ -86,12 +98,19 @@ public class AccountSettingsActivity extends AppCompatActivity {
      */
     private void setUpSettingsFields() {
 
-        String username = mSharedPreferences.getString(getString(R.string.USERNAME), "null");
-        String email = mSharedPreferences.getString(getString(R.string.EMAIL), "null");
-        float rating = mSharedPreferences.getFloat(getString(R.string.USER_RATING), 5f);
-        mUsernameView.setText(username);
-        mEmailView.setText(email);
-        mRatingBar.setRating(rating);
+        /** Shared Preferences - Uncomment to use */
+//        String username = mSharedPreferences.getString(getString(R.string.USERNAME), "null");
+//        String email = mSharedPreferences.getString(getString(R.string.EMAIL), "null");
+//        float rating = mSharedPreferences.getFloat(getString(R.string.USER_RATING), 5f);
+//        mUsernameView.setText(username);
+//        mEmailView.setText(email);
+//        mRatingBar.setRating(rating);
+
+        /** SQLite implementation */
+        mRatingBar.setRating(mUserDB.getmUserRating());
+        mUsernameView.setText(mUserDB.getmUsername());
+        mEmailView.setText(mUserDB.getmEmail());
+
 
     }
 
