@@ -25,6 +25,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.data.UserDB;
 import uw.tacoma.edu.paidaid.tasks.AddRequestsTask;
 import uw.tacoma.edu.paidaid.view.DatePickerFragment;
 
@@ -152,10 +153,14 @@ public class AddRequestFragment extends DialogFragment implements View.OnClickLi
      */
      private int getUserId() {
 
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
-                , Context.MODE_PRIVATE);
+//         SharedPreferences sharedPref = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
+//                , Context.MODE_PRIVATE);
+//         sharedPref.getInt(getString(R.string.USERID), -1);
 
-        return sharedPref.getInt(getString(R.string.USERID), -1);
+         UserDB db = new UserDB(getActivity());
+
+         return db.getmUserId();
+
      }
 
     /**

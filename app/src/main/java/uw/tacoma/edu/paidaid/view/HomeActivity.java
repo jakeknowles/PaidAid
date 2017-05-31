@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -188,7 +189,7 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
 
-        Log.e("ON START ", "METHOD CALLED");
+        Log.i("ON START ", "METHOD CALLED");
 
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
@@ -563,6 +564,7 @@ public class HomeActivity extends AppCompatActivity implements
 
 
     }
+
 
 }
 

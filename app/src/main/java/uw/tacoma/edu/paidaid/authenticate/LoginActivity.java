@@ -1,7 +1,9 @@
 package uw.tacoma.edu.paidaid.authenticate;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 
 import uw.tacoma.edu.paidaid.R;
 
@@ -32,5 +34,6 @@ public class LoginActivity extends AppCompatActivity {
             .add(R.id.login_fragment_container, new LoginFragment())
             .commit();
     }
+
 
 }
