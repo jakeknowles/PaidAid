@@ -159,17 +159,11 @@ public class HomeActivity extends AppCompatActivity implements
                     MY_PERMISSIONS_LOCATIONS);
         } else {
 
-            // On click listener to bottom nav bar
-            addListenerToNavBar();
-
             // Add the request fragment to populate the grid of requests
             if ((savedInstanceState == null || getSupportFragmentManager().findFragmentById(R.id.list) == null)
                     && mCurrentLocation != null) {
 
-                RequestFragment requestFragment = new RequestFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.activity_main, requestFragment, getString(R.string.home_tag))
-                        .commit();
+                setUpWhenPermissionsGranted();
 
             }
         }
@@ -496,6 +490,7 @@ public class HomeActivity extends AppCompatActivity implements
 
             // On click listener to bottom nav bar
             addListenerToNavBar();
+            findViewById(R.id.user_account).setEnabled(true);
 
             RequestFragment requestFragment = new RequestFragment();
             getSupportFragmentManager().beginTransaction()

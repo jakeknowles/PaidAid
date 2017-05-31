@@ -25,6 +25,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import uw.tacoma.edu.paidaid.R;
+import uw.tacoma.edu.paidaid.data.UserDB;
 
 
 /**
@@ -70,6 +71,11 @@ public class RegisterFragment extends Fragment {
 
 
     /**
+     * The user database
+     */
+    private UserDB mUserDB;
+
+    /**
      * Constructor Initialize fields.
      */
     public RegisterFragment() {
@@ -87,6 +93,7 @@ public class RegisterFragment extends Fragment {
         mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.LOGIN_PREFS)
                 , Context.MODE_PRIVATE);
 
+        mUserDB = new UserDB(getActivity());
 
     }
 
@@ -256,6 +263,10 @@ public class RegisterFragment extends Fragment {
                             .putInt(getString(R.string.USERID), userid)
                             .putFloat(getString(R.string.USER_RATING), rating)
                             .commit();
+
+                    mUserDB.insertUser(userid, rating, mUsernameEditText.getText().toString(),
+                            mEmailEditText.getText().toString());
+
 
 
                     Toast.makeText(mActivity.getApplicationContext(), "Welcome to PaidAid!"
