@@ -1,7 +1,5 @@
 package uw.tacoma.edu.paidaid.model;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -198,14 +196,28 @@ public class Request implements Serializable {
         return mStarRating;
     }
 
+
+    /**
+     * Getter latitude
+     * @return the latitude
+     */
     public double getLatitude() {
         return mLatitude;
     }
 
+
+    /**
+     * Getter longitude
+     * @return the longitude
+     */
     public double getLongitude() {
         return mLongitude;
     }
 
+    /**
+     * Getter distance
+     * @return the distance
+     */
     public void setDistanceAway(double theDistance) {
         mDistanceAway = theDistance;
     }

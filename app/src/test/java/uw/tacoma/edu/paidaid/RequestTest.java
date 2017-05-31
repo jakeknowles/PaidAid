@@ -41,12 +41,14 @@ public class RequestTest {
     public String theStoreName = "Costco";
     public String theItemsAndComments = "7 Boxes of Fruit Snacks";
     public float theStarRating =  4;
+    public double theLongitude = 10.0;
+    public double theLatitude = 10.0;
 
 
     @Before
     public void setUp() {
          mRequest = new Request(theUserID, theUsername, theEmail, theTip, theDistanceAway,
-                theStoreName, theItemsAndComments, theStarRating);
+                theStoreName, theItemsAndComments, theStarRating, theLongitude, theLatitude);
         MockitoAnnotations.initMocks(this);
     }
 
@@ -119,6 +121,16 @@ public class RequestTest {
     @Test
     public void testgetmStarRating() {
         assertTrue(theStarRating == mRequest.getmStarRating());
+    }
+
+    @Test
+    public double getLatitude() {
+        assertEquals(theLatitude, mRequest.getLatitude());
+    }
+
+    @Test
+    public double getLongitude() {
+        assertEquals(theLongitude, mRequest.getLongitude());
     }
 
 }
