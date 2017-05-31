@@ -16,7 +16,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,8 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -56,13 +53,13 @@ public class HomeActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-
+    /** Locations interval update */
     private static int UPDATE_INTERVAL = 1;
 
-
+    /** Locations interval */
     private static int FASTEST_INTERVAL = 5;
 
-
+    /** Locations displacement */
     private static int DISPLACEMENT = 10;
 
     /**
@@ -85,12 +82,13 @@ public class HomeActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
 
 
+    /** Location Request */
     private LocationRequest mLocationRequest;
 
-
+    /** Current Location */
     private Location mCurrentLocation;
 
-
+    /** Update time */
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
 
     /**
@@ -178,7 +176,9 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
-
+    /**
+     * onDestroy()
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -186,6 +186,9 @@ public class HomeActivity extends AppCompatActivity implements
             mGoogleApiClient.disconnect();
     }
 
+    /**
+     * onStart()
+     */
     @Override
     protected void onStart() {
 
@@ -197,6 +200,9 @@ public class HomeActivity extends AppCompatActivity implements
         super.onStart();
     }
 
+    /**
+     * onStop()
+     */
     @Override
     protected void onStop() {
 
@@ -263,6 +269,10 @@ public class HomeActivity extends AppCompatActivity implements
         return mCurrentLocation;
     }
 
+    /**
+     * getFusedLocation()
+     * @return Location
+     */
     public Location getFusedLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -445,6 +455,12 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * onRequestPermissionsResult deals with persmissions
+     * @param requestCode requestCode
+     * @param permissions permissions
+     * @param grantResults grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -497,8 +513,10 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
 
-
-
+    /**
+     * onConnected
+     * @param bundle bundle
+     */
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
@@ -531,6 +549,9 @@ public class HomeActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * createLocationsRequest deals with location updates
+     */
     private void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(UPDATE_INTERVAL);
@@ -539,6 +560,10 @@ public class HomeActivity extends AppCompatActivity implements
         mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
     }
 
+    /**
+     * onConnectionsSuspended
+     * @param i i
+     */
     @Override
     public void onConnectionSuspended(int i) {
         // The connection to Google Play services was lost for some reason. We call connect() to
@@ -548,6 +573,10 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * onConnectionFailed
+     * @param result result is the connection result
+     */
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult result) {
         Log.e("HOME ACTIVITY", "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
@@ -555,6 +584,10 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
+    /**
+     * onLocationChanged gets the current location to view
+     * @param location
+     */
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
